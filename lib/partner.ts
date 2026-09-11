@@ -66,16 +66,15 @@ export const FALLBACK_PARTNER: PartnerCardData = {
 };
 
 export const EXAMPLE_PARTNER: PartnerCardData = {
-  title: "Me segue no Twitter!",
+  title: "Conheça o Spectra PRO",
   description:
-    "Posto updates dos meus projetos, coisas aleatórias, coisas da vida, eventos, etc.\n\nSegue aí gay",
-  buttonLabel: "Sou lindo e vou seguir",
-  imageUrl:
-    "https://cdn.nemtudo.me/f/nemtudo/MjAyNi8wOC8yMC9JTUFHRS8wMl8yOF8wMl9fMTc4NzIwMzY4MjQyNC02NzMxNDIwNTI.webp",
-  buttonUrl: "https://go.nemtudo.me/golive-partner-twitter",
-  backgroundColor: "#000000",
+    "Transmita em até 4K 60FPS, tenha salas exclusivas sem anúncios e turbine a sua comunidade.",
+  buttonLabel: "Saiba mais",
+  imageUrl: "",
+  buttonUrl: "https://spectra.live/pro",
+  backgroundColor: "#07080d",
   textColor: "#ffffff",
-  buttonBackgroundColor: "#ffffff",
+  buttonBackgroundColor: "#06b6d4",
   buttonTextColor: "#000000",
 };
 

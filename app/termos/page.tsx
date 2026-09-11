@@ -255,12 +255,12 @@ export default function TermosPage() {
           <p className={pClass}>
             Dúvidas, solicitações sobre seus dados ou denúncias podem ser enviadas pelo Discord{" "}
             <a
-              href="https://discord.gg/nemtudo"
+              href="https://discord.gg/p8ZRn2SKm"
               target="_blank"
               rel="noopener noreferrer"
               className={linkClass}
             >
-              discord.gg/nemtudo
+              discord.gg/p8ZRn2SKm
             </a>
             .
           </p>
