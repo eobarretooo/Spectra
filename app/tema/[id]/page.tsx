@@ -61,20 +61,20 @@ export async function generateMetadata(props: PageProps<"/tema/[id]">): Promise<
   const { id } = await props.params;
   const theme = await loadTheme(id);
 
-  const title = theme ? `${theme.name} — tema para o GoLive` : "Tema do GoLive";
+  const title = theme ? `${theme.name} — tema para o Spectra` : "Tema do Spectra";
   const subtitle = theme
     ? theme.description ||
       `${theme.author ? `Um tema de ${theme.author}. ` : ""}${
         theme.price > 0 ? `${theme.price.toLocaleString("pt-BR")} pontos.` : "Grátis para usar."
       }`
-    : "Temas de sala feitos pela comunidade do GoLive.";
+    : "Temas de sala feitos pela comunidade do Spectra.";
 
   return pageMetadata({
     path: `/tema/${id}`,
     title,
     description: subtitle,
     card: {
-      title: theme?.name ?? "Tema do GoLive",
+      title: theme?.name ?? "Tema do Spectra",
       subtitle,
       tone: "theme",
       badge: theme?.author ? `Tema de ${theme.author}` : "Tema",

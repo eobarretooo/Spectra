@@ -191,7 +191,7 @@ export function CosmeticsStoreDialog({ closePopup }: { closePopup: (hasAction?: 
               >
                 <span className="flex items-center gap-2">
                   <span className="h-4 w-4 shrink-0 rounded-full border border-dashed border-zinc-400 dark:border-zinc-600" />
-                  {activeTab === "name_color" ? "Nenhuma (padrão)" : "Padrão (GoLive)"}
+                  {activeTab === "name_color" ? "Nenhuma (padrão)" : "Padrão (Spectra)"}
                 </span>
                 <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400">
                   {currentEquipped === null ? "Equipada" : "Equipar"}

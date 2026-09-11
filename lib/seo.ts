@@ -14,7 +14,7 @@ import type { Metadata } from "next";
 // of the whole card instead of only its text.
 
 /** The site's own address. Kept in step with app/layout.tsx's SITE_URL. */
-export const SITE_URL = "https://golive.nemtudo.me";
+export const SITE_URL = "https://spectra.live";
 
 /**
  * Which accent a card is drawn in — see app/api/og/route.tsx.
@@ -81,7 +81,7 @@ export function pageMetadata({
       type: "website",
       locale: "pt_BR",
       url,
-      siteName: "GoLive",
+      siteName: "Spectra",
       title,
       description,
       images: [{ url: image, width: 1200, height: 630, alt: title }],

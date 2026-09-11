@@ -14,8 +14,8 @@ export async function generateMetadata(props: PageProps<"/invite/[code]">): Prom
   return {
     title: name ? `Convite para ${name}` : "Convite para um grupo",
     description: name
-      ? `Você foi convidado para o grupo "${name}" no GoLive. Abra o link para entrar.`
-      : "Você foi convidado para um grupo no GoLive.",
+      ? `Você foi convidado para o grupo "${name}" no Spectra. Abra o link para entrar.`
+      : "Você foi convidado para um grupo no Spectra.",
     robots: { index: false, follow: false },
   };
 }

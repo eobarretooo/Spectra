@@ -38,7 +38,7 @@ import {
 // can tell whether the OS found anything. A dead end would be the one failure
 // with no recovery.
 
-const PROTOCOL = "golive";
+const PROTOCOL = "spectra";
 
 // The handoff is deliberately not one of these: it is driven by the shared
 // store (see lib/appHandoff.ts), because it can be entered from inside the
@@ -193,7 +193,7 @@ export function RoomAppGate({ handle, children }: { handle: string; children: Re
   return (
     <GateCard
       title="Abrir esta sala no app?"
-      body="No app do GoLive você não ouve eco da sua própria voz na transmissão de outra pessoa, e o desempenho é melhor."
+      body="No app do Spectra você não ouve eco da sua própria voz na transmissão de outra pessoa, e o desempenho é melhor."
     >
       <button
         type="button"

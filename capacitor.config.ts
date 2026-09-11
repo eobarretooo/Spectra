@@ -19,11 +19,11 @@ import type { CapacitorConfig } from "@capacitor/cli";
 // public/ rather than an empty folder so `npx cap sync` has something real to
 // copy — Android's cold-start splash background and any offline fallback
 // asset both come from there.
-const APP_URL = process.env.GOLIVE_APP_URL || "https://golive.nemtudo.me";
+const APP_URL = process.env.SPECTRA_APP_URL || process.env.GOLIVE_APP_URL || "http://localhost:3000";
 
 const config: CapacitorConfig = {
-  appId: "me.nemtudo.golive",
-  appName: "Go Live",
+  appId: "live.spectra.app",
+  appName: "Spectra",
   webDir: "public",
   server: {
     url: APP_URL,

@@ -243,7 +243,7 @@ export function ThemeReportClient({ id }: { id: string }) {
             icon={<MdOutlinePodcasts />}
             accent="--series-1"
             value={formatCount(live.online)}
-            hint="Dessas, quantas estão com o GoLive aberto"
+            hint="Dessas, quantas estão com o Spectra aberto"
           />
           <StatTile
             label="Salas com o tema"
@@ -403,7 +403,7 @@ export function ThemeReportClient({ id }: { id: string }) {
                 {
                   label: "Online agora",
                   value: live.online,
-                  hint: "E estão com o GoLive aberto neste momento",
+                  hint: "E estão com o Spectra aberto neste momento",
                 },
               ]}
             />

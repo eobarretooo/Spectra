@@ -25,11 +25,11 @@ import SupressErrors from "./middlewares/SupressErrors";
 const UMAMI_WEBSITE_ID = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID;
 const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
-const SITE_URL = "https://golive.nemtudo.me";
-const SITE_NAME = "GoLive";
-const TITLE = "GoLive — Transmissão de Tela em Grupo Online Grátis";
+const SITE_URL = "http://localhost:3000";
+const SITE_NAME = "Spectra";
+const TITLE = "Spectra — Transmissão de Tela, Voz e Câmera em Alta Definição";
 const DESCRIPTION =
-  "Transmita sua voz, tela ou câmera para várias pessoas ao mesmo tempo, direto do navegador. Sem cadastro. A forma mais fácil de fazer chamadas em grupo online.";
+  "Transmita sua voz, tela ou câmera para várias pessoas ao mesmo tempo com ultra baixa latência, direto do navegador. Sem cadastro, sem limites.";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -49,10 +49,11 @@ export const metadata: Metadata = {
   },
   description: DESCRIPTION,
   keywords: [
+    "Spectra",
     "transmitir tela",
     "transmissão de tela online",
     "transmitir tela em grupo",
-    "transmissão de tela em grupo online fácil",
+    "transmissão de tela em alta definição",
     "compartilhar tela online",
     "compartilhamento de tela em grupo",
     "compartilhar tela com amigos",
@@ -61,31 +62,16 @@ export const metadata: Metadata = {
 
     "transmitir câmera",
     "transmissão de câmera online",
-    "transmitir câmera em grupo",
-    "transmissão de câmera em grupo online fácil",
     "compartilhar câmera online",
-    "compartilhamento de câmera em grupo",
-    "compartilhar câmera com amigos",
-    "assistir câmera em grupo",
-    "sala de compartilhamento de câmera",
 
     "transmitir voz",
     "transmissão de voz online",
-    "transmitir voz em grupo",
-    "transmissão de voz em grupo online fácil",
-    "compartilhar voz online",
-    "compartilhamento de voz em grupo",
-    "compartilhar voz com amigos",
-    "assistir voz em grupo",
-    "sala de compartilhamento de voz",
-
-    "screen share online grátis",
-    "GoLive",
-    "AntiJanja"
+    "chamada de voz em grupo",
+    "screen share online grátis"
   ],
   applicationName: SITE_NAME,
-  authors: [{ name: "NemTudo", url: "https://discord.gg/nemtudo" }],
-  creator: "NemTudo",
+  authors: [{ name: "Spectra Team" }],
+  creator: "Spectra",
   alternates: {
     canonical: "/",
   },
@@ -98,15 +84,10 @@ export const metadata: Metadata = {
     description: DESCRIPTION,
     images: [
       {
-        // A static file under public/, not the generated route that used to
-        // live at app/opengraph-image.tsx. That file was deleted along with
-        // this change: Next's file convention emits its own og:image for the
-        // root segment, so leaving it would have put two images on every
-        // shared link and let the crawler pick.
-        url: "/assets/oembed/image.png",
+        url: "/spectra-logo.svg",
         width: 1200,
         height: 630,
-        alt: "GoLive — transmissão de tela em grupo online",
+        alt: "Spectra — transmissão de tela em grupo online",
       },
     ],
   },
@@ -114,11 +95,11 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: TITLE,
     description: DESCRIPTION,
-    images: ["/assets/oembed/image.png"],
+    images: ["/spectra-logo.svg"],
   },
   icons: {
-    icon: "/icon.png",
-    apple: "/icon.png",
+    icon: "/spectra-logo.svg",
+    apple: "/spectra-logo.svg",
   },
   robots: {
     index: true,

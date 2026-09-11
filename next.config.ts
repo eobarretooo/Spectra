@@ -89,7 +89,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/github",
-        destination: "https://github.com/Nem-Tudo/group-sharescreen",
+        destination: "https://github.com/eobarretooo/Spectra",
         permanent: true,
       },
     ];

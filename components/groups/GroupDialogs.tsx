@@ -303,7 +303,7 @@ export function JoinGroupDialog({ closePopup }: PopupProps<object>) {
               setValue(e.target.value);
               setError(null);
             }}
-            placeholder="https://golive.nemtudo.me/invite/AbC123xy"
+            placeholder="https://spectra.live/invite/AbC123xy"
             className={inputClass}
           />
         </label>

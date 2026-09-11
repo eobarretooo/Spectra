@@ -113,7 +113,7 @@ export default function OAuthCallbackPage() {
             Login concluído
           </p>
           <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
-            Volte para o aplicativo do GoLive — você já pode fechar esta aba.
+            Volte para o aplicativo do Spectra — você já pode fechar esta aba.
           </p>
         </div>
       </main>

@@ -91,18 +91,20 @@ html[data-obs="true"] div:has(> iframe[src*="challenges.cloudflare.com"]) {
    specific rule no matter how specific that rule is. */
 :root[data-theme="dark"] {
   color-scheme: dark;
-  /* Same value as --color-black below on purpose: that is what the page
-     wrappers paint (`bg-zinc-50 dark:bg-black`), and the body showing through
-     a hair lighter behind them — on an overscroll bounce, or under a short
-     page — is exactly the kind of seam nobody can name but everybody sees. */
-  --background: #101014;
-  --foreground: #e9e9ec;
+  /* Deep Space Onyx background with subtle spectral violet/cyan undertones */
+  --background: #0a0b10;
+  --foreground: #f1f5f9;
 
-  --color-black: #101014 !important;
-  --color-zinc-950: #1a1a1f;
-  --color-zinc-900: #232329;
-  --color-zinc-800: #313139;
-  --color-zinc-700: #43434d;
+  --color-black: #0a0b10 !important;
+  --color-zinc-950: #12131d;
+  --color-zinc-900: #1b1c2b;
+  --color-zinc-800: #292c3f;
+  --color-zinc-700: #3b3f5c;
+
+  --spectra-cyan: #06b6d4;
+  --spectra-cyan-glow: #22d3ee;
+  --spectra-violet: #8b5cf6;
+  --spectra-violet-glow: #a855f7;
 }
 
 body {
@@ -490,7 +492,8 @@ body:has([data-group-shell]) {
   }
 }
 
-.golive-eq-bar {
+.golive-eq-bar,
+.spectra-eq-bar {
   transform-origin: bottom;
   animation: golive-eq 1.1s ease-in-out infinite;
 }
@@ -505,7 +508,8 @@ body:has([data-group-shell]) {
   }
 }
 
-.golive-live-dot {
+.golive-live-dot,
+.spectra-live-dot {
   animation: golive-live-dot 1.6s ease-in-out infinite;
 }
 
@@ -513,7 +517,9 @@ body:has([data-group-shell]) {
    that the shapes do not already say standing still. */
 @media (prefers-reduced-motion: reduce) {
   .golive-eq-bar,
-  .golive-live-dot {
+  .spectra-eq-bar,
+  .golive-live-dot,
+  .spectra-live-dot {
     animation: none;
   }
 }
@@ -680,12 +686,14 @@ body:has([data-group-shell]) {
   }
 }
 
-.golive-shine {
+.golive-shine,
+.spectra-shine {
   animation: golive-shine 5s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .golive-shine {
+  .golive-shine,
+  .spectra-shine {
     animation: none;
     opacity: 0;
   }

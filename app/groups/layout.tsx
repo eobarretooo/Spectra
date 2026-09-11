@@ -8,7 +8,7 @@ import { GroupAppShell } from "@/components/groups/GroupAppShell";
 
 export const metadata: Metadata = {
   title: "Grupos",
-  description: "Seus grupos no GoLive: salas de voz e de texto permanentes com seus amigos.",
+  description: "Seus grupos no Spectra: salas de voz e de texto permanentes com seus amigos.",
   // A group is private to its members; there is nothing here for a search
   // engine to index.
   robots: { index: false, follow: false },

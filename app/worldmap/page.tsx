@@ -4,7 +4,7 @@ import { RoomsMapClient } from "./RoomsMapClient";
 export const metadata: Metadata = {
   title: "Mapa de salas públicas",
   description:
-    "Veja no mapa do mundo onde estão as salas públicas de transmissão de tela ativas agora no GoLive e entre na que estiver mais perto de você.",
+    "Veja no mapa do mundo onde estão as salas públicas de transmissão de tela ativas agora no Spectra e entre na que estiver mais perto de você.",
   alternates: {
     canonical: "/worldmap",
   },

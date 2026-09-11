@@ -38,7 +38,7 @@ function WeightArt() {
       <div className="flex h-full flex-col justify-center gap-2.5 px-4">
         <Caption>memória em uso</Caption>
         {[
-          { name: "GoLive", width: "22%", fill: "bg-emerald-500" },
+          { name: "Spectra", width: "22%", fill: "bg-cyan-500" },
           // Clearly darker than the track behind it in both themes — a bar
           // you cannot see is not a comparison.
           { name: "De sempre", width: "88%", fill: "bg-zinc-400 dark:bg-zinc-500" },
@@ -141,14 +141,14 @@ function EchoArt() {
           {bars.map((h, i) => (
             <span
               key={i}
-              className="golive-eq-bar w-1 flex-1 rounded-full bg-emerald-500/80"
+              className="spectra-eq-bar w-1 flex-1 rounded-full bg-cyan-500/80"
               style={{ height: `${h * 100}%`, animationDelay: `${i * 90}ms` }}
             />
           ))}
         </div>
         <div className="flex items-center gap-1.5">
           <span className="rounded bg-white px-1.5 py-0.5 text-[9px] font-semibold text-zinc-500 line-through dark:bg-zinc-950 dark:text-zinc-500">
-            GoLive
+            Spectra
           </span>
           <span className="text-[9px] text-zinc-400 dark:text-zinc-600">nunca sai junto</span>
         </div>
@@ -171,7 +171,7 @@ function PickerArt() {
           </span>
         </div>
         <div className="flex gap-2">
-          <div className="h-10 flex-1 rounded-md bg-gradient-to-br from-zinc-300 to-zinc-200 ring-2 ring-emerald-500 dark:from-zinc-700 dark:to-zinc-800" />
+          <div className="h-10 flex-1 rounded-md bg-gradient-to-br from-zinc-300 to-zinc-200 ring-2 ring-cyan-500 dark:from-zinc-700 dark:to-zinc-800" />
           <div className="h-10 flex-1 rounded-md bg-zinc-200 dark:bg-zinc-800" />
         </div>
       </div>
@@ -212,9 +212,9 @@ function WindowArt() {
           <div className="flex items-center gap-1 border-b border-black/10 bg-zinc-100 px-2 py-1 dark:border-white/10 dark:bg-zinc-900">
             <span className="h-1.5 w-1.5 rounded-full bg-red-400" />
             <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+            <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
             <span className="ml-1 text-[9px] font-medium text-zinc-500 dark:text-zinc-400">
-              GoLive
+              Spectra
             </span>
           </div>
           <div className="h-5" />
@@ -309,7 +309,7 @@ export function SharedScreenArt() {
         </div>
       </div>
       <span className="absolute bottom-2 left-2 inline-flex items-center gap-1.5 rounded-full bg-black/50 px-2 py-0.5 text-[10px] font-semibold text-white">
-        <span className="golive-live-dot h-1.5 w-1.5 rounded-full bg-red-500" />
+        <span className="spectra-live-dot h-1.5 w-1.5 rounded-full bg-red-500" />
         ao vivo
       </span>
     </div>
@@ -348,7 +348,7 @@ export function ParticipantArt({
           {[0.5, 1, 0.7].map((h, i) => (
             <span
               key={i}
-              className="golive-eq-bar w-[3px] rounded-full bg-emerald-300"
+              className="spectra-eq-bar w-[3px] rounded-full bg-cyan-300"
               style={{ height: `${h * 100}%`, animationDelay: `${i * 140}ms` }}
             />
           ))}

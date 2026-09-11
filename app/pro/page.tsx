@@ -3,29 +3,25 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { ProPanel } from "./ProPanel";
 import { pageMetadata } from "@/lib/seo";
 
-const TITLE = "GoLive Pro — seja Verificado, transmita em 4K/120fps e muito mais!";
+const TITLE = "Spectra — transmita em 4K/120fps e muito mais!";
 const DESCRIPTION =
-  "Assinatura mensal do GoLive: transmita a sua tela em 2K e 4K, com até 240 quadros por segundo.";
+  "Recursos do Spectra: transmita a sua tela em 2K e 4K, com até 240 quadros por segundo.";
 
 export const metadata: Metadata = pageMetadata({
   path: "/pro",
   title: TITLE,
   description: DESCRIPTION,
   keywords: [
-    "golive pro",
+    "spectra",
     "transmitir tela em 4k",
     "compartilhar tela 240fps",
-    "assinatura golive",
-    "golive premium",
+    "spectra live",
   ],
-  // No price on the card, deliberately: it is read from the plan document (see
-  // the API's premiumPlan.ts) and a number baked into a picture is a number
-  // nobody remembers to change the day it moves.
   card: {
     title: "Transmita em 4K, com 240fps",
     subtitle: "Selo verificado, sem anúncios, perfil personalizado e mais.",
     tone: "pro",
-    badge: "GoLive Pro",
+    badge: "Spectra",
   },
 });
 

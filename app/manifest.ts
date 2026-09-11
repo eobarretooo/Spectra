@@ -6,20 +6,19 @@ import type { MetadataRoute } from "next";
 // just from this file existing.
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "GoLive — Transmissão de Tela em Grupo Online Grátis",
-    short_name: "GoLive",
+    name: "Spectra — Transmissão de Tela em Alta Definição",
+    short_name: "Spectra",
     description:
-      "Transmita sua tela para várias pessoas ao mesmo tempo, direto do navegador. Crie uma sala em 4 cliques sem cadastro.",
+      "Transmita sua tela, câmera e voz com ultra baixa latência, direto do navegador. Crie uma sala em instantes sem cadastro.",
     start_url: "/",
-    scope: "/",
     display: "standalone",
-    background_color: "#09090b",
-    theme_color: "#09090b",
+    background_color: "#0a0b10",
+    theme_color: "#0a0b10",
     icons: [
       {
-        src: "/icon.png",
+        src: "/spectra-logo.svg",
         sizes: "500x500",
-        type: "image/png",
+        type: "image/svg+xml",
         purpose: "any",
       },
     ],

@@ -183,6 +183,7 @@ import {
   MdCardGiftcard,
 } from "react-icons/md";
 import { BsGearFill, BsCoin } from "react-icons/bs";
+import { FaGithub } from "react-icons/fa";
 import {
   LuPanelLeftClose,
   LuPanelLeftOpen,
@@ -5505,26 +5506,19 @@ export function WatchRoom({
                 points at the thing that sells it instead of at a donation
                 page — see app/pro. What it offers climbs with the reader's own
                 plan; the three states are decided in `proButton` above. */}
-            <Tooltip content={proButton.tooltip} placement="bottom">
-              <button
-                type="button"
-                onClick={() => {
-                  // Still one event, with which of the three was on screen —
-                  // "the premium button was pressed" is the question, and
-                  // three separate names would only have to be added back up.
-                  trackEvent("pro_button_clicked", { offer: proButton.label });
-                  proButton.onPress();
-                }}
-                aria-label={proButton.ariaLabel}
-                className={`flex shrink-0 cursor-pointer items-center gap-1.5 rounded-lg border px-2 py-2 text-sm font-medium transition 2xl:px-3 ${proButton.className}`}
+            <Tooltip content="Spectra no GitHub" placement="bottom">
+              <a
+                href="https://github.com/eobarretooo/Spectra"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Spectra no GitHub"
+                className="flex shrink-0 cursor-pointer items-center gap-1.5 rounded-lg border border-zinc-300 px-2 py-2 text-sm font-medium transition text-zinc-700 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800 2xl:px-3"
               >
-                <proButton.Icon
-                  className={`h-5 w-5 shrink-0 ${proButton.iconClassName}`}
-                />
+                <FaGithub className="h-5 w-5 shrink-0 text-cyan-500 dark:text-cyan-400" />
                 <span className="hidden sm:inline lg:hidden 2xl:inline">
-                  {proButton.label}
+                  GitHub
                 </span>
-              </button>
+              </a>
             </Tooltip>
 
             {/* Immediately left of "mais opções": the two are the only

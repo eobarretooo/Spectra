@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const SITE_URL = "https://golive.nemtudo.me";
+const SITE_URL = "https://spectra.live";
 
 export default function robots(): MetadataRoute.Robots {
   return {

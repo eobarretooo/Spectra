@@ -1362,7 +1362,7 @@ function ProfileContent({
               className="mt-5 text-xs text-zinc-400 dark:text-zinc-600"
               style={theme ? { color: theme.faint, textShadow: theme.textShadow } : undefined}
             >
-              No GoLive desde {memberSince}.
+              No Spectra desde {memberSince}.
             </p>
 
         {isEditing && (

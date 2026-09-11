@@ -38,7 +38,7 @@ import { Capacitor } from "@capacitor/core";
 import type { DesktopBridge } from "./desktop";
 import { desktopOAuthNonce } from "./desktop";
 
-const PROTOCOL = "golive";
+const PROTOCOLS = new Set(["spectra", "golive"]);
 
 // manifest.ts's theme_color/background_color and layout.tsx's
 // viewport.themeColor — so the Custom Tab's toolbar reads as part of the app
@@ -79,7 +79,7 @@ function handleDeepLink(rawUrl: string) {
   } catch {
     return;
   }
-  if (parsed.protocol !== `${PROTOCOL}:`) return;
+  if (!PROTOCOLS.has(parsed.protocol.replace(/:$/, ""))) return;
 
   // `new URL("golive://oauth#x")` puts "oauth" in `host`, not `pathname` —
   // custom schemes parse as authority-based. Same both-fields check as the
@@ -166,5 +166,6 @@ export async function initCapacitorBridge(): Promise<void> {
     },
   };
 
+  window.spectra = bridge;
   window.golive = bridge;
 }

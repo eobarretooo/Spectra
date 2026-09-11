@@ -23,7 +23,7 @@ export function UserProfileClient({ id }: { id: string }) {
           href="/"
           className="text-sm font-medium text-zinc-500 underline underline-offset-2 hover:text-zinc-900 dark:hover:text-zinc-100"
         >
-          ← Voltar para o GoLive
+          ← Voltar para o Spectra
         </Link>
         <div className="mt-4">
           {/* Autoplay only here: this page is somebody opening a profile on

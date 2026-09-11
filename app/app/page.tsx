@@ -40,17 +40,17 @@ import {
 // The file itself always comes from /download, which resolves the newest
 // GitHub release asset at request time — no version is pinned into this page.
 
-const SITE_URL = "https://golive.nemtudo.me";
-const RELEASES_API = "https://api.github.com/repos/Nem-Tudo/group-sharescreen/releases/latest";
+const SITE_URL = "http://localhost:3000";
+const RELEASES_API = "https://api.github.com/repos/eobarretooo/Spectra/releases/latest";
 
-const TITLE = "Baixar o app do GoLive para PC — Windows, macOS e Linux";
+const TITLE = "Baixar o app do Spectra para PC — Windows, macOS e Linux";
 const DESCRIPTION =
-  "O GoLive como aplicativo: leve na máquina, sem overlay nem serviço em segundo plano, e com o áudio da transmissão escolhido app por app — tire o Spotify, tire o WhatsApp, mande só o que você quer. Grátis para Windows, macOS e Linux.";
+  "O Spectra como aplicativo: leve na máquina, sem overlay nem serviço em segundo plano, e com o áudio da transmissão escolhido app por app — tire o Spotify, tire o WhatsApp, mande só o que você quer. Grátis para Windows, macOS e Linux.";
 
 // Its own card rather than the root's, so this link is not the home page's
 // picture with a different sentence under it. See lib/seo.ts.
 const OG_IMAGE = ogImage({
-  title: "O GoLive no seu PC",
+  title: "O Spectra no seu PC",
   subtitle: "Leve, sem overlay, e você escolhe quais sons saem da máquina.",
   badge: "App para PC",
 });
@@ -59,15 +59,15 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   keywords: [
-    "baixar golive",
+    "baixar spectra",
     "app de transmitir tela",
     "programa leve para compartilhar tela",
     "transmitir tela com som do sistema",
     "escolher quais sons transmitir",
     "compartilhar tela sem vazar spotify",
     "compartilhar tela sem eco",
-    "golive para pc",
-    "golive windows",
+    "spectra para pc",
+    "spectra windows",
   ],
   alternates: { canonical: "/app" },
   openGraph: {
@@ -90,7 +90,7 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  name: "GoLive para computador",
+  name: "Spectra para computador",
   url: `${SITE_URL}/app`,
   description: DESCRIPTION,
   applicationCategory: "CommunicationApplication",
@@ -120,7 +120,7 @@ const BENEFITS: { title: string; body: string; art: FeatureArtId; tag?: string }
   },
   {
     title: "Som do sistema sem eco",
-    body: "Pelo navegador, a captura leva o próprio GoLive junto e as vozes da sala voltam com atraso. No app o GoLive fica sempre fora.",
+    body: "Pelo navegador, a captura leva o próprio Spectra junto e as vozes da sala voltam com atraso. No app o Spectra fica sempre fora.",
     art: "echo",
     tag: "Windows",
   },
@@ -130,7 +130,7 @@ const BENEFITS: { title: string; body: string; art: FeatureArtId; tag?: string }
     art: "picker",
   },
   {
-    title: "Janela só do GoLive",
+    title: "Janela só do Spectra",
     body: "Sem se perder entre abas, sem fechar a sala junto com o navegador, sem barra de endereço no meio da transmissão. Fica na barra de tarefas como qualquer programa.",
     art: "window",
   },
@@ -145,7 +145,7 @@ const BENEFITS: { title: string; body: string; art: FeatureArtId; tag?: string }
 // programs, not a claim about a particular version of a particular one — and
 // "costumam" is doing real work in the right-hand column.
 const COMPARISON = {
-  golive: [
+  spectra: [
     "Abre quando você vai transmitir e fecha quando acabou",
     "Você marca, app por app, quais sons ficam fora da transmissão",
     "Vídeo e voz ponto a ponto entre os participantes",
@@ -165,7 +165,7 @@ const COMPARISON = {
 // on GoLive is not a default anyone can change, which is the whole echo
 // story in three words.
 const MUTED_APPS = [
-  { name: "GoLive", checked: true, locked: true },
+  { name: "Spectra", checked: true, locked: true },
   { name: "Spotify", checked: true },
   { name: "WhatsApp", checked: true },
   { name: "Navegador", checked: false },
@@ -207,7 +207,7 @@ const PLATFORM_ROWS = [
 
 const FAQ = [
   {
-    q: "Preciso do app pra usar o GoLive?",
+    q: "Preciso do app pra usar o Spectra?",
     a: "Não. O site funciona inteiro no navegador, no PC e no celular. O app existe pra quem quer escolher quais sons vão junto, o seletor de tela nativo e uma janela dedicada que não pesa na máquina.",
   },
   {
@@ -216,7 +216,7 @@ const FAQ = [
   },
   {
     q: "É pago?",
-    a: "Não. O app é gratuito, como o resto do GoLive, e o código está no GitHub.",
+    a: "Não. O app é gratuito, como o resto do Spectra, e o código está no GitHub.",
   },
   {
     q: "Como funciona a escolha dos sons?",
@@ -235,8 +235,8 @@ const FAQ = [
     a: "O aviso aparece porque o instalador ainda não tem assinatura digital paga, não porque haja algo nele. O código é aberto e o arquivo vem direto dos releases do GitHub do projeto — dá pra conferir a origem antes de instalar.",
   },
   {
-    q: "E no celular?",
-    a: "Não existe app de celular, mas o site funciona no navegador e pode ser adicionado à tela de início: ele abre em tela cheia, como um aplicativo.",
+    q: "E no celular / Android?",
+    a: "O app nativo para Android está em desenvolvimento ativo com Capacitor/WebRTC no GitHub oficial do Spectra! Você já pode adicionar à tela de início como PWA ou gerar a build pelo repositório.",
   },
 ];
 
@@ -289,16 +289,16 @@ export default async function AppPage() {
       <section className="relative overflow-hidden">
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 -top-40 h-[28rem] bg-[radial-gradient(60%_60%_at_50%_50%,rgba(16,185,129,0.16),transparent_70%)]"
+          className="pointer-events-none absolute inset-x-0 -top-40 h-[28rem] bg-[radial-gradient(60%_60%_at_50%_50%,rgba(6,182,212,0.16),transparent_70%)]"
         />
         <div
           className={`${sectionClass} relative grid gap-12 pt-8 pb-20 lg:grid-cols-2 lg:items-center lg:gap-16`}
         >
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-700 dark:text-emerald-300">
+            <span className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-xs font-semibold text-cyan-700 dark:text-cyan-300">
               Windows · macOS · Linux
               {version && (
-                <span className="font-mono font-normal text-emerald-600/70 dark:text-emerald-400/70">
+                <span className="font-mono font-normal text-cyan-600/70 dark:text-cyan-400/70">
                   {version}
                 </span>
               )}
@@ -333,7 +333,7 @@ export default async function AppPage() {
               <span className="h-3 w-3 rounded-full bg-amber-400" />
               <span className="h-3 w-3 rounded-full bg-emerald-400" />
               <span className="ml-2 text-xs font-medium text-zinc-500 dark:text-zinc-400">
-                GoLive
+                Spectra
               </span>
             </div>
             <div className="grid grid-cols-2 gap-2 p-4">
@@ -418,7 +418,7 @@ export default async function AppPage() {
               <li className="flex gap-3">
                 <MdCheck className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" />
                 <span>
-                  <strong className="text-zinc-950 dark:text-zinc-50">O GoLive já sai fora</strong>,
+                  <strong className="text-zinc-950 dark:text-zinc-50">O Spectra já sai fora</strong>,
                   sempre — é o que evita que as vozes da sala voltem pra sala e todo mundo se ouça
                   com atraso.
                 </span>
@@ -478,15 +478,15 @@ export default async function AppPage() {
         <h2 className={h2Class}>Um app, não um cliente inteiro</h2>
         <p className="mt-3 max-w-2xl text-zinc-600 dark:text-zinc-400">
           Os programas de call viraram plataformas: loja, overlay, integrações, tudo carregado
-          antes de você falar a primeira palavra. O GoLive é uma janela.
+          antes de você falar a primeira palavra. O Spectra é uma janela.
         </p>
         <div className="mt-10 grid gap-4 lg:grid-cols-2">
-          <div className="rounded-2xl border border-emerald-500/25 bg-emerald-500/5 p-6">
-            <p className="font-semibold text-emerald-700 dark:text-emerald-300">No app do GoLive</p>
+          <div className="rounded-2xl border border-cyan-500/25 bg-cyan-500/5 p-6">
+            <p className="font-semibold text-cyan-700 dark:text-cyan-300">No app do Spectra</p>
             <ul className="mt-4 space-y-3">
-              {COMPARISON.golive.map((item) => (
+              {COMPARISON.spectra.map((item) => (
                 <li key={item} className="flex gap-3 text-sm text-zinc-700 dark:text-zinc-300">
-                  <MdCheck className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" />
+                  <MdCheck className="mt-0.5 h-4 w-4 shrink-0 text-cyan-500" />
                   {item}
                 </li>
               ))}
@@ -563,7 +563,7 @@ export default async function AppPage() {
           <div className="mt-8 flex flex-col items-center gap-4">
             <DownloadPanel />
             <a
-              href="https://github.com/Nem-Tudo/group-sharescreen"
+              href="https://github.com/eobarretooo/Spectra"
               target="_blank"
               rel="noopener noreferrer"
               className={ghostButtonClass}

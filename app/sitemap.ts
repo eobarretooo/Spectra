@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const SITE_URL = "https://golive.nemtudo.me";
+const SITE_URL = "https://spectra.live";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -24,12 +24,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${SITE_URL}/app`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${SITE_URL}/discord-bot`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,

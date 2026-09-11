@@ -4,7 +4,7 @@ import { RoomsPageClient } from "./RoomsPageClient";
 export const metadata: Metadata = {
   title: "Salas públicas de transmissão de tela",
   description:
-    "Veja as salas públicas de transmissão de tela em grupo ativas agora no GoLive e entre para assistir ou compartilhar sua tela ao vivo, sem cadastro.",
+    "Veja as salas públicas de transmissão de tela em grupo ativas agora no Spectra e entre para assistir ou compartilhar sua tela ao vivo, sem cadastro.",
   alternates: {
     canonical: "/rooms",
   },

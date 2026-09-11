@@ -40,7 +40,7 @@ const LINKS = [
  * surface that already says what they are.
  */
 export function SocialLinks({
-  title = "Acompanhe o GoLive",
+  title = "Acompanhe o Spectra",
   className = "",
 }: {
   title?: string | null;

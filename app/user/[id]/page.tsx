@@ -9,11 +9,11 @@ export async function generateMetadata(
   return pageMetadata({
     path: `/user/${id}`,
     title: `Perfil de ${id}`,
-    description: `Veja o perfil de ${id} no GoLive.`,
+    description: `Veja o perfil de ${id} no Spectra.`,
     noindex: true,
     card: {
       title: id,
-      subtitle: "Perfil no GoLive",
+      subtitle: "Perfil no Spectra",
       badge: "Perfil",
     },
   });

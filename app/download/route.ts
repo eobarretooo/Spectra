@@ -21,8 +21,8 @@ import {
 // Which platform gets which file lives in lib/downloadTargets.ts, where it
 // can be tested.
 
-const GITHUB_OWNER = "Nem-Tudo";
-const GITHUB_REPO = "group-sharescreen";
+const GITHUB_OWNER = "eobarretooo";
+const GITHUB_REPO = "Spectra";
 
 const RELEASES_PAGE = `https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}/releases/latest`;
 const LATEST_RELEASE_API = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/releases/latest`;

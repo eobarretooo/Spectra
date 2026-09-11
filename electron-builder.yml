@@ -1,6 +1,6 @@
-appId: me.nemtudo.golive
-productName: Go Live
-copyright: © NemTudo
+appId: live.spectra.app
+productName: Spectra
+copyright: © Spectra Team
 
 directories:
   output: electron/release
@@ -22,8 +22,8 @@ artifactName: ${productName}-${version}.${ext}
 # builds normally and simply skips the upload.
 publish:
   provider: github
-  owner: Nem-Tudo
-  repo: group-sharescreen
+  owner: eobarretooo
+  repo: Spectra
   # electron-builder's own default, stated explicitly because it is load
   # bearing and invisible otherwise: uploads land in a *draft* release, and a
   # draft is not returned by GitHub's `releases/latest` API. So neither the
@@ -64,8 +64,9 @@ files:
 # than a nicety: without it the login started in the browser has nowhere to
 # come back to.
 protocols:
-  - name: GoLive
+  - name: Spectra
     schemes:
+      - spectra
       - golive
 
 win:
@@ -139,9 +140,9 @@ mac:
   # declares why it wants them — and does so silently, which reads as "the
   # app is broken" rather than "a permission is missing".
   extendInfo:
-    NSCameraUsageDescription: O GoLive usa a câmera para você transmitir vídeo na sala.
-    NSMicrophoneUsageDescription: O GoLive usa o microfone para você falar na sala.
-    NSScreenCaptureUsageDescription: O GoLive captura sua tela para compartilhá-la com a sala.
+    NSCameraUsageDescription: O Spectra usa a câmera para você transmitir vídeo na sala.
+    NSMicrophoneUsageDescription: O Spectra usa o microfone para você falar na sala.
+    NSScreenCaptureUsageDescription: O Spectra captura sua tela para compartilhá-la com a sala.
 
 linux:
   icon: electron/build/icon.png

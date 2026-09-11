@@ -32,8 +32,8 @@ export async function generateMetadata(
   return {
     title: secret ? "Sala privada" : `Sala ${handle}`,
     description: secret
-      ? "Alguém te convidou para uma sala privada no GoLive. Abra o link para entrar."
-      : `Entre na sala "${handle}" no GoLive para transmitir ou assistir tela em grupo, ao vivo e sem cadastro.`,
+      ? "Alguém te convidou para uma sala privada no Spectra. Abra o link para entrar."
+      : `Entre na sala "${handle}" no Spectra para transmitir ou assistir tela em grupo, ao vivo e sem cadastro.`,
     robots: {
       index: false,
       follow: false,

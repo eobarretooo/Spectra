@@ -61,7 +61,7 @@ export function SocialNotifier() {
       body:
         arrived === 1 && last
           ? `${last.name} quer ser seu amigo.`
-          : "Abra o GoLive para responder.",
+          : "Abra o Spectra para responder.",
       tag: "friend-requests",
     });
   }, [graph]);

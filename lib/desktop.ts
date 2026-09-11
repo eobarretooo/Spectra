@@ -203,13 +203,14 @@ export interface DesktopBridge {
 
 declare global {
   interface Window {
+    spectra?: DesktopBridge;
     golive?: DesktopBridge;
   }
 }
 
 export function getDesktopBridge(): DesktopBridge | null {
   if (typeof window === "undefined") return null;
-  return window.golive ?? null;
+  return window.spectra ?? window.golive ?? null;
 }
 
 /**

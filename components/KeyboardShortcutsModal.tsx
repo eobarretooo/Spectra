@@ -52,12 +52,12 @@ export function KeyboardShortcutsModal({
               way (see isAppOnlyDisabled); this was the one that did not. */}
           {isAppOnlyCategory && !isDesktop && (
             <a
-              href="https://golive.nemtudo.me/app"
+              href="/app"
               target="_blank"
               rel="noopener noreferrer"
-              title="Baixar aplicativo GoLive"
+              title="Baixar aplicativo Spectra"
               style={{ width: "fit-content", textWrap: "nowrap" }}
-              className="flex w-fit shrink-0 items-center gap-1 rounded-md bg-indigo-50 px-2 py-0.5 text-[11px] font-medium whitespace-nowrap text-indigo-700 transition hover:bg-indigo-100 hover:text-indigo-800 dark:bg-indigo-950/60 dark:text-indigo-400 dark:hover:bg-indigo-900/60 dark:hover:text-indigo-300"
+              className="flex w-fit shrink-0 items-center gap-1 rounded-md bg-cyan-50 px-2 py-0.5 text-[11px] font-medium whitespace-nowrap text-cyan-700 transition hover:bg-cyan-100 hover:text-cyan-800 dark:bg-cyan-950/60 dark:text-cyan-400 dark:hover:bg-cyan-900/60 dark:hover:text-cyan-300"
             >
               <MdOutlineDesktopWindows className="h-3 w-3" />
               Apenas no app
@@ -74,7 +74,7 @@ export function KeyboardShortcutsModal({
                 ? "Conta necessária"
                 : "Clique para gravar";
             const onDisabledClick = isAppOnlyDisabled
-              ? () => window.open("https://golive.nemtudo.me/app", "_blank")
+              ? () => window.open("/app", "_blank")
               : !hasAccount
                 ? () => {
                     onClose();
@@ -203,12 +203,12 @@ export function KeyboardShortcutsModal({
                   <li>
                     Os atalhos de transmissão, câmera e música funcionam no{" "}
                     <a
-                      href="https://golive.nemtudo.me/app"
+                      href="/app"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-medium text-indigo-600 underline hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300"
+                      className="font-medium text-cyan-600 underline hover:text-cyan-700 dark:text-cyan-400 dark:hover:text-cyan-300"
                     >
-                      aplicativo GoLive para computador
+                      aplicativo Spectra para computador
                     </a>.
                   </li>
                 </>
@@ -219,7 +219,7 @@ export function KeyboardShortcutsModal({
               <li>
                 {isDesktop
                   ? "Os atalhos funcionam globalmente, mesmo com o foco em outros programas ou jogos."
-                  : "No aplicativo GoLive, os atalhos funcionam globalmente, mesmo com o foco em outros programas ou jogos."}
+                  : "No aplicativo Spectra, os atalhos funcionam globalmente, mesmo com o foco em outros programas ou jogos."}
               </li>
               <li>
                 Atalhos nativos do sistema (como <kbd className="font-mono font-semibold">Ctrl+C</kbd> ou <kbd className="font-mono font-semibold">Ctrl+V</kbd>) continuam funcionando normalmente.

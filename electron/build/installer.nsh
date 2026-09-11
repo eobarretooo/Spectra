@@ -57,7 +57,7 @@
   ; instead of Electron's userData directory. Missing file means an install
   ; that never ran a version new enough to leave one; nothing to report, and
   ; nothing to complain about.
-  FileOpen $0 "$APPDATA\GoLive\install-id" r
+  FileOpen $0 "$APPDATA\Spectra\install-id" r
   IfErrors uninstall_report_done
   FileRead $0 $1
   FileClose $0
@@ -82,10 +82,10 @@
   ; would matter much, since the app rewrites it on the next launch, but
   ; deleting state on the way to reinstalling the same program is the kind of
   ; thing that is fine until the day it isn't.
-  Delete "$APPDATA\GoLive\install-id"
+  Delete "$APPDATA\Spectra\install-id"
   ; No /r: this removes the directory only if it is empty, so anything else
   ; that ever lands in there survives.
-  RMDir "$APPDATA\GoLive"
+  RMDir "$APPDATA\Spectra"
 
   uninstall_report_done:
   Pop $3

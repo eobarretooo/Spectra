@@ -205,7 +205,7 @@ export function CompleteOAuthSignupForm({
           Quase lá
         </h2>
         <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
-          Conectado com {PROVIDER_LABEL[provider]}. Escolha como você vai aparecer no GoLive.
+          Conectado com {PROVIDER_LABEL[provider]}. Escolha como você vai aparecer no Spectra.
         </p>
       </div>
       <label htmlFor="oauth-username" className={labelClass}>
@@ -245,7 +245,7 @@ export function CompleteOAuthSignupForm({
         }}
         className={`self-start ${linkButtonClass}`}
       >
-        Já tenho uma conta no GoLive
+        Já tenho uma conta no Spectra
       </button>
       <div className="mt-2 flex gap-2">
         <button

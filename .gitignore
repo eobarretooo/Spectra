@@ -70,3 +70,8 @@ next-env.d.ts
 /android/**/*.jks
 /android/app/src/main/assets/public
 /android/app/src/main/assets/capacitor.config.json
+
+# backend
+/backend/node_modules
+/backend/dist
+/backend/data

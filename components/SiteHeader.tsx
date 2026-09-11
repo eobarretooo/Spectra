@@ -55,23 +55,6 @@ type SecondaryItem = {
 };
 
 const SECONDARY: SecondaryItem[] = [
-  // The sponsor, and the one row a phone does not get at all.
-  //
-  // Every other entry here shortens: the icon goes below `sm`, the label goes
-  // below `lg`. That works for a destination somebody might be looking for —
-  // "App", "Bot" — and not for this one, which is an outbound link to another
-  // company. Shrunk to a bare logo it is an unlabelled image next to the
-  // account menu, competing for the narrowest part of the bar with the things
-  // the site is actually for.
-  {
-    key: "square",
-    href: "https://go.nemtudo.me/square-link",
-    target: "_blank",
-    label: "Square Cloud",
-    short: "Square",
-    Icon: SquareIcon,
-    desktopOnly: true,
-  },
   // Before the app and the bot: it is a place to browse and come back to,
   // which those two are not — they are read once and installed.
   {
@@ -84,85 +67,18 @@ const SECONDARY: SecondaryItem[] = [
   },
   { key: "app", href: "/app", label: "App para PC", target: "", short: "App", Icon: MdMonitor },
   {
-    key: "bot",
-    href: "/discord-bot",
-    label: "Bot para Discord",
-    target: "",
-    short: "Bot",
-    Icon: FaDiscord,
+    key: "github",
+    href: "https://github.com/eobarretooo/Spectra",
+    target: "_blank",
+    label: "GitHub",
+    short: "GitHub",
+    Icon: GlobeIcon,
   },
 ];
 
 export function SiteHeader() {
   const pathname = usePathname();
-  const { account } = useAuth();
-  const { openPopup } = useNtPopups();
-
-  // The premium row, which is three different offers wearing one slot.
-  //
-  // The slot has always sold whatever the reader has not got, and until now
-  // that was only ever "Pro" — which is the wrong thing to keep advertising to
-  // somebody who already pays for it, and the *only* thing a subscriber saw of
-  // the plan above theirs. So it climbs with them:
-  //
-  //   no plan  → "Pro", the blue badge. What the site sells.
-  //   Pro      → "Pro Max", in that plan's own gold mark (see planIcons), and
-  //              pointing at /pro already opened on it — a reader who has Pro
-  //              should not have to find the picker to see what is above it.
-  //   Pro Max  → "Presentear Pro". There is nothing left to sell them, and the
-  //              one thing they can still buy is a plan for somebody else.
-  //
-  // Read from `flags` rather than from `features`: the question here is which
-  // *plan* somebody holds, not what they may do, and the two flags are exactly
-  // that answer (see the API's entitlements.ts — PRO_MAX carries PRO too,
-  // which is why it is tested first).
-  const flags = account?.flags ?? [];
-  const proItem: SecondaryItem = flags.includes("PRO_MAX")
-    ? {
-        key: "pro",
-        // By name rather than as markup here: the bar is translucent, and a
-        // dialog rendered inside a `backdrop-filter` is a dialog whose backdrop
-        // covers the bar instead of the page (see GiftPlanDialog).
-        onClick: () => void openPopup("gift_plan", { data: {} }),
-        label: "Presentear Pro",
-        // The only row whose two labels differ in *words* rather than in
-        // length. It has to: "Presentear Pro" beside an account menu is most
-        // of a phone's bar, and the verb alone is the half that says what
-        // happens.
-        short: "Presentear",
-        Icon: MdCardGiftcard,
-        iconClassName: "text-emerald-500",
-        alwaysVisible: true,
-      }
-    : flags.includes("PRO")
-      ? {
-          key: "pro",
-          href: "/pro?plano=premium_max",
-          target: "",
-          label: "Pro Max",
-          short: "Pro Max",
-          // The plan's own mark, which carries its colour in its gradients and
-          // therefore takes no colour class of its own.
-          Icon: GoldVerifiedBadgeIcon,
-          alwaysVisible: true,
-        }
-      : {
-          key: "pro",
-          href: "/pro",
-          target: "",
-          label: "Pro",
-          short: "Pro",
-          // The same blue badge that marks a verified name (see
-          // DisplayUserName) — it keeps its own colour rather than inheriting
-          // the row's grey, because it only reads as *that* badge if it looks
-          // like it everywhere.
-          Icon: VerifiedBadgeIcon,
-          iconClassName: "text-blue-500",
-          alwaysVisible: true,
-        };
-
-  // Ahead of the app and the bot, where "Pro" has always sat.
-  const secondary: SecondaryItem[] = [SECONDARY[0], proItem, ...SECONDARY.slice(1)];
+  const secondary: SecondaryItem[] = SECONDARY;
 
   return (
     // Sticky and translucent: on the long marketing pages the way back to the
@@ -172,15 +88,12 @@ export function SiteHeader() {
       <div className="mx-auto flex h-14 w-full max-w-5xl items-center gap-1.5 px-3 sm:gap-2 sm:px-4">
         <Link
           href="/"
-          className="flex shrink-0 items-center gap-2 transition hover:opacity-80"
-          aria-label="Início do GoLive"
+          className="flex shrink-0 items-center gap-2.5 transition hover:opacity-85"
+          aria-label="Início do Spectra"
         >
-          {/* The same red square every Discord embed of the site shows (see
-              the openGraph image in app/layout.tsx) — the mark people already
-              associate with GoLive, rather than a second one invented here. */}
-          <img src="/icon.png" alt="site icon" style={{ width: "20px" }} />
-          <span className="hidden text-base font-semibold tracking-tight text-zinc-950 sm:inline dark:text-zinc-50">
-            GoLive
+          <img src="/spectra-logo.svg" alt="Spectra" className="h-6 w-6 drop-shadow-[0_0_8px_rgba(34,211,238,0.4)]" />
+          <span className="hidden text-base font-bold tracking-tight text-zinc-950 sm:inline dark:text-zinc-50 bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent">
+            Spectra
           </span>
         </Link>
 

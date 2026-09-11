@@ -93,7 +93,7 @@ export function DownloadPanel() {
                 O app é para computador
               </p>
               <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-                No celular o GoLive funciona direto no navegador, sem instalar nada — e dá pra
+                No celular o Spectra funciona direto no navegador, sem instalar nada — e dá pra
                 adicionar à tela de início como um aplicativo. Guarde esta página pra quando
                 estiver no PC.
               </p>
@@ -119,10 +119,10 @@ export function DownloadPanel() {
           </a>
         ))}
         <a
-          href="https://github.com/Nem-Tudo/group-sharescreen/releases/latest"
+          href="https://github.com/eobarretooo/Spectra/releases/latest"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-lg px-3.5 py-2 text-sm font-medium text-zinc-500 underline underline-offset-2 transition hover:text-zinc-900 dark:hover:text-zinc-100"
+          className="inline-flex items-center gap-2 rounded-lg px-3.5 py-2 text-sm font-medium text-zinc-500 underline underline-offset-2 transition hover:text-cyan-600 dark:hover:text-cyan-400"
         >
           <MdDownload className="h-4 w-4 shrink-0" />
           Todos os arquivos

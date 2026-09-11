@@ -250,14 +250,14 @@ export function ParticipantRow({
           )
         )}
         {isApp ? (
-          <Tooltip content={`${name} está usando o aplicativo do GoLive no PC`}>
+          <Tooltip content={`${name} está usando o aplicativo do Spectra no PC`}>
             <span className="flex shrink-0 items-center self-center">
               <MdOutlineDesktopWindows className="h-3.5 w-3.5 text-indigo-500 dark:text-indigo-400" />
             </span>
           </Tooltip>
         ) : (
           isMobileApp && (
-            <Tooltip content={`${name} está usando o aplicativo do GoLive no celular`}>
+            <Tooltip content={`${name} está usando o aplicativo do Spectra no celular`}>
               <span className="flex shrink-0 items-center self-center">
                 {/* Same size and colour as the desktop one on purpose: they
                     are the same fact about a person, and a different colour

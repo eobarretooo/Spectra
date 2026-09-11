@@ -598,7 +598,7 @@ export function ProPanel({
       <div className="flex items-start justify-between gap-4">
         <div>
           <h1 className="flex items-center gap-1.5 text-2xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-50">
-            {plan?.title ?? "GoLive Pro"}
+            {plan?.title ?? "Spectra"}
             {/* The plan's own mark, chosen by its `iconId` in the database (see
                 components/planIcons.tsx). Rendered from the plan rather than
                 hardcoded here for the same reason the price is read from it: the
@@ -632,7 +632,7 @@ export function ProPanel({
               is there, which is the opposite of what a notice wants. */}
           <span
             aria-hidden
-            className="golive-shine pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-transparent via-emerald-300/25 to-transparent"
+            className="spectra-shine pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-transparent via-cyan-300/25 to-transparent"
           />
           <BsStars className="relative mt-0.5 h-5 w-5 shrink-0 text-emerald-500" />
           <p className="relative text-sm leading-relaxed text-emerald-900 dark:text-emerald-200">

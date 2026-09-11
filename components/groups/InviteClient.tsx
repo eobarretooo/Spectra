@@ -58,7 +58,7 @@ export function InviteClient({ code, initialPreview }: { code: string; initialPr
         acceptLabel="Aceitar convite"
         blocked={
           group.suspended
-            ? "Este grupo foi suspenso pela administração do GoLive. Ninguém consegue entrar enquanto durar a suspensão."
+            ? "Este grupo foi suspenso pela administração do Spectra. Ninguém consegue entrar enquanto durar a suspensão."
             : invite.state !== "ok"
               ? `${STATE_TEXT[invite.state]} Peça um novo convite a alguém do grupo.`
               : null

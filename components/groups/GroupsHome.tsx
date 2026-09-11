@@ -173,7 +173,7 @@ function JoinByInvite() {
             setValue(e.target.value);
             setError(null);
           }}
-          placeholder="golive.nemtudo.me/invite/…"
+          placeholder="spectra.live/invite/…"
           className="min-w-0 flex-1 rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-950 outline-none focus:border-zinc-500 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
         />
         <button type="submit" disabled={!value.trim()} className={secondaryButton}>

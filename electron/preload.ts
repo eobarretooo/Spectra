@@ -21,7 +21,7 @@ function readVersion(): string {
   return arg ? arg.slice(VERSION_ARG.length) : "0.0.0";
 }
 
-contextBridge.exposeInMainWorld("golive", {
+const bridge = {
   appVersion: readVersion(),
   platform: process.platform,
 
@@ -220,7 +220,10 @@ contextBridge.exposeInMainWorld("golive", {
         },
       }
     : undefined,
-});
+};
+
+contextBridge.exposeInMainWorld("spectra", bridge);
+contextBridge.exposeInMainWorld("golive", bridge);
 
 // Whether main flagged this machine as capable, through the same argv
 // channel readVersion above uses — a sandboxed preload has no other way to

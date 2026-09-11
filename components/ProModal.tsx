@@ -46,7 +46,7 @@ export function ProModal({ open, planId, onClose }: ProModalProps) {
       onClick={onClose}
       role="dialog"
       aria-modal="true"
-      aria-label="GoLive Pro"
+      aria-label="Spectra"
     >
       <div
         className="relative flex max-h-[90vh] w-full max-w-2xl flex-col overflow-y-auto rounded-2xl border border-zinc-200 bg-zinc-50 shadow-2xl dark:border-zinc-800 dark:bg-black"

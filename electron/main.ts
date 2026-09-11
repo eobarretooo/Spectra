@@ -84,19 +84,19 @@ import {
 
 // Where the UI comes from. Overridable so `npm run electron:dev` can point at
 // a local `next dev` without a rebuild.
-const APP_URL = process.env.GOLIVE_APP_URL || "https://golive.nemtudo.me";
+const APP_URL = process.env.SPECTRA_APP_URL || process.env.GOLIVE_APP_URL || "http://localhost:3000";
 const APP_ORIGIN = new URL(APP_URL).origin;
 
 // Registered with the OS so the OAuth result can find its way back — see
 // startOAuth below and the web app's lib/desktop.ts.
-const PROTOCOL = "golive";
+const PROTOCOL = "spectra";
 
 // Must match electron-builder.yml's `appId`. On Windows, a renderer's
 // `new Notification()` (see lib/notifications.ts) silently shows nothing unless
 // the process declares this same AppUserModelID — the OS keys toasts to the
 // installed app's identity, and without it every notification is dropped with
 // no error. Harmless on macOS/Linux.
-const APP_USER_MODEL_ID = "me.nemtudo.golive";
+const APP_USER_MODEL_ID = "live.spectra.app";
 
 // A login the user never finishes would otherwise leave a promise pending in
 // the renderer forever. Generous, because the flow legitimately involves
@@ -1283,7 +1283,7 @@ function takeResumeUrl(): string | null {
 // lib/installId.ts) — a random number whose only job is to be the same one
 // tomorrow. It stays in %APPDATA% rather than the install directory so the
 // uninstaller can still read it after the program files are gone.
-const INSTALL_ID_DIR_NAME = "GoLive";
+const INSTALL_ID_DIR_NAME = "Spectra";
 const INSTALL_ID_FILE_NAME = "install-id";
 
 // Same shape the server validates against, and for the same reason: this

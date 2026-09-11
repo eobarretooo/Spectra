@@ -447,30 +447,27 @@ export default function Home() {
             <HomeGroupsPanel />
           </div>
           <main className="w-full max-w-md rounded-2xl border border-black/10 bg-white p-8 shadow-sm dark:border-white/10 dark:bg-zinc-950">
-            <h1 className="text-2xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-50">
-              GoLive
-            </h1>
-            <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
-              Compartilhe sua tela com quem estiver na mesma sala, sem cadastro.
+            <div className="flex items-center gap-3">
+              <img src="/spectra-logo.svg" alt="Spectra" className="h-9 w-9 drop-shadow-[0_0_12px_rgba(34,211,238,0.4)]" />
+              <h1 className="text-2xl font-bold tracking-tight text-zinc-950 dark:text-zinc-50 bg-gradient-to-r from-cyan-400 via-sky-300 to-violet-400 bg-clip-text text-transparent">
+                Spectra
+              </h1>
+            </div>
+            <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
+              Compartilhe sua tela, câmera e voz em alta definição com quem estiver na mesma sala, sem cadastro.
             </p>
-            {/* Wrapped so the two sit side by side and wrap together on a
-              narrow screen — the download button renders nothing at all in
-              the app itself or on mobile, and the row collapses cleanly. */}
-            <div className="mt-3 flex flex-wrap items-center gap-2">
+            <div className="mt-4 flex flex-wrap items-center gap-2">
               <Link
                 href="/rooms"
-                className="inline-flex items-center gap-1.5 rounded-lg border border-sky-300 px-3.5 py-2 text-sm font-medium text-sky-700 transition hover:border-sky-400 hover:bg-sky-100 dark:border-sky-700 dark:text-sky-300 dark:hover:border-sky-600 dark:hover:bg-sky-900"
+                className="inline-flex items-center gap-1.5 rounded-lg border border-cyan-500/30 px-3.5 py-2 text-sm font-medium text-cyan-700 transition hover:border-cyan-500 hover:bg-cyan-50 dark:border-cyan-500/30 dark:text-cyan-300 dark:hover:border-cyan-400 dark:hover:bg-cyan-950/40"
               >
                 <GlobeIcon className="h-4 w-4" />
                 Ver salas públicas
               </Link>
-              {/* The same rooms, arranged by where their owners put them on the
-                globe instead of by headcount — see app/worldmap. Only ever public
-                ones, same as the list beside it. */}
               <Tooltip content="Encontre salas no seu país, cidade ou bairro!">
                 <Link
                   href="/worldmap"
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-sky-300 px-3.5 py-2 text-sm font-medium text-sky-700 transition hover:border-sky-400 hover:bg-sky-100 dark:border-sky-700 dark:text-sky-300 dark:hover:border-sky-600 dark:hover:bg-sky-900"
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-violet-500/30 px-3.5 py-2 text-sm font-medium text-violet-700 transition hover:border-violet-500 hover:bg-violet-50 dark:border-violet-500/30 dark:text-violet-300 dark:hover:border-violet-400 dark:hover:bg-violet-950/40"
                 >
                   <MdOutlineMap className="h-4 w-4" />
                   Ver mapa de salas
@@ -839,7 +836,6 @@ export default function Home() {
         <AdsterraBanner className="mt-6" />
         {/* No heading on this one: the home page is a form someone came here to
           fill in, and three handles under it explain themselves. */}
-        <SocialLinks title={null} className="mt-6" />
         <p className="mt-4 flex gap-5 text-center text-xs text-zinc-400 dark:text-zinc-600" style={{ alignItems: "center" }}>
           <Link
             href="/termos"
@@ -847,9 +843,8 @@ export default function Home() {
           >
             Termos de uso
           </Link>
-          <Link href={"https://go.nemtudo.me/square-link"} target="_blank">
-            <img src={"https://cdn.squarecloud.app/assets/powered-by.svg"} style={{ width: "200px" }} />
-          </Link>
+          <span>•</span>
+          <span>Spectra Live</span>
         </p>
       </div>
     </>

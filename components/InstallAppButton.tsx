@@ -145,7 +145,7 @@ export function InstallAppButton() {
       </div>
       <div className="min-w-0 flex-1">
         <p className="text-sm font-semibold text-zinc-950 dark:text-zinc-50">
-          {downloadPlatform ? "Baixar o app do GoLive" : "Instalar o GoLive"}
+          {downloadPlatform ? "Baixar o app do Spectra" : "Instalar o Spectra"}
         </p>
         {downloadPlatform ? (
           <p className="mt-0.5 text-xs text-zinc-600 dark:text-zinc-400">

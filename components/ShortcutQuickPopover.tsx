@@ -70,12 +70,12 @@ export function ShortcutQuickPopover({
                 letting you edit the shortcut right underneath. */}
             {isAppOnly && !isDesktop && (
               <a
-                href="https://golive.nemtudo.me/app"
+                href="/app"
                 target="_blank"
                 rel="noopener noreferrer"
-                title="Baixar aplicativo GoLive"
+                title="Baixar aplicativo Spectra"
                 style={{ width: "fit-content", textWrap: "nowrap" }}
-                className="flex w-fit shrink-0 items-center gap-1 rounded-md bg-indigo-50 px-1.5 py-0.5 text-[10px] font-medium whitespace-nowrap text-indigo-700 transition hover:bg-indigo-100 hover:text-indigo-800 dark:bg-indigo-950/60 dark:text-indigo-400 dark:hover:bg-indigo-900/60 dark:hover:text-indigo-300"
+                className="flex w-fit shrink-0 items-center gap-1 rounded-md bg-cyan-50 px-1.5 py-0.5 text-[10px] font-medium whitespace-nowrap text-cyan-700 transition hover:bg-cyan-100 hover:text-cyan-800 dark:bg-cyan-950/60 dark:text-cyan-400 dark:hover:bg-cyan-900/60 dark:hover:text-cyan-300"
               >
                 <MdOutlineDesktopWindows className="h-3 w-3" />
                 No app
@@ -90,17 +90,17 @@ export function ShortcutQuickPopover({
           {isAppOnly && !isDesktop ? (
             <div className="flex flex-col gap-2.5">
               <a
-                href="https://golive.nemtudo.me/app"
+                href="/app"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex flex-col items-center rounded-lg border border-zinc-200 bg-zinc-50 p-3 text-center transition hover:border-indigo-300 hover:bg-indigo-50/50 dark:border-zinc-800 dark:bg-zinc-900/60 dark:hover:border-indigo-800 dark:hover:bg-indigo-950/30"
+                className="group flex flex-col items-center rounded-lg border border-zinc-200 bg-zinc-50 p-3 text-center transition hover:border-cyan-300 hover:bg-cyan-50/50 dark:border-zinc-800 dark:bg-zinc-900/60 dark:hover:border-cyan-800 dark:hover:bg-cyan-950/30"
               >
-                <MdOutlineDesktopWindows className="mb-1.5 h-6 w-6 text-zinc-400 transition group-hover:text-indigo-600 dark:text-zinc-500 dark:group-hover:text-indigo-400" />
-                <p className="text-xs font-semibold text-zinc-800 transition group-hover:text-indigo-600 dark:text-zinc-200 dark:group-hover:text-indigo-400">
+                <MdOutlineDesktopWindows className="mb-1.5 h-6 w-6 text-zinc-400 transition group-hover:text-cyan-600 dark:text-zinc-500 dark:group-hover:text-cyan-400" />
+                <p className="text-xs font-semibold text-zinc-800 transition group-hover:text-cyan-600 dark:text-zinc-200 dark:group-hover:text-cyan-400">
                   Disponível no aplicativo
                 </p>
                 <p className="mt-1 text-[11px] text-zinc-500 transition group-hover:text-zinc-700 dark:text-zinc-400 dark:group-hover:text-zinc-300">
-                  Este atalho só pode ser configurado e utilizado no aplicativo GoLive. Clique para baixar.
+                  Este atalho só pode ser configurado e utilizado no aplicativo Spectra. Clique para baixar.
                 </p>
                 <span className="mt-2 inline-flex items-center gap-1 rounded-md bg-zinc-900 px-2.5 py-1 text-[11px] font-medium text-white transition hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-950 dark:hover:bg-zinc-200">
                   Baixar aplicativo

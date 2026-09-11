@@ -82,7 +82,7 @@ function GiftBand({ tone }: { tone: "gold" | "blue" }) {
           system for less motion (see globals.css). */}
       <span
         aria-hidden
-        className="golive-shine pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/40 to-transparent"
+        className="spectra-shine pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/40 to-transparent"
       />
       <span className="absolute inset-0 flex items-center justify-center">
         <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white/20 ring-1 ring-white/40 backdrop-blur-sm">

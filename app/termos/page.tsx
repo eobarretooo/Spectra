@@ -5,7 +5,7 @@ import { AdsterraBanner } from "@/components/AdsterraBanner";
 export const metadata: Metadata = {
   title: "Termos de Uso e Privacidade",
   description:
-    "Termos de uso e política de privacidade do GoLive: como o serviço de transmissão de tela, câmera e voz em grupo funciona e quais dados são tratados.",
+    "Termos de uso e política de privacidade do Spectra: como o serviço de transmissão de tela, câmera e voz em grupo funciona e quais dados são tratados.",
   alternates: {
     canonical: "/termos",
   },
@@ -26,31 +26,31 @@ export default function TermosPage() {
     <div className="flex flex-1 justify-center bg-zinc-50 px-4 py-16 dark:bg-black">
       <main className="w-full max-w-2xl">
         <Link href="/" className={`text-sm font-medium text-zinc-500 ${linkClass}`}>
-          ← Voltar para o GoLive
+          ← Voltar para o Spectra
         </Link>
 
         <h1 className="mt-4 text-2xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-50">
           Termos de Uso e Privacidade
         </h1>
         <p className={pClass}>
-          Estes termos explicam como o GoLive (
-          <a href="https://golive.nemtudo.me" className={linkClass}>
-            golive.nemtudo.me
+          Estes termos explicam como o Spectra (
+          <a href="https://spectra.live" className={linkClass}>
+            spectra.live
           </a>
           ) funciona e o que acontece com seus dados ao usá-lo. Ao acessar o site ou entrar em
           uma sala, você concorda com o que está descrito aqui.
         </p>
 
         <section className={sectionClass}>
-          <h2 className={h2Class}>1. O que é o GoLive</h2>
+          <h2 className={h2Class}>1. O que é o Spectra</h2>
           <p className={pClass}>
-            O GoLive é um serviço gratuito para transmitir tela, câmera ou voz para outras
+            O Spectra é um serviço gratuito para transmitir tela, câmera ou voz para outras
             pessoas na mesma sala, direto do navegador, sem necessidade de instalar nada. É
             possível usar sem se cadastrar: basta escolher um nome e entrar ou criar uma sala.
           </p>
           <p className={pClass}>
             A conexão de áudio/vídeo entre os participantes é feita ponto a ponto (WebRTC). O
-            servidor do GoLive atua apenas como intermediário para as pessoas se encontrarem na
+            servidor do Spectra atua apenas como intermediário para as pessoas se encontrarem na
             sala (sinalização) — ele não grava, armazena nem tem acesso ao conteúdo da tela,
             câmera ou voz transmitidos.
           </p>
@@ -81,7 +81,7 @@ export default function TermosPage() {
         <section className={sectionClass}>
           <h2 className={h2Class}>3. Conta e uso como convidado</h2>
           <p className={pClass}>
-            Você pode usar o GoLive apenas com um nome de exibição temporário (convidado) ou criar
+            Você pode usar o Spectra apenas com um nome de exibição temporário (convidado) ou criar
             uma conta com usuário e senha. Também é possível entrar/criar conta usando Discord ou
             Google, quando esses botões estiverem disponíveis. Uma conta criada por login social
             fica sem senha e só pode ser acessada por aquele provedor, até que uma senha seja
@@ -104,7 +104,7 @@ export default function TermosPage() {
 
         <section className={sectionClass}>
           <h2 className={h2Class}>5. Regras de uso</h2>
-          <p className={pClass}>Ao usar o GoLive, você concorda em não:</p>
+          <p className={pClass}>Ao usar o Spectra, você concorda em não:</p>
           <ul className={ulClass}>
             <li>Transmitir ou compartilhar conteúdo ilegal, ou que viole direitos de terceiros;</li>
             <li>
@@ -119,7 +119,7 @@ export default function TermosPage() {
             <li>Se passar por outra pessoa ou entidade de forma enganosa.</li>
           </ul>
           <p className={pClass}>
-            Como a mídia transmitida (tela, câmera, voz) não passa pelos servidores do GoLive,
+            Como a mídia transmitida (tela, câmera, voz) não passa pelos servidores do Spectra,
             não há como moderar esse conteúdo em tempo real — a responsabilidade pelo que é
             transmitido é de quem transmite. Já o chat pode ser moderado, incluindo filtro de
             palavras banidas.
@@ -129,7 +129,7 @@ export default function TermosPage() {
         <section className={sectionClass}>
           <h2 className={h2Class}>6. Moderação e banimentos</h2>
           <p className={pClass}>
-            Para manter o serviço utilizável, o GoLive mantém sistemas de moderação, incluindo:
+            Para manter o serviço utilizável, o Spectra mantém sistemas de moderação, incluindo:
           </p>
           <ul className={ulClass}>
             <li>Filtro de palavras banidas no chat;</li>
@@ -167,7 +167,7 @@ export default function TermosPage() {
 
         <section className={sectionClass}>
           <h2 className={h2Class}>7. Dados que coletamos</h2>
-          <p className={pClass}>Dependendo de como você usa o GoLive, podemos tratar:</p>
+          <p className={pClass}>Dependendo de como você usa o Spectra, podemos tratar:</p>
           <ul className={ulClass}>
             <li>
               <strong>Nome de convidado</strong>, guardado só no seu navegador (localStorage) para
@@ -180,7 +180,7 @@ export default function TermosPage() {
             <li>
               <strong>Login social</strong>: quando você entra com Discord ou Google, recebemos o
               identificador da conta no provedor e, se o provedor confirmar que é verificado, seu
-              e-mail — usado para vincular ou reconhecer sua conta no GoLive;
+              e-mail — usado para vincular ou reconhecer sua conta no Spectra;
             </li>
             <li>
               <strong>Endereço IP</strong>, usado para segurança (banimentos, limite de taxa) e
@@ -197,14 +197,14 @@ export default function TermosPage() {
           </ul>
           <p className={pClass}>
             O conteúdo transmitido por tela, câmera ou voz não é coletado nem armazenado pelo
-            GoLive — ele trafega diretamente entre os participantes da sala.
+            Spectra — ele trafega diretamente entre os participantes da sala.
           </p>
         </section>
 
         <section className={sectionClass}>
           <h2 className={h2Class}>8. Estatísticas públicas</h2>
           <p className={pClass}>
-            O GoLive mantém um painel público de estatísticas de uso (Grafana), com números
+            O Spectra mantém um painel público de estatísticas de uso (Grafana), com números
             agregados como quantidade de conexões por região aproximada — sem nenhum dado que
             identifique uma pessoa individualmente.
           </p>
@@ -214,7 +214,7 @@ export default function TermosPage() {
           <h2 className={h2Class}>9. Apoiadores e parceiros</h2>
           <p className={pClass}>
             Quem apoia o projeto financeiramente pode ter seu nome e o valor apoiado exibidos
-            publicamente no site, como forma de agradecimento. O GoLive também pode exibir
+            publicamente no site, como forma de agradecimento. O Spectra também pode exibir
             anúncios de parceiros em algumas salas, com estatísticas de exibição e cliques
             associadas a esses anúncios.
           </p>
@@ -223,7 +223,7 @@ export default function TermosPage() {
         <section className={sectionClass}>
           <h2 className={h2Class}>10. Idade mínima</h2>
           <p className={pClass}>
-            O GoLive não é direcionado a crianças. Ao usar o serviço, você declara ter idade
+            O Spectra não é direcionado a crianças. Ao usar o serviço, você declara ter idade
             mínima permitida pela legislação do seu país para consentir com o tratamento de dados
             aqui descrito (em geral, 13 anos, respeitando exigências locais).
           </p>
@@ -232,9 +232,9 @@ export default function TermosPage() {
         <section className={sectionClass}>
           <h2 className={h2Class}>11. Serviço &quot;como está&quot;</h2>
           <p className={pClass}>
-            O GoLive é oferecido gratuitamente, sem garantias de disponibilidade, desempenho ou
+            O Spectra é oferecido gratuitamente, sem garantias de disponibilidade, desempenho ou
             ausência de erros. O serviço pode sair do ar, mudar ou ser descontinuado a qualquer
-            momento, sem aviso prévio. Na máxima medida permitida por lei, o GoLive não se
+            momento, sem aviso prévio. Na máxima medida permitida por lei, o Spectra não se
             responsabiliza por danos decorrentes do uso ou da impossibilidade de uso do serviço,
             nem pelo conteúdo transmitido por terceiros.
           </p>
