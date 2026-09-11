@@ -50,24 +50,23 @@ export function OpenInAppBanner() {
   if (!visible) return null;
 
   return (
-    <div className="flex flex-wrap items-center gap-x-3 gap-y-2 border-b border-black/10 bg-zinc-100 px-3 py-2 text-sm dark:border-white/10 dark:bg-zinc-900 sm:px-4">
-      <MdOutlineDesktopWindows className="h-4 w-4 shrink-0 text-zinc-500 dark:text-zinc-400" />
-      <span className="text-zinc-700 dark:text-zinc-300">
-        Não ouça eco (ouvir sua própria voz na transmissão do amigo) utilizando o app oficial do Go
-        Live!
+    <div className="flex flex-wrap items-center gap-x-3 gap-y-2 border-b border-cyan-500/20 bg-gradient-to-r from-cyan-950/40 via-zinc-950/90 to-zinc-950/90 px-3 py-2.5 text-xs sm:text-sm backdrop-blur-xl sm:px-4">
+      <div className="flex items-center gap-2">
+        <span className="flex h-2 w-2 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
+        <MdOutlineDesktopWindows className="h-4 w-4 shrink-0 text-cyan-400" />
+      </div>
+      <span className="text-zinc-200 font-medium">
+        Isole o áudio e elimine o eco da sua transmissão utilizando o <strong className="text-cyan-400 font-bold">app oficial do Spectra</strong>!
       </span>
       <span className="ml-auto flex items-center gap-2">
         <DownloadAppButton source="room-banner" />
         <button
           type="button"
           onClick={() => {
-            // Asked for rather than done here. The gate is what owns the
-            // handoff, because leaving the room is half of it — and leaving
-            // the room means unmounting the component this button is inside.
             setVisible(false);
             requestAppHandoff();
           }}
-          className="rounded-lg bg-zinc-950 px-3 py-1.5 text-xs font-medium text-white transition hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-950 dark:hover:bg-zinc-200"
+          className="rounded-xl border border-cyan-500/40 bg-cyan-500/10 px-3 py-1.5 text-xs font-semibold text-cyan-300 transition duration-200 hover:bg-cyan-500 hover:text-zinc-950 shadow-[0_0_12px_rgba(6,182,212,0.15)]"
         >
           Abrir no app
         </button>
@@ -77,7 +76,7 @@ export function OpenInAppBanner() {
             setStoredOpenInAppDismissed(true);
             setVisible(false);
           }}
-          className="rounded-lg px-2 py-1.5 text-xs font-medium text-zinc-500 transition hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200"
+          className="rounded-xl px-2.5 py-1.5 text-xs font-medium text-zinc-400 transition hover:bg-white/5 hover:text-zinc-200"
         >
           Agora não
         </button>

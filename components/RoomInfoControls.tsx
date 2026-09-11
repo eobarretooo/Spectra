@@ -109,7 +109,7 @@ export function RoomInfoControls({
         placement="bottom-start"
         tooltip="Categoria da sala"
         content={
-          <div className="flex w-52 max-w-[calc(100vw-1rem)] flex-col gap-0.5 rounded-lg border border-zinc-300 bg-white p-1 shadow-lg dark:border-zinc-700 dark:bg-zinc-900">
+          <div className="flex w-52 max-w-[calc(100vw-1rem)] flex-col gap-0.5 rounded-2xl border border-white/10 bg-[#0c101c]/95 p-1.5 shadow-2xl backdrop-blur-xl">
             {/* Deliberately first: taking a category off is as ordinary as
                 putting one on, and hiding it behind "Outros" would be a
                 different thing entirely. */}
@@ -119,7 +119,7 @@ export function RoomInfoControls({
                 signalingClient.setRoomInfo({ category: null });
                 setCategoryOpen(false);
               }}
-              className={`rounded-md px-2.5 py-1.5 text-left text-sm transition hover:bg-zinc-100 dark:hover:bg-zinc-800 ${category === null ? "font-semibold" : ""
+              className={`rounded-xl px-2.5 py-1.5 text-left text-sm transition hover:bg-white/5 text-zinc-300 hover:text-white ${category === null ? "font-semibold text-cyan-300" : ""
                 }`}
             >
               Sem categoria
@@ -132,7 +132,7 @@ export function RoomInfoControls({
                   signalingClient.setRoomInfo({ category: c.id });
                   setCategoryOpen(false);
                 }}
-                className={`flex items-center gap-2 rounded-md px-2.5 py-1.5 text-left text-sm transition hover:bg-zinc-100 dark:hover:bg-zinc-800 ${category === c.id ? "font-semibold" : ""
+                className={`flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-left text-sm transition hover:bg-white/5 text-zinc-300 hover:text-white ${category === c.id ? "font-semibold text-cyan-300" : ""
                   }`}
               >
                 <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${c.className}`} />
@@ -147,7 +147,7 @@ export function RoomInfoControls({
           onClick={() => setCategoryOpen((o) => !o)}
           className={`flex shrink-0 items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium transition ${active
             ? active.className
-            : "border border-dashed border-zinc-300 text-zinc-500 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-400 dark:hover:bg-zinc-900"
+            : "border border-white/10 bg-white/5 text-zinc-400 hover:border-cyan-500/30 hover:bg-white/10 hover:text-white"
             }`}
         >
           {active ? active.label : "Categoria"}
@@ -171,7 +171,7 @@ export function RoomInfoControls({
         maxLength={MAX_ROOM_DESCRIPTION_LENGTH}
         placeholder="Descrição da sala..."
         aria-label="Descrição da sala"
-        className="min-w-0 max-w-96 flex-1 rounded-lg border border-zinc-300 bg-transparent px-2.5 py-1 text-xs text-zinc-700 outline-none placeholder:text-zinc-400 focus:border-zinc-500 dark:border-zinc-700 dark:text-zinc-300 dark:placeholder:text-zinc-600"
+        className="min-w-0 max-w-96 flex-1 rounded-xl border border-white/10 bg-white/5 px-2.5 py-1 text-xs text-zinc-200 outline-none placeholder:text-zinc-500 transition focus:border-cyan-500/50 focus:bg-white/10 focus:shadow-[0_0_10px_rgba(6,182,212,0.15)]"
       />
     </div>
   );

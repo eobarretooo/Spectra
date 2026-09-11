@@ -569,7 +569,7 @@ export function VideoTile({
               type="button"
               onClick={onToggleMic}
               aria-label={isMicOn ? "Desativar microfone" : "Ativar microfone"}
-              className={`rounded-full p-2 text-white active:bg-black/80 ${isMicOn ? "bg-emerald-600 hover:bg-emerald-700" : "bg-red-600 hover:bg-red-700"
+              className={`rounded-full p-2 text-white active:bg-black/80 ${isMicOn ? "bg-cyan-500 text-zinc-950 font-bold shadow-[0_0_12px_rgba(6,182,212,0.35)] hover:bg-cyan-400" : "bg-rose-600 hover:bg-rose-500 shadow-[0_0_12px_rgba(225,29,72,0.35)]"
                 }`}
             >
               {isMicOn ? <MicIcon className="h-5 w-5" /> : <MicOffIcon className="h-5 w-5" />}
@@ -582,7 +582,7 @@ export function VideoTile({
               type="button"
               onClick={onToggleMicsMuted}
               aria-label={micsMuted ? "Reativar microfones" : "Silenciar microfones"}
-              className={`rounded-full p-2 text-white active:bg-black/80 ${micsMuted ? "bg-red-600 hover:bg-red-700" : "bg-emerald-600 hover:bg-emerald-700"
+              className={`rounded-full p-2 text-white active:bg-black/80 ${micsMuted ? "bg-rose-600 hover:bg-rose-500 shadow-[0_0_12px_rgba(225,29,72,0.35)]" : "bg-cyan-500 text-zinc-950 font-bold shadow-[0_0_12px_rgba(6,182,212,0.35)] hover:bg-cyan-400"
                 }`}
             >
               {micsMuted ? (
@@ -638,9 +638,9 @@ export function VideoTile({
               onClick={onFocus}
               aria-label={isSpotlighted ? "Remover destaque" : `Focar em ${nameForLabel}`}
               aria-pressed={isSpotlighted}
-              className={`rounded-full p-2 text-white active:bg-black/80 ${isSpotlighted
-                ? "bg-emerald-600 hover:bg-emerald-700"
-                : "bg-black/60 hover:bg-black/80"
+              className={`rounded-full p-2 transition active:scale-95 ${isSpotlighted
+                ? "bg-cyan-500 text-zinc-950 font-bold shadow-[0_0_15px_rgba(6,182,212,0.45)] hover:bg-cyan-400"
+                : "bg-black/60 text-white hover:bg-black/80"
                 }`}
             >
               <FocusIcon className="h-5 w-5" />
@@ -660,12 +660,12 @@ export function VideoTile({
               onClick={onHyperfocus}
               aria-label={`Hiperfoco em ${nameForLabel}${!hasAccount ? " (requer conta)" : ""}`}
               aria-pressed={isHyperfocused}
-              className={`rounded-full p-2 text-white transition ${
+              className={`rounded-full p-2 transition ${
                 !hasAccount
-                  ? "bg-black/30 opacity-40 hover:bg-black/30 hover:opacity-40 active:bg-black/30"
+                  ? "bg-black/30 opacity-40 hover:bg-black/30 hover:opacity-40 active:bg-black/30 text-white"
                   : isHyperfocused
-                    ? "bg-emerald-600 hover:bg-emerald-700 active:bg-black/80"
-                    : "bg-black/60 hover:bg-black/80 active:bg-black/80"
+                    ? "bg-cyan-500 text-zinc-950 font-bold shadow-[0_0_15px_rgba(6,182,212,0.45)] hover:bg-cyan-400 active:scale-95"
+                    : "bg-black/60 hover:bg-black/80 active:bg-black/80 text-white"
               }`}
             >
               <HyperfocusIcon className="h-5 w-5" />

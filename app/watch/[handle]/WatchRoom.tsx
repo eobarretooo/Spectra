@@ -255,7 +255,7 @@ function MenuToggleRow({
       >
         <span>{label}</span>
         <span
-          className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-white ${active ? "bg-emerald-600" : "bg-zinc-500"
+          className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${active ? "bg-cyan-500 text-zinc-950 font-bold shadow-[0_0_10px_rgba(6,182,212,0.3)]" : "bg-white/10 text-zinc-400"
             }`}
         >
           {active ? activeIcon : inactiveIcon}
@@ -281,9 +281,9 @@ function DeviceMenuOption({
     <button
       type="button"
       onClick={onClick}
-      className={`flex w-full items-center justify-between gap-2 rounded-md px-3 py-2 text-left text-sm transition ${selected
-        ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400"
-        : "text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
+      className={`flex w-full items-center justify-between gap-2 rounded-xl px-3 py-2 text-left text-sm font-medium transition ${selected
+        ? "border border-cyan-500/30 bg-cyan-500/15 text-cyan-300 font-semibold"
+        : "text-zinc-300 hover:bg-white/5"
         }`}
     >
       <span className="truncate">{label}</span>
@@ -333,7 +333,7 @@ function MicGainRow({
         onChange={(event) => onChange(Number(event.target.value))}
         onDoubleClick={() => onChange(DEFAULT_MIC_GAIN)}
         aria-label="Volume do microfone"
-        className="mt-2 h-1.5 w-full cursor-pointer accent-emerald-600 disabled:cursor-not-allowed disabled:opacity-50"
+        className="mt-2 h-1.5 w-full cursor-pointer accent-cyan-400 disabled:cursor-not-allowed disabled:opacity-50"
       />
       <p className="mt-1.5 text-[11px] leading-snug text-zinc-500 dark:text-zinc-500">
         {disabled
@@ -399,12 +399,12 @@ function MicUsageHint({
       tooltip={tooltip}
       wrapperClassName={wrapperClassName}
       content={
-        <div className="w-64 max-w-[calc(100vw-1rem)] rounded-lg border border-zinc-300 bg-white p-3 text-left shadow-lg dark:border-zinc-700 dark:bg-zinc-900">
-          <p className="flex items-center gap-1.5 text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-            <MicIcon className="h-4 w-4 shrink-0 text-emerald-600 dark:text-emerald-500" />
+        <div className="w-64 max-w-[calc(100vw-1rem)] rounded-2xl border border-white/10 bg-[#0b0e17]/95 p-3.5 text-left shadow-2xl backdrop-blur-xl">
+          <p className="flex items-center gap-1.5 text-sm font-bold text-white">
+            <MicIcon className="h-4 w-4 shrink-0 text-cyan-400" />
             Fale com a sala
           </p>
-          <p className="mt-1 text-xs leading-relaxed text-zinc-600 dark:text-zinc-300">
+          <p className="mt-1.5 text-xs leading-relaxed text-zinc-300">
             Ligue o microfone aqui para conversar com quem está na sala. O áudio
             do site é feito para isso — com cancelamento de ruído e volume por
             pessoa — e a sala fica bem melhor de acompanhar do que só assistindo.
@@ -413,14 +413,14 @@ function MicUsageHint({
             <button
               type="button"
               onClick={onEnableMic}
-              className="flex-1 rounded-md bg-emerald-600 px-3 py-1.5 text-xs font-medium text-white transition hover:bg-emerald-700"
+              className="flex-1 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-3 py-1.5 text-xs font-bold text-zinc-950 shadow-[0_0_12px_rgba(6,182,212,0.3)] transition hover:brightness-110"
             >
               Ativar microfone
             </button>
             <button
               type="button"
               onClick={onDismiss}
-              className="rounded-md px-3 py-1.5 text-xs font-medium text-zinc-600 transition hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800"
+              className="rounded-xl border border-white/10 px-3 py-1.5 text-xs font-medium text-zinc-400 transition hover:bg-white/5 hover:text-zinc-200"
             >
               Agora não
             </button>
@@ -692,9 +692,9 @@ function ShareControls({
   onOpenAllShortcuts?: () => void;
 }) {
   const segment =
-    "flex items-center px-3 py-2 text-white transition disabled:cursor-not-allowed disabled:opacity-50";
-  const live = "bg-red-600 hover:bg-red-700";
-  const idle = "bg-emerald-600 hover:bg-emerald-700";
+    "flex items-center px-3.5 py-2 text-white transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-40";
+  const live = "border-rose-500/50 bg-rose-600 text-white shadow-[0_0_15px_rgba(225,29,72,0.4)] hover:bg-rose-500";
+  const idle = "bg-white/10 text-zinc-200 hover:border-cyan-500/40 hover:bg-cyan-500/20 hover:text-cyan-300";
 
   const screenBlocked = !screenSharing && Boolean(screenBlockedReason);
   const cameraBlocked = !cameraSharing && Boolean(cameraBlockedReason);
@@ -714,7 +714,7 @@ function ShareControls({
         : "Seu navegador não permite usar a câmera";
 
   return (
-    <div className="flex items-stretch overflow-hidden rounded-lg">
+    <div className="flex items-stretch overflow-hidden rounded-xl border border-white/10 bg-white/5 shadow-md">
       <Popover
         open={open}
         onClose={() => setOpen(false)}
@@ -730,7 +730,7 @@ function ShareControls({
           type="button"
           onClick={() => setOpen((o) => !o)}
           aria-label="Qualidade da transmissão"
-          className="flex items-center border-r border-black/15 bg-emerald-600 px-2 text-white transition hover:bg-emerald-700"
+          className="flex items-center border-r border-white/10 bg-white/10 px-2.5 text-zinc-300 transition hover:bg-white/20 hover:text-white"
         >
           <BsGearFill className="h-3.5 w-3.5" />
         </button>
@@ -781,7 +781,7 @@ function ShareControls({
             disabled={!cameraSupported || cameraBlocked}
             aria-pressed={cameraSharing}
             aria-label={cameraLabel}
-            className={`${segment} border-l border-black/15 ${cameraSharing ? live : idle}`}
+            className={`${segment} border-l border-white/10 ${cameraSharing ? live : idle}`}
           >
             <CameraIcon className="h-5 w-5" />
           </button>
@@ -985,11 +985,11 @@ const DOCK_SLOT = "flex min-w-0 flex-1 items-center justify-center";
 const DOCK_BUTTON_BASE =
   "flex h-11 w-full items-center justify-center rounded-xl text-white transition active:scale-95 disabled:cursor-not-allowed disabled:opacity-50";
 const DOCK_BUTTON = `${DOCK_BUTTON_BASE}`;
-const DOCK_ON = "bg-emerald-600 active:bg-emerald-700";
-const DOCK_OFF = "bg-red-600 active:bg-red-700";
+const DOCK_ON = "border border-cyan-500/40 bg-cyan-500/20 text-cyan-300 shadow-[0_0_12px_rgba(6,182,212,0.25)] active:bg-cyan-500/30";
+const DOCK_OFF = "border border-rose-500/40 bg-rose-500/20 text-rose-300 active:bg-rose-500/30";
 // Same red as DOCK_OFF, named apart because it means the opposite thing: not
 // "this is switched off" but "this is on the air".
-const DOCK_LIVE = "bg-red-600 active:bg-red-700";
+const DOCK_LIVE = "border border-rose-500/50 bg-rose-600 text-white shadow-[0_0_15px_rgba(225,29,72,0.4)] active:bg-rose-700";
 const DOCK_TAB =
   "flex h-11 w-11 sm:w-12 shrink-0 flex-col items-center justify-center gap-0.5 rounded-xl transition active:scale-95";
 // The one surface in the room that is a deliberate highlight rather than a
@@ -997,9 +997,9 @@ const DOCK_TAB =
 // .room-accent, which falls back to exactly these colours when no theme is
 // on). Everything else in the room is painted by the palette through the zinc
 // tokens and needs no class of its own.
-const DOCK_TAB_ACTIVE = "room-accent";
+const DOCK_TAB_ACTIVE = "border border-cyan-500/40 bg-cyan-500/20 text-cyan-300 shadow-[0_0_12px_rgba(6,182,212,0.25)]";
 const DOCK_TAB_IDLE =
-  "text-zinc-600 active:bg-zinc-100 dark:text-zinc-400 dark:active:bg-zinc-900";
+  "text-zinc-400 hover:text-zinc-200 hover:bg-white/5 active:bg-white/10";
 
 /**
  * What changes when this room is a group's voice room (see
@@ -2152,11 +2152,9 @@ export function WatchRoom({
         tooltip: "Presentear alguém com o Spectra Pro",
         ariaLabel: "Presentear Pro",
         Icon: MdCardGiftcard,
-        // Carries its own colour, like the badges below: green is what the
-        // gift control is everywhere else on the site.
-        iconClassName: "text-emerald-500",
+        iconClassName: "text-purple-400",
         className:
-          "border-emerald-300 text-emerald-600 hover:bg-emerald-50 dark:border-emerald-800 dark:text-emerald-400 dark:hover:bg-emerald-950/40",
+          "border border-purple-500/30 bg-purple-500/10 text-purple-300 hover:border-purple-400/50 hover:bg-purple-500/20 shadow-[0_0_12px_rgba(168,85,247,0.2)] rounded-xl",
         onPress: () => void openPopup("gift_plan", { data: {} }),
       }
     : planFlags.includes("PRO")
@@ -2169,7 +2167,7 @@ export function WatchRoom({
           Icon: GoldVerifiedBadgeIcon,
           iconClassName: "",
           className:
-            "border-amber-300 text-amber-600 hover:bg-amber-50 dark:border-amber-800 dark:text-amber-400 dark:hover:bg-amber-950/40",
+            "border border-amber-500/30 bg-amber-500/10 text-amber-300 hover:border-amber-400/50 hover:bg-amber-500/20 shadow-[0_0_12px_rgba(245,158,11,0.2)] rounded-xl",
           // Opened straight onto the card it is about: somebody who already
           // has Pro should not have to find the picker to see what is above it.
           onPress: () => openProModal("premium_max"),
@@ -2182,9 +2180,9 @@ export function WatchRoom({
           // badge that appears next to a verified name (see DisplayUserName),
           // and it only reads as that badge if it keeps its own.
           Icon: VerifiedBadgeIcon,
-          iconClassName: "text-blue-500",
+          iconClassName: "text-cyan-400",
           className:
-            "border-blue-300 text-blue-600 hover:bg-blue-50 dark:border-blue-800 dark:text-blue-400 dark:hover:bg-blue-950/40",
+            "border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 hover:border-cyan-400/50 hover:bg-cyan-500/20 shadow-[0_0_12px_rgba(6,182,212,0.2)] rounded-xl",
           onPress: () => openProModal(),
         };
   const roomAllowsTheme = canUseRoomPermission("theme");
@@ -2739,10 +2737,10 @@ export function WatchRoom({
         </p>
         <p className="text-sm text-zinc-500 dark:text-zinc-400">
           Se você acredita que isso é um engano, abra um ticket em <a
-            href="https://discord.gg/nemtudo"
+            href="https://discord.gg/p8ZRn2SKm"
             target="_blank"
-            className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-500 dark:hover:text-blue-400"
-          >discord.gg/nemtudo</a>
+            className="text-sm font-medium text-cyan-400 hover:text-cyan-300 transition"
+          >discord.gg/spectra</a>
         </p>
       </div>
     );
@@ -2946,10 +2944,10 @@ export function WatchRoom({
               </Link>
             </div>
             <a
-              href="https://discord.gg/nemtudo"
+              href="https://discord.gg/p8ZRn2SKm"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-lg px-4 py-2 text-sm font-medium text-blue-600 transition hover:text-blue-700 dark:text-blue-500 dark:hover:text-blue-400"
+              className="rounded-xl px-4 py-2 text-sm font-medium text-cyan-400 transition hover:text-cyan-300"
             >
               Precisa de ajuda? Fale com o suporte no Discord
             </a>
@@ -4135,10 +4133,17 @@ export function WatchRoom({
 
       {!group && (
         <span
-          className={`mb-2 inline-block w-fit shrink-0 rounded-full px-2.5 py-1 text-xs font-medium text-white sm:hidden ${
-            isPrivateRoomHandle(handle) ? "bg-red-600" : "bg-emerald-600"
+          className={`mb-2 inline-flex items-center gap-1.5 w-fit shrink-0 rounded-full px-2.5 py-1 text-xs font-semibold sm:hidden ${
+            isPrivateRoomHandle(handle)
+              ? "border border-rose-500/30 bg-rose-500/15 text-rose-300"
+              : "border border-cyan-500/30 bg-cyan-500/15 text-cyan-300"
           }`}
         >
+          <span
+            className={`h-1.5 w-1.5 rounded-full animate-pulse ${
+              isPrivateRoomHandle(handle) ? "bg-rose-400" : "bg-cyan-400"
+            }`}
+          />
           {isPrivateRoomHandle(handle) ? "Sala privada" : "Sala pública"}
         </span>
       )}
@@ -4150,7 +4155,7 @@ export function WatchRoom({
           is worse than no heading. */}
       {/* Never in a private room: a category is what puts a room on the public
           list, and a blurb is what it is advertised with — neither means
-          anything for a room that is only reachable by its link. */}
+          anything when nobody outside the room can find it. */}
       {!isWideLayout &&
         !isPrivateRoomHandle(handle) &&
         !group &&
@@ -4168,15 +4173,15 @@ export function WatchRoom({
         </div>
       )}
 
-      {/* Also reachable from the main row on desktop (see the
+      {/* "Compartilhar sala" (was the third button in the desktop
           quick-access group below) — kept here too since mobile
           has no room for it outside this menu. */}
       <button
         type="button"
         onClick={handleCopyLink}
-        className={`flex items-center gap-1.5 rounded-lg border px-3 py-2 text-left text-sm font-medium transition sm:hidden ${linkCopied
-          ? "border-emerald-600 text-emerald-600 dark:border-emerald-500 dark:text-emerald-500"
-          : "border-zinc-300 text-zinc-700 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-900"
+        className={`flex items-center gap-1.5 rounded-xl border px-3 py-2 text-left text-sm font-medium transition sm:hidden ${linkCopied
+          ? "border-cyan-500/50 bg-cyan-500/15 text-cyan-300 shadow-[0_0_12px_rgba(6,182,212,0.25)]"
+          : "border-white/10 bg-white/5 text-zinc-300 hover:border-white/20 hover:bg-white/10 hover:text-white"
           }`}
       >
         {linkCopied ? <CheckIcon className="h-4 w-4" /> : <LinkIcon className="h-4 w-4" />}
@@ -4184,10 +4189,10 @@ export function WatchRoom({
       </button>
 
       <a
-        href="https://discord.gg/nemtudo"
+        href="https://discord.gg/p8ZRn2SKm"
         target="_blank"
         rel="noopener noreferrer"
-        className="rounded-lg px-2 py-2 text-sm font-medium text-red-600 transition hover:bg-red-50 dark:text-red-500 dark:hover:bg-red-950/40"
+        className="rounded-xl px-2.5 py-2 text-sm font-medium text-rose-400 transition hover:bg-rose-500/10"
       >
         Reportar bug
       </a>
@@ -4255,7 +4260,7 @@ export function WatchRoom({
               disabled={!canManageMusic}
               className="flex w-full items-center gap-2 rounded-lg px-2 py-2 text-left text-sm font-medium text-zinc-700 transition hover:bg-zinc-100 disabled:cursor-not-allowed disabled:opacity-50 dark:text-zinc-300 dark:hover:bg-zinc-900"
             >
-              <MdMusicNote className="h-4 w-4 shrink-0 text-emerald-500" />
+              <MdMusicNote className="h-4 w-4 shrink-0 text-cyan-400" />
               {state.music || myMusicSlot ? "Trocar a música da sala" : "Colocar música na sala"}
               <BetaMark />
             </button>
@@ -4458,7 +4463,7 @@ export function WatchRoom({
           placement="bottom-start"
           tooltip="Escolher microfone"
           content={
-            <div className="w-64 max-w-[calc(100vw-1rem)] rounded-lg border border-zinc-300 bg-white p-1 shadow-lg dark:border-zinc-700 dark:bg-zinc-900">
+            <div className="w-64 max-w-[calc(100vw-1rem)] rounded-2xl border border-white/10 bg-[#0c101c]/95 p-1.5 shadow-2xl backdrop-blur-2xl">
               <DeviceMenuOption
                 label="Padrão do sistema"
                 selected={micDeviceId === null}
@@ -4493,7 +4498,7 @@ export function WatchRoom({
             type="button"
             onClick={() => setMicDeviceMenuOpen((o) => !o)}
             aria-label="Escolher microfone"
-            className={`rounded-l-lg border-r border-black/15 px-1 text-white transition ${isMicOn ? "bg-emerald-600 hover:bg-emerald-700" : "bg-red-600 hover:bg-red-700"
+            className={`rounded-l-xl border-r border-black/20 px-1.5 transition ${isMicOn ? "bg-cyan-500/20 text-cyan-300 border-cyan-500/40 hover:bg-cyan-500/30" : "bg-rose-500/20 text-rose-300 border-rose-500/30 hover:bg-rose-500/30"
               }`}
           >
             <ChevronDownIcon className="h-3.5 w-3.5" />
@@ -4529,7 +4534,7 @@ export function WatchRoom({
               // screenBlockedReason for the same reasoning.
               disabled={!isMicOn && Boolean(micBlockedReason)}
               aria-label={isMicOn ? "Desativar microfone" : "Ativar microfone"}
-              className={`rounded-r-lg p-2 text-white transition disabled:cursor-not-allowed disabled:opacity-50 ${isMicOn ? "bg-emerald-600 hover:bg-emerald-700" : "bg-red-600 hover:bg-red-700"
+              className={`rounded-r-xl p-2 transition disabled:cursor-not-allowed disabled:opacity-50 ${isMicOn ? "border border-cyan-500/40 bg-cyan-500/20 text-cyan-300 shadow-[0_0_12px_rgba(6,182,212,0.25)] hover:bg-cyan-500/30" : "border border-rose-500/30 bg-rose-500/20 text-rose-300 hover:bg-rose-500/30"
                 }`}
             >
               {isMicOn ? <MicIcon className="h-5 w-5" /> : <MicOffIcon className="h-5 w-5" />}
@@ -4546,7 +4551,7 @@ export function WatchRoom({
             placement="bottom-start"
             tooltip="Escolher saída de áudio"
             content={
-              <div className="w-64 max-w-[calc(100vw-1rem)] rounded-lg border border-zinc-300 bg-white p-1 shadow-lg dark:border-zinc-700 dark:bg-zinc-900">
+              <div className="w-64 max-w-[calc(100vw-1rem)] rounded-2xl border border-white/10 bg-[#0c101c]/95 p-1.5 shadow-2xl backdrop-blur-2xl">
                 <DeviceMenuOption
                   label="Padrão do sistema"
                   selected={speakerDeviceId === null}
@@ -4573,7 +4578,7 @@ export function WatchRoom({
               type="button"
               onClick={() => setSpeakerDeviceMenuOpen((o) => !o)}
               aria-label="Escolher saída de áudio"
-              className={`rounded-l-lg border-r border-black/15 px-1 text-white transition ${micsMuted ? "bg-red-600 hover:bg-red-700" : "bg-emerald-600 hover:bg-emerald-700"
+              className={`rounded-l-xl border-r border-black/20 px-1.5 transition ${micsMuted ? "bg-rose-500/20 text-rose-300 border-rose-500/30 hover:bg-rose-500/30" : "bg-cyan-500/20 text-cyan-300 border-cyan-500/40 hover:bg-cyan-500/30"
                 }`}
             >
               <ChevronDownIcon className="h-3.5 w-3.5" />
@@ -4597,7 +4602,7 @@ export function WatchRoom({
                 setQuickShortcutAction("toggleDeafen");
               }}
               aria-label={micsMuted ? "Reativar microfones" : "Silenciar microfones"}
-              className={`p-2 text-white transition ${canSelectSpeaker ? "rounded-r-lg" : "rounded-lg"} ${micsMuted ? "bg-red-600 hover:bg-red-700" : "bg-emerald-600 hover:bg-emerald-700"
+              className={`p-2 transition ${canSelectSpeaker ? "rounded-r-xl" : "rounded-xl"} ${micsMuted ? "border border-rose-500/30 bg-rose-500/20 text-rose-300 hover:bg-rose-500/30" : "border border-cyan-500/40 bg-cyan-500/20 text-cyan-300 shadow-[0_0_12px_rgba(6,182,212,0.25)] hover:bg-cyan-500/30"
                 }`}
             >
               {micsMuted ? (
@@ -4614,7 +4619,7 @@ export function WatchRoom({
           a standalone separator rather than a border on the group, so the
           spacing matches the one before the add-video button in the header
           dock that holds all of this. */}
-      <span className="mx-0.5 h-6 w-px shrink-0 self-center bg-zinc-300 dark:bg-zinc-700" />
+      <span className="mx-1 h-6 w-px shrink-0 self-center bg-white/10" />
 
       <div className="flex items-center">
         <ShareControls
@@ -4755,7 +4760,7 @@ export function WatchRoom({
               type="button"
               onClick={() => setInviting(true)}
               aria-label="Chamar um amigo para esta sala"
-              className="flex h-6 w-6 shrink-0 cursor-pointer items-center justify-center rounded-lg border border-emerald-600/40 text-emerald-700 transition hover:bg-emerald-50 dark:border-emerald-500/40 dark:text-emerald-400 dark:hover:bg-emerald-950/40"
+              className="flex h-6 w-6 shrink-0 cursor-pointer items-center justify-center rounded-lg border border-cyan-500/30 text-cyan-400 transition hover:bg-cyan-500/15"
             >
               <MdPersonAddAlt1 className="h-3.5 w-3.5" />
             </button>
@@ -4763,8 +4768,8 @@ export function WatchRoom({
         )}
         {connectingAudioPeers && (
           <Tooltip content="Conectando o áudio de quem está com o microfone ligado">
-            <span className="flex shrink-0 items-center gap-1 text-[11px] font-medium text-emerald-600 dark:text-emerald-500">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
+            <span className="flex shrink-0 items-center gap-1 text-[11px] font-medium text-cyan-400">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-cyan-400" />
               Conectando
             </span>
           </Tooltip>
@@ -4973,10 +4978,7 @@ export function WatchRoom({
               // dead for a manager of one, with the tooltip explaining why
               // rather than the button silently doing nothing.
               disabled={isRoomManager && privateRoomCannotBeMapped}
-              className={`flex w-full items-center justify-center gap-1.5 rounded-lg border px-3 py-2 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-50 ${state.roomLocation
-                ? "border-sky-500 text-sky-600 hover:bg-sky-50 dark:border-sky-700 dark:text-sky-400 dark:hover:bg-sky-950/40"
-                : "border-sky-500 text-sky-600 hover:bg-sky-50 dark:border-sky-700 dark:text-sky-400 dark:hover:bg-sky-950/40"
-                }`}
+              className="flex w-full items-center justify-center gap-1.5 rounded-xl border border-sky-500/30 bg-sky-500/10 px-3 py-2 text-sm font-medium text-sky-400 transition hover:bg-sky-500/20 disabled:cursor-not-allowed disabled:opacity-50"
             >
               <MdOutlineMap className="h-4 w-4 shrink-0" />
               {state.roomLocation || !isRoomManager ? "Local no mapa" : "Definir no mapa"}
@@ -5021,11 +5023,7 @@ export function WatchRoom({
                 data: { currentThemeId: state.roomTheme ?? null },
               });
             }}
-            className={`flex w-full items-center justify-center gap-1.5 rounded-lg border px-3 py-2 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-50 ${
-              canSetRoomTheme
-                ? "border-zinc-300 text-zinc-700 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-900"
-                : "border-zinc-300 text-zinc-500 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-400 dark:hover:bg-zinc-900"
-            }`}
+            className="flex w-full items-center justify-center gap-1.5 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm font-medium text-zinc-300 transition hover:border-white/20 hover:bg-white/10 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
           >
             <MdPalette className="h-4 w-4 shrink-0" />
             {roomTheme.fromRoom ? "Trocar tema" : "Tema da sala"}
@@ -5036,7 +5034,7 @@ export function WatchRoom({
           <button
             type="button"
             onClick={openManageRoomPopup}
-            className="flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-zinc-300 px-3 py-2 text-sm font-medium text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-900"
+            className="flex flex-1 items-center justify-center gap-1.5 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm font-medium text-zinc-300 transition hover:border-white/20 hover:bg-white/10 hover:text-white"
           >
             <BsGearFill className="h-3.5 w-3.5 shrink-0" />
             Gerenciar sala
@@ -5193,7 +5191,7 @@ export function WatchRoom({
           // group's bar (see inHeaderSlot), and the rest is said there already.
           group
             ? "hidden"
-            : "shrink-0 border-b border-black/10 bg-white px-3 py-2 dark:border-white/10 dark:bg-zinc-950 sm:px-4"
+            : "shrink-0 border-b border-white/10 bg-[#07080d]/90 px-3 py-2.5 backdrop-blur-2xl sm:px-4"
         }
       >
         <div className="flex flex-wrap items-center gap-x-2 gap-y-2.5 lg:grid lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:flex-nowrap lg:gap-3">
@@ -5226,11 +5224,11 @@ export function WatchRoom({
               </Tooltip>
             )}
 
-            {!group && <span className="hidden h-6 w-px shrink-0 bg-zinc-200 lg:block dark:bg-zinc-800" />}
+            {!group && <span className="hidden h-6 w-px shrink-0 bg-white/10 lg:block" />}
 
             {group && (
               <div className="flex min-w-0 items-center gap-2">
-                <MdVolumeUp className="h-5 w-5 shrink-0 text-emerald-600" />
+                <MdVolumeUp className="h-5 w-5 shrink-0 text-cyan-400" />
                 <h1 className="truncate text-base font-semibold text-zinc-950 dark:text-zinc-50 sm:text-lg">
                   {group.channelName}
                 </h1>
@@ -5258,7 +5256,7 @@ export function WatchRoom({
                 }
                 placement="bottom"
               >
-                <h1 className="truncate text-base font-semibold text-zinc-950 dark:text-zinc-50 sm:text-lg">
+                <h1 className="truncate text-base font-bold tracking-tight text-zinc-950 dark:text-white sm:text-lg">
                   {privateRoomParts ? privateRoomParts.name : (streamerMode && isPrivateRoomHandle(handle) ? "Sala Privada" : handle)}
                 </h1>
               </Tooltip>
@@ -5271,7 +5269,7 @@ export function WatchRoom({
                   }
                   placement="bottom"
                 >
-                  <span className="shrink-0 rounded-full bg-zinc-200 px-2.5 py-1 font-mono text-xs font-medium tracking-wider text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
+                  <span className="shrink-0 rounded-full border border-white/10 bg-white/5 px-2.5 py-1 font-mono text-xs font-medium tracking-wider text-zinc-300">
                     {streamerMode ? "••••••" : privateRoomParts.code}
                   </span>
                 </Tooltip>
@@ -5285,16 +5283,20 @@ export function WatchRoom({
                 placement="bottom"
               >
                 <span
-                  className={`flex shrink-0 items-center gap-1.5 rounded-full text-xs font-medium text-white xl:px-2.5 xl:py-1 ${
-                    isPrivateRoomHandle(handle) ? "xl:bg-red-600" : "xl:bg-emerald-600"
+                  className={`flex shrink-0 items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold backdrop-blur-md transition-colors ${
+                    isPrivateRoomHandle(handle)
+                      ? "border border-rose-500/30 bg-rose-500/15 text-rose-300 shadow-[0_0_10px_rgba(244,63,94,0.2)]"
+                      : "border border-cyan-500/30 bg-cyan-500/15 text-cyan-300 shadow-[0_0_10px_rgba(6,182,212,0.2)]"
                   }`}
                 >
                   <span
-                    className={`h-2 w-2 shrink-0 rounded-full xl:hidden ${
-                      isPrivateRoomHandle(handle) ? "bg-red-600" : "bg-emerald-600"
+                    className={`h-1.5 w-1.5 shrink-0 rounded-full animate-pulse ${
+                      isPrivateRoomHandle(handle)
+                        ? "bg-rose-400 shadow-[0_0_6px_rgba(244,63,94,0.8)]"
+                        : "bg-cyan-400 shadow-[0_0_6px_rgba(6,182,212,0.8)]"
                     }`}
                   />
-                  <span className="hidden xl:inline">
+                  <span className="hidden sm:inline">
                     {isPrivateRoomHandle(handle) ? "Sala privada" : "Sala pública"}
                   </span>
                 </span>
@@ -5334,10 +5336,10 @@ export function WatchRoom({
               there is only ever one mic button, one device popover and one
               open/closed state for them. */}
           {isWideLayout && inHeaderSlot("center", (
-            <div className="flex items-center justify-center gap-1.5 justify-self-center rounded-xl border border-zinc-200 bg-zinc-100 p-1 dark:border-zinc-800 dark:bg-zinc-900">
+            <div className="flex items-center justify-center gap-1.5 justify-self-center rounded-2xl border border-white/10 bg-[#0b0e17]/90 p-1.5 backdrop-blur-xl shadow-2xl">
               {mainControls}
 
-              <span className="mx-0.5 h-6 w-px shrink-0 bg-zinc-300 dark:bg-zinc-700" />
+              <span className="mx-0.5 h-6 w-px shrink-0 bg-white/10" />
 
               {/* Adding a YouTube/Twitch video/live to the room. Sits with
                   the transmission controls because that's what it produces:
@@ -5356,7 +5358,7 @@ export function WatchRoom({
                   onClick={openAddVideoSourcePopup}
                   disabled={Boolean(videoSourceBlockedReason)}
                   aria-label="Adicionar fonte de vídeo"
-                  className="flex items-center gap-1.5 rounded-lg bg-emerald-600 px-3 py-2 text-sm font-medium text-white transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="flex items-center gap-1.5 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm font-medium text-zinc-200 transition hover:border-cyan-500/40 hover:bg-cyan-500/15 hover:text-cyan-300 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   <MdOutlineOndemandVideo className="h-5 w-5 shrink-0" />
                   <span className="hidden 2xl:inline"><BetaMark /></span>
@@ -5385,7 +5387,7 @@ export function WatchRoom({
                   onClick={openAddMusicPopup}
                   disabled={!canManageMusic}
                   aria-label="Colocar música na sala"
-                  className="flex items-center gap-1.5 rounded-lg bg-emerald-600 px-3 py-2 text-sm font-medium text-white transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="flex items-center gap-1.5 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm font-medium text-zinc-200 transition hover:border-cyan-500/40 hover:bg-cyan-500/15 hover:text-cyan-300 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   <MdMusicNote className="h-5 w-5 shrink-0" />
                   <span className="hidden 2xl:inline"><BetaMark /></span>
@@ -5412,7 +5414,7 @@ export function WatchRoom({
                     else router.push("/");
                   }}
                   aria-label="Sair da chamada"
-                  className="flex items-center rounded-lg bg-red-600 px-3 py-2 text-sm font-medium text-white transition hover:bg-red-700"
+                  className="flex items-center rounded-xl border border-rose-500/40 bg-rose-600 px-3.5 py-2 text-sm font-semibold text-white shadow-[0_0_15px_rgba(225,29,72,0.35)] transition hover:bg-rose-500 hover:shadow-[0_0_20px_rgba(225,29,72,0.5)]"
                 >
                   <MdCallEnd className="h-5 w-5 shrink-0" />
                 </button>
@@ -5435,9 +5437,9 @@ export function WatchRoom({
                 type="button"
                 onClick={handleCopyLink}
                 aria-label="Compartilhar sala"
-                className={`hidden shrink-0 items-center gap-1.5 rounded-lg border px-2.5 py-2 text-sm font-medium transition sm:flex ${linkCopied
-                  ? "border-emerald-600 text-emerald-600 dark:border-emerald-500 dark:text-emerald-500"
-                  : "border-zinc-300 text-zinc-700 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-900"
+                className={`hidden shrink-0 items-center gap-1.5 rounded-xl border px-3 py-2 text-sm font-semibold transition sm:flex ${linkCopied
+                  ? "border-cyan-500/50 bg-cyan-500/20 text-cyan-300 shadow-[0_0_12px_rgba(6,182,212,0.25)]"
+                  : "border-white/10 bg-white/5 text-zinc-300 hover:border-cyan-500/30 hover:bg-white/10 hover:text-white"
                   }`}
               >
                 {linkCopied ? <CheckIcon className="h-4 w-4" /> : <LinkIcon className="h-4 w-4" />}
@@ -5470,13 +5472,13 @@ export function WatchRoom({
                 <button
                   type="button"
                   onClick={() => setProfileUserId(account.id)}
-                  className="flex shrink-0 items-center gap-1.5 rounded-lg border border-zinc-200 px-2.5 py-1.5 text-xs font-medium text-zinc-500 transition hover:border-zinc-300 hover:bg-zinc-50 dark:border-zinc-800 dark:text-zinc-400 dark:hover:border-zinc-700 dark:hover:bg-zinc-900"
+                  className="flex shrink-0 items-center gap-1.5 rounded-xl border border-white/10 bg-white/5 px-2.5 py-1.5 text-xs font-medium text-zinc-400 transition hover:border-white/20 hover:bg-white/10 hover:text-zinc-200"
                 >
-                  <span className="hidden max-w-[8rem] truncate text-zinc-700 sm:inline dark:text-zinc-300">
+                  <span className="hidden max-w-[8rem] truncate text-zinc-300 sm:inline">
                     {state.name}
                   </span>
-                  <span className="hidden h-3 w-px bg-zinc-300 sm:inline-block dark:bg-zinc-700" />
-                  <span className="flex items-center gap-1 tabular-nums">
+                  <span className="hidden h-3 w-px bg-white/10 sm:inline-block" />
+                  <span className="flex items-center gap-1 tabular-nums text-amber-300">
                     <BsCoin className="h-3.5 w-3.5 shrink-0" />
                     {points}
                   </span>
@@ -5488,12 +5490,12 @@ export function WatchRoom({
                   content="Seus pontos de convidado ficam salvos só neste navegador. Limpar os dados do site, ou entrar de outro navegador, começa do zero — crie uma conta para não perdê-los."
                   placement="bottom"
                 >
-                  <div className="flex shrink-0 items-center gap-1.5 rounded-lg border border-zinc-200 px-2.5 py-1.5 text-xs font-medium text-zinc-500 dark:border-zinc-800 dark:text-zinc-400">
-                    <span className="hidden max-w-[8rem] truncate text-zinc-700 sm:inline dark:text-zinc-300">
+                  <div className="flex shrink-0 items-center gap-1.5 rounded-xl border border-white/10 bg-white/5 px-2.5 py-1.5 text-xs font-medium text-zinc-400">
+                    <span className="hidden max-w-[8rem] truncate text-zinc-300 sm:inline">
                       {state.name}
                     </span>
-                    <span className="hidden h-3 w-px bg-zinc-300 sm:inline-block dark:bg-zinc-700" />
-                    <span className="flex items-center gap-1 tabular-nums">
+                    <span className="hidden h-3 w-px bg-white/10 sm:inline-block" />
+                    <span className="flex items-center gap-1 tabular-nums text-amber-300">
                       <BsCoin className="h-3.5 w-3.5 shrink-0" />
                       {points}
                     </span>
@@ -5531,9 +5533,9 @@ export function WatchRoom({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Spectra no GitHub"
-                className="flex shrink-0 cursor-pointer items-center gap-1.5 rounded-lg border border-zinc-300 px-2 py-2 text-sm font-medium transition text-zinc-700 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800 2xl:px-3"
+                className="flex shrink-0 cursor-pointer items-center gap-1.5 rounded-xl border border-white/10 bg-white/5 px-2.5 py-2 text-sm font-semibold text-zinc-300 backdrop-blur-md transition hover:border-cyan-500/30 hover:bg-white/10 hover:text-white 2xl:px-3"
               >
-                <FaGithub className="h-5 w-5 shrink-0 text-cyan-500 dark:text-cyan-400" />
+                <FaGithub className="h-5 w-5 shrink-0 text-cyan-400" />
                 <span className="hidden sm:inline lg:hidden 2xl:inline">
                   GitHub
                 </span>
@@ -5552,7 +5554,7 @@ export function WatchRoom({
               placement="bottom-end"
               tooltip="Mais opções"
               content={
-                <div className="flex max-h-[80vh] w-80 flex-col gap-1 overflow-y-auto rounded-xl border border-zinc-200 bg-white p-3 shadow-2xl dark:border-zinc-800 dark:bg-zinc-950">
+                <div className="flex max-h-[80vh] w-80 flex-col gap-1 overflow-y-auto rounded-2xl border border-white/10 bg-[#0c101c]/95 p-3 shadow-2xl backdrop-blur-2xl">
                   {menuItems}
                 </div>
               }
@@ -5561,9 +5563,9 @@ export function WatchRoom({
                 type="button"
                 onClick={() => (menuOpen ? closeMenu() : setMenuOpen(true))}
                 aria-label="Mais opções"
-                className={`shrink-0 rounded-lg border p-2 transition ${menuOpen
-                  ? "border-zinc-400 bg-zinc-100 text-zinc-900 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100"
-                  : "border-zinc-300 text-zinc-700 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-900"
+                className={`shrink-0 rounded-xl border p-2 transition ${menuOpen
+                  ? "border-cyan-500/50 bg-cyan-500/20 text-cyan-300 shadow-[0_0_12px_rgba(6,182,212,0.25)]"
+                  : "border-white/10 bg-white/5 text-zinc-300 hover:border-cyan-500/30 hover:bg-white/10 hover:text-white"
                   }`}
               >
                 <MoreIcon className="h-5 w-5" />
@@ -5598,7 +5600,7 @@ export function WatchRoom({
                     // click away for the other case.
                     setAccountModal("create");
                   }}
-                  className="flex shrink-0 items-center gap-1.5 rounded-lg border border-zinc-950 bg-zinc-950 px-2 py-2 text-sm font-medium text-white transition hover:bg-zinc-800 sm:px-3 dark:border-zinc-50 dark:bg-zinc-50 dark:text-zinc-950 dark:hover:bg-zinc-200"
+                  className="flex shrink-0 items-center gap-1.5 rounded-xl border border-cyan-500/40 bg-gradient-to-r from-cyan-500 to-blue-600 px-3 py-2 text-sm font-bold text-zinc-950 shadow-[0_0_12px_rgba(6,182,212,0.3)] transition hover:brightness-110"
                 >
                   <MdLogin className="h-5 w-5 shrink-0" />
                   <span className="hidden sm:inline">Entrar</span>
@@ -5833,8 +5835,8 @@ export function WatchRoom({
             card, and the ad lives in the group's rooms column. */}
         {isWideLayout && !leftSidebarCollapsed && !group && (
           <aside className="flex h-full w-[300px] shrink-0 flex-col gap-3">
-            <div className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950">
-              <div className="shrink-0 border-b border-zinc-200 px-3 py-2 dark:border-zinc-800">
+            <div className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#0b0e17]/85 backdrop-blur-xl shadow-xl">
+              <div className="shrink-0 border-b border-white/10 px-3 py-2.5">
                 {participantsHeader}
               </div>
               {/* Barely any padding of its own: the rows carry theirs, and
@@ -5900,37 +5902,44 @@ export function WatchRoom({
             // Wrapped the same way the tile grid is: `main` doesn't scroll,
             // so the one thing in it that has a minimum height of its own
             // needs a box that can.
-            <div className="min-h-0 flex-1 overflow-y-auto">
-              <div className="flex h-full min-h-75 flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-zinc-300 bg-white/50 px-4 text-center dark:border-zinc-800 dark:bg-zinc-950/40">
-                <p className="text-zinc-600 dark:text-zinc-400">
-                  Ninguém está transmitindo ainda.
+            <div className="relative min-h-0 flex-1 overflow-y-auto flex items-center justify-center p-4">
+              {/* Subtle radial ambient glow */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden"
+              >
+                <div className="h-96 w-96 rounded-full bg-gradient-to-tr from-cyan-500/15 via-blue-600/10 to-purple-600/15 blur-3xl" />
+              </div>
+
+              <div className="relative z-10 flex w-full max-w-xl flex-col items-center justify-center rounded-3xl border border-white/10 bg-[#090d18]/80 p-8 sm:p-12 text-center shadow-2xl backdrop-blur-2xl">
+                {/* Glowing beacon icon */}
+                <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl border border-cyan-500/30 bg-gradient-to-tr from-cyan-500/20 via-blue-500/15 to-purple-500/20 text-cyan-400 shadow-[0_0_35px_rgba(6,182,212,0.3)]">
+                  <span className="absolute -inset-1 rounded-2xl border border-cyan-400/20 animate-pulse" />
+                  <ScreenIcon className="h-8 w-8 shrink-0" />
+                </div>
+
+                <h3 className="mt-5 text-xl sm:text-2xl font-bold tracking-tight text-white">
+                  Palco de Transmissão
+                </h3>
+
+                <p className="mt-2 text-sm text-zinc-400 leading-relaxed max-w-md">
+                  Ninguém está transmitindo no momento. Comece compartilhando sua tela, ative sua câmera ou reproduza vídeos sincronizados.
                 </p>
-                {/* The empty pane is the one place with room for the labelled
-                    version of the header's icon toggles, and the one moment
-                    when starting a share is the only thing anyone can do here.
-                    Pointing at the header instead ("clique no ícone lá em
-                    cima") asked the person to go find a control while standing
-                    on the space where it fits. Only ever shown while nobody —
-                    including us — is transmitting, so these are always "start",
-                    never "stop": see nothingToShow. */}
+
                 {screenShareMode === "unsupported" && (
-                  <p className="text-sm text-zinc-500 dark:text-zinc-500">
+                  <p className="mt-2 text-xs font-medium text-rose-400">
                     Seu navegador não permite compartilhar tela nem câmera.
                   </p>
                 )}
-                <div className="mt-2 flex flex-wrap items-center justify-center gap-2">
-                  {/* Each is hidden outright rather than disabled here (unlike
-                      the header's copies, which stay put so the row doesn't
-                      reflow): this pane exists to offer what can be done right
-                      now, and a wall of dead buttons is not that. The note
-                      below says why, once, for whatever ends up missing. */}
+
+                <div className="mt-6 flex flex-wrap items-center justify-center gap-3 w-full">
                   {screenShareMode === "display" && !screenBlockedReason && (
                     <button
                       type="button"
                       onClick={() => startShare("display")}
-                      className="flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-700"
+                      className="group relative flex items-center justify-center gap-2.5 rounded-xl bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 px-6 py-3.5 text-sm font-bold text-zinc-950 shadow-[0_0_25px_rgba(6,182,212,0.35)] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_35px_rgba(6,182,212,0.5)] active:scale-98 cursor-pointer"
                     >
-                      <ScreenIcon className="h-5 w-5" />
+                      <ScreenIcon className="h-5 w-5 transition-transform group-hover:scale-110" />
                       Compartilhar tela
                     </button>
                   )}
@@ -5939,7 +5948,7 @@ export function WatchRoom({
                     <button
                       type="button"
                       onClick={() => startCameraShare()}
-                      className="flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-700"
+                      className="flex items-center justify-center gap-2.5 rounded-xl border border-white/10 bg-white/5 px-5 py-3.5 text-sm font-semibold text-zinc-200 backdrop-blur-md transition-all duration-300 hover:border-cyan-500/40 hover:bg-cyan-500/10 hover:text-cyan-300 active:scale-98 cursor-pointer"
                     >
                       <CameraIcon className="h-5 w-5" />
                       Compartilhar câmera
@@ -5947,15 +5956,15 @@ export function WatchRoom({
                   )}
 
                   {videoSourceBlockedReason ? (
-                    <p className="basis-full text-center text-sm text-zinc-500 dark:text-zinc-500">
+                    <p className="basis-full text-center text-xs text-zinc-500 mt-2">
                       O dono da sala limitou o que os participantes podem transmitir aqui.
                     </p>
                   ) : (
-                    <div className="basis-full flex justify-center">
+                    <div className="basis-full flex justify-center mt-1">
                       <button
                         type="button"
                         onClick={openAddVideoSourcePopup}
-                        className="flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-700"
+                        className="flex items-center justify-center gap-2.5 rounded-xl border border-purple-500/30 bg-purple-500/10 px-5 py-3 text-sm font-semibold text-purple-200 backdrop-blur-md transition-all duration-300 hover:border-purple-400/50 hover:bg-purple-500/20 hover:text-white active:scale-98 cursor-pointer"
                       >
                         <MdOutlineOndemandVideo className="h-5 w-5 shrink-0" />
                         Adicionar fonte de vídeo
@@ -6038,7 +6047,7 @@ export function WatchRoom({
                                   type="button"
                                   onClick={() => setSpotlightId(tile.id)}
                                   aria-label="Destacar esta transmissão"
-                                  className="absolute inset-0 z-10 cursor-pointer rounded-xl ring-emerald-500 transition hover:ring-2 focus-visible:ring-2 focus-visible:outline-none"
+                                  className="absolute inset-0 z-10 cursor-pointer rounded-xl ring-cyan-400/80 transition hover:ring-2 focus-visible:ring-2 focus-visible:outline-none"
                                 />
                               )}
                             </div>
@@ -6165,7 +6174,7 @@ export function WatchRoom({
                 // panel kept alive behind `display: none` cannot scroll
                 // itself, so it would come back holding whatever position it
                 // had when it was put away.
-                className="relative z-10 flex h-[55dvh] min-h-72 shrink-0 flex-col border-t border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950 will-change-transform"
+                className="relative z-10 flex h-[55dvh] min-h-72 shrink-0 flex-col border-t border-white/10 bg-[#0b0e17]/95 backdrop-blur-2xl will-change-transform"
               >
                 {/* The usual sheet grab bar, and a second way out: a sheet
                     whose only exit is the control that opened it is the kind
@@ -6177,7 +6186,7 @@ export function WatchRoom({
                   aria-label="Fechar"
                   className="group flex w-full shrink-0 cursor-pointer flex-col items-center justify-center py-2.5 touch-none select-none"
                 >
-                  <span className="h-1.5 w-12 rounded-full bg-zinc-300 transition-colors group-hover:bg-zinc-400 group-active:bg-zinc-500 dark:bg-zinc-700 dark:group-hover:bg-zinc-600 dark:group-active:bg-zinc-500" />
+                  <span className="h-1.5 w-12 rounded-full bg-zinc-600 transition-colors group-hover:bg-zinc-500 group-active:bg-zinc-400" />
                 </button>
 
                 {mobilePanel === "participants" ? (
@@ -6192,8 +6201,8 @@ export function WatchRoom({
             )}
 
             {(state.status === "connecting" || state.status === "closed") && (
-              <p className="relative z-20 flex shrink-0 items-center justify-center gap-1.5 border-t border-amber-200 bg-amber-50 py-1 text-xs font-medium text-amber-700 dark:border-amber-900 dark:bg-amber-950/40 dark:text-amber-500">
-                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-amber-500" />
+              <p className="relative z-20 flex shrink-0 items-center justify-center gap-1.5 border-t border-cyan-500/30 bg-cyan-950/40 py-1 text-xs font-medium text-cyan-300">
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-cyan-400" />
                 Conectando...
               </p>
             )}
@@ -6204,7 +6213,7 @@ export function WatchRoom({
                 *over* it on the right. One row, thumb-sized targets, never
                 scrolls, never moves. */}
             <div
-              className="relative z-20 flex shrink-0 flex-col border-t border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950"
+              className="relative z-20 flex shrink-0 flex-col border-t border-white/10 bg-[#07080d]/95 backdrop-blur-2xl"
               onTouchStart={handleDrawerTouchStart}
               onTouchEnd={handleDrawerTouchEnd}
             >
@@ -6229,7 +6238,7 @@ export function WatchRoom({
 
               {/* O Menu Expandido: [fonte de video] [musica] [stream] */}
               {mobileExtraMenuOpen && (
-                <div className="border-b border-zinc-200 bg-zinc-50/90 px-3 py-2.5 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-900/90 transition-all">
+                <div className="border-b border-white/10 bg-[#0c101c]/95 px-3 py-2.5 backdrop-blur-xl transition-all">
                   <div className="grid grid-cols-3 gap-2">
                     {/* [fonte de video] */}
                     <button
@@ -6240,9 +6249,9 @@ export function WatchRoom({
                       }}
                       disabled={Boolean(videoSourceBlockedReason)}
                       aria-label="Adicionar fonte de vídeo"
-                      className="flex h-[4.75rem] flex-col items-center justify-center gap-1.5 rounded-xl border border-zinc-200 bg-white p-2 text-zinc-700 shadow-sm transition active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200"
+                      className="flex h-[4.75rem] flex-col items-center justify-center gap-1.5 rounded-xl border border-white/10 bg-white/5 p-2 text-zinc-200 backdrop-blur-md shadow-sm transition active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 hover:border-cyan-500/30 hover:bg-white/10"
                     >
-                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-100 text-emerald-600 dark:bg-emerald-950/70 dark:text-emerald-400">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-cyan-500/30 bg-cyan-500/15 text-cyan-300">
                         <MdOutlineOndemandVideo className="h-5 w-5" />
                       </div>
                       <div className="flex flex-col items-center">
@@ -6252,7 +6261,7 @@ export function WatchRoom({
                           </span>
                           <span className="text-[9px] font-bold leading-none"><BetaMark /></span>
                         </div>
-                        <span className="text-[9px] font-medium leading-none text-zinc-400 dark:text-zinc-500 mt-0.5">
+                        <span className="text-[9px] font-medium leading-none text-zinc-400 mt-0.5">
                           Mídia
                         </span>
                       </div>
@@ -6267,9 +6276,9 @@ export function WatchRoom({
                       }}
                       disabled={!canManageMusic}
                       aria-label={state.music || myMusicSlot ? "Trocar a música da sala" : "Colocar música na sala"}
-                      className="flex h-[4.75rem] flex-col items-center justify-center gap-1.5 rounded-xl border border-zinc-200 bg-white p-2 text-zinc-700 shadow-sm transition active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200"
+                      className="flex h-[4.75rem] flex-col items-center justify-center gap-1.5 rounded-xl border border-white/10 bg-white/5 p-2 text-zinc-200 backdrop-blur-md shadow-sm transition active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 hover:border-cyan-500/30 hover:bg-white/10"
                     >
-                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-100 text-emerald-600 dark:bg-emerald-950/70 dark:text-emerald-400">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-cyan-500/30 bg-cyan-500/15 text-cyan-300">
                         <MdMusicNote className="h-5 w-5" />
                       </div>
                       <div className="flex flex-col items-center">
@@ -6279,7 +6288,7 @@ export function WatchRoom({
                           </span>
                           <span className="text-[9px] font-bold leading-none"><BetaMark /></span>
                         </div>
-                        <span className="text-[9px] font-medium leading-none text-zinc-400 dark:text-zinc-500 mt-0.5">
+                        <span className="text-[9px] font-medium leading-none text-zinc-400 mt-0.5">
                           {state.music || myMusicSlot ? "Tocando" : "Parado"}
                         </span>
                       </div>
@@ -6296,18 +6305,14 @@ export function WatchRoom({
                         toggleStreamerMode();
                       }}
                       aria-label={streamerMode ? "Desativar modo streamer" : "Ativar modo streamer"}
-                      className={`flex h-[4.75rem] flex-col items-center justify-center gap-1.5 rounded-xl border p-2 shadow-sm transition active:scale-95 ${
+                      className={`flex h-[4.75rem] flex-col items-center justify-center gap-1.5 rounded-xl border p-2 backdrop-blur-md shadow-sm transition active:scale-95 ${
                         streamerMode
-                          ? "border-purple-500/60 bg-purple-50 text-purple-700 dark:border-purple-800 dark:bg-purple-950/40 dark:text-purple-300"
-                          : "border-zinc-200 bg-white text-zinc-700 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200"
+                          ? "border-purple-500/40 bg-purple-500/20 text-purple-300 shadow-[0_0_12px_rgba(168,85,247,0.25)]"
+                          : "border-white/10 bg-white/5 text-zinc-200 hover:border-purple-500/30 hover:bg-white/10"
                       }`}
                     >
                       <div
-                        className={`flex h-9 w-9 items-center justify-center rounded-lg ${
-                          streamerMode
-                            ? "bg-purple-600 text-white"
-                            : "bg-purple-100 text-purple-600 dark:bg-purple-950/70 dark:text-purple-400"
-                        }`}
+                        className={`flex h-9 w-9 items-center justify-center rounded-lg border border-purple-500/30 bg-purple-500/20 text-purple-300`}
                       >
                         <ObsSourceIcon className="h-5 w-5" />
                       </div>
@@ -6320,7 +6325,7 @@ export function WatchRoom({
                         </div>
                         <span
                           className={`text-[9px] font-bold leading-none mt-0.5 ${
-                            streamerMode ? "text-purple-600 dark:text-purple-400" : "text-zinc-400 dark:text-zinc-500"
+                            streamerMode ? "text-purple-400" : "text-zinc-400"
                           }`}
                         >
                           {streamerMode ? "Ativado" : "Desativado"}
@@ -6463,7 +6468,7 @@ export function WatchRoom({
                         else router.push("/");
                       }}
                       aria-label="Sair da chamada"
-                      className={`${DOCK_BUTTON} bg-red-600 hover:bg-red-700 active:bg-red-800 text-white`}
+                      className={`${DOCK_BUTTON} border border-rose-500/40 bg-rose-600 hover:bg-rose-500 active:bg-rose-700 text-white shadow-[0_0_12px_rgba(225,29,72,0.35)]`}
                     >
                       <MdCallEnd className="h-5 w-5" />
                     </button>
@@ -6471,7 +6476,7 @@ export function WatchRoom({
                 </div>
 
                 {/* Divisor | */}
-                <span className="mx-0.5 sm:mx-1 h-8 w-px shrink-0 bg-zinc-200 dark:bg-zinc-800" />
+                <span className="mx-0.5 sm:mx-1 h-8 w-px shrink-0 bg-white/10" />
 
                 {/* 6. Chat e 7. Pessoas */}
                 <div className="flex shrink-0 items-center gap-1">

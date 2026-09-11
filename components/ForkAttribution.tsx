@@ -6,8 +6,8 @@ import { usePathname } from "next/navigation";
 export function ForkAttribution() {
   const pathname = usePathname();
 
-  // Hide in OBS browser source overlays so streamers don't get overlay bars
-  if (pathname?.startsWith("/obs")) {
+  // Hide in OBS browser source overlays and live rooms so streams have full clean view
+  if (pathname?.startsWith("/obs") || pathname?.startsWith("/watch")) {
     return null;
   }
 

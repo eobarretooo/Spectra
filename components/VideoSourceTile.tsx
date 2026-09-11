@@ -980,8 +980,8 @@ export function VideoSourceTile({
                 type="button"
                 onClick={() => setShowNativeControls((shown) => !shown)}
                 aria-pressed={showNativeControls}
-                className={`flex items-center gap-1 rounded-full px-2 py-1 text-[11px] font-medium text-white transition ${
-                  showNativeControls ? "bg-emerald-600 hover:bg-emerald-700" : "hover:bg-white/10"
+                className={`flex items-center gap-1 rounded-full px-2 py-1 text-[11px] font-medium transition ${
+                  showNativeControls ? "bg-cyan-500 text-zinc-950 font-bold shadow-[0_0_10px_rgba(6,182,212,0.4)] hover:bg-cyan-400" : "text-white hover:bg-white/10"
                 }`}
               >
                 <MdSettings className="h-3.5 w-3.5 shrink-0" />
@@ -1040,8 +1040,8 @@ export function VideoSourceTile({
                 onClick={onFocus}
                 aria-label={isSpotlighted ? "Remover destaque" : "Focar nesse vídeo"}
                 aria-pressed={isSpotlighted}
-                className={`rounded-full p-1.5 text-white transition ${
-                  isSpotlighted ? "bg-emerald-600 hover:bg-emerald-700" : "hover:bg-white/10"
+                className={`rounded-full p-1.5 transition ${
+                  isSpotlighted ? "bg-cyan-500 text-zinc-950 font-bold shadow-[0_0_12px_rgba(6,182,212,0.4)] hover:bg-cyan-400" : "text-white hover:bg-white/10"
                 }`}
               >
                 <FocusIcon className="h-4 w-4" />
@@ -1061,12 +1061,12 @@ export function VideoSourceTile({
                 onClick={!hasAccount ? (onRequestAccount ?? onHyperfocus) : onHyperfocus}
                 aria-label={`Hiperfoco nesse vídeo${!hasAccount ? " (requer conta)" : ""}`}
                 aria-pressed={isHyperfocused}
-                className={`rounded-full p-1.5 text-white transition ${
+                className={`rounded-full p-1.5 transition ${
                   !hasAccount
-                    ? "opacity-40 hover:bg-transparent hover:opacity-40"
+                    ? "opacity-40 hover:bg-transparent hover:opacity-40 text-white"
                     : isHyperfocused
-                      ? "bg-emerald-600 hover:bg-emerald-700"
-                      : "hover:bg-white/10"
+                      ? "bg-cyan-500 text-zinc-950 font-bold shadow-[0_0_12px_rgba(6,182,212,0.4)] hover:bg-cyan-400"
+                      : "text-white hover:bg-white/10"
                 }`}
               >
                 <HyperfocusIcon className="h-4 w-4" />

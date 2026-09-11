@@ -165,9 +165,9 @@ export function ParticipantRow({
       connectionLost={connectionLost}
       className={`truncate font-medium transition-colors ${
         speaking
-          ? "text-emerald-600 dark:text-emerald-400"
+          ? "text-cyan-400 font-bold"
           : isSelf
-            ? "text-zinc-900 dark:text-zinc-100"
+            ? "text-zinc-950 dark:text-white"
             : ""
       }`}
     />
@@ -189,10 +189,10 @@ export function ParticipantRow({
       // on the *container* — not just on the name — because the row is the
       // target: the actions are about the person, not about the word.
       title={hasMenu ? "Clique com o botão direito para ver as ações" : undefined}
-      className={`flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm ${
-        isSelf ? "bg-zinc-100 dark:bg-zinc-900" : "text-zinc-700 dark:text-zinc-300"
+      className={`flex items-center justify-between gap-2 rounded-xl px-3 py-2 text-sm transition ${
+        isSelf ? "border border-cyan-500/25 bg-cyan-500/10 text-white" : "text-zinc-300 hover:bg-white/5"
       } ${
-        hasMenu ? "cursor-pointer transition hover:bg-zinc-200/70 dark:hover:bg-zinc-800" : ""
+        hasMenu ? "cursor-pointer hover:bg-white/10" : ""
       }`}
     >
       {/* items-center, not items-baseline. Everything in this row is either a
@@ -292,20 +292,20 @@ export function ParticipantRow({
             {screen && (
               <Tooltip content={`${name} está transmitindo a tela`}>
                 <span className="flex shrink-0 items-center">
-                  <ScreenIcon className="h-4 w-4 text-emerald-500" />
+                  <ScreenIcon className="h-4 w-4 text-cyan-400" />
                 </span>
               </Tooltip>
             )}
             {camera && (
               <Tooltip content={`${name} está transmitindo a câmera`}>
                 <span className="flex shrink-0 items-center">
-                  <CameraIcon className="h-4 w-4 text-violet-500" />
+                  <CameraIcon className="h-4 w-4 text-violet-400" />
                 </span>
               </Tooltip>
             )}
           </>
         ) : (
-          sharing && <ScreenIcon className="h-4 w-4 text-emerald-500" />
+          sharing && <ScreenIcon className="h-4 w-4 text-cyan-400" />
         )}
         {sharingVideo && (
           <Tooltip content={`${name} adicionou uma ou mais fontes de vídeo`}>

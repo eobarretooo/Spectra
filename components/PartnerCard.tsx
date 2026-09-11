@@ -604,10 +604,10 @@ export function PartnerCard({
       )}
 
       <div
-        className="w-full overflow-hidden rounded-lg border border-zinc-200 p-3 dark:border-zinc-800 sm:p-4"
+        className="w-full overflow-hidden rounded-2xl border border-white/10 p-3 sm:p-4 shadow-xl backdrop-blur-xl transition-all"
         style={{
-          backgroundColor: displayData.backgroundColor ?? "#ffffff",
-          color: displayData.textColor ?? "#18181b",
+          backgroundColor: displayData.backgroundColor ?? "#090d16",
+          color: displayData.textColor ?? "#f4f4f5",
         }}
       >
         <div className="mb-2 flex items-center justify-between gap-2">
@@ -621,9 +621,9 @@ export function PartnerCard({
               <button
                 type="button"
                 onClick={() => setStatsOpen((open) => !open)}
-                className="flex items-center gap-1 text-xs font-medium text-emerald-400 cursor-pointer"
+                className="flex items-center gap-1.5 text-xs font-medium text-cyan-400 cursor-pointer transition hover:text-cyan-300"
               >
-                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" />
+                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(6,182,212,0.8)] animate-pulse" />
                 {peopleOnline} online agora
                 <ChevronUpIcon
                   className={`h-3 w-3 transition-transform ${statsOpen ? "rotate-180" : ""}`}
@@ -810,7 +810,7 @@ export function PartnerCard({
               setStatsOpen(false);
               setShowingExample(true);
             }}
-            className="mt-2 block w-full rounded-lg border border-current px-3 py-1.5 text-center text-xs font-medium opacity-70 transition hover:opacity-100"
+            className="mt-2.5 block w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-center text-xs font-medium text-zinc-300 transition hover:border-white/20 hover:bg-white/10 hover:text-white cursor-pointer"
           >
             Ver exemplo de anúncio
           </button>

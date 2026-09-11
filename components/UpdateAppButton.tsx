@@ -94,7 +94,7 @@ export function UpdateAppButton() {
         onClick={handleInstall}
         disabled={installing}
         aria-label="Uma nova atualização está pronta!"
-        className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-600 text-white shadow-lg transition hover:bg-emerald-500 disabled:opacity-70 dark:bg-emerald-500 dark:hover:bg-emerald-400"
+        className="flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-500/40 bg-gradient-to-r from-cyan-500 to-blue-600 text-zinc-950 font-bold shadow-[0_0_15px_rgba(6,182,212,0.35)] transition hover:brightness-110 disabled:opacity-70"
       >
         <DownloadIcon className="h-5 w-5" />
       </button>

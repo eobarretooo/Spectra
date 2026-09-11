@@ -830,10 +830,10 @@ export function ChatPanel({
 
   return (
     <div
-      className={`${marginClassName} flex ${heightClassName} flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950`}
+      className={`${marginClassName} flex ${heightClassName} flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#0b0e17]/85 backdrop-blur-xl shadow-xl`}
       style={{ minHeight: "180px" }}
     >
-      <div className="flex shrink-0 items-center justify-between gap-2 border-b border-zinc-200 px-3 py-2 dark:border-zinc-800">
+      <div className="flex shrink-0 items-center justify-between gap-2 border-b border-white/10 px-3 py-2.5">
         <h2 className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">Chat</h2>
         <div className="flex items-center gap-1.5">
           {messages.length > 0 && (
@@ -1447,13 +1447,13 @@ export function ChatPanel({
                     ? "Escreva algo junto (opcional)..."
                     : "Digite uma mensagem...")
               }
-              className="min-h-8 min-w-0 flex-1 resize-none rounded-lg border border-zinc-300 bg-white px-2.5 py-1.5 text-base sm:text-sm leading-5 text-zinc-950 outline-none transition focus:border-zinc-500 focus:ring-2 focus:ring-zinc-950/10 disabled:cursor-not-allowed disabled:opacity-60 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50 dark:focus:ring-white/10"
+              className="min-h-8 min-w-0 flex-1 resize-none rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 text-base sm:text-sm leading-5 text-zinc-100 placeholder:text-zinc-500 outline-none transition focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/30 disabled:cursor-not-allowed disabled:opacity-60"
             />
             <button
               type="submit"
               disabled={!canSend}
               aria-label="Enviar"
-              className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-zinc-950 text-white transition hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-zinc-50 dark:text-zinc-950 dark:hover:bg-zinc-200"
+              className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-cyan-500 text-zinc-950 font-bold shadow-[0_0_12px_rgba(6,182,212,0.3)] transition hover:bg-cyan-400 active:scale-95 disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none cursor-pointer"
             >
               {sendingImages ? (
                 <span
