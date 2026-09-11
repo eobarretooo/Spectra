@@ -87,12 +87,27 @@ export function refreshGroup(groupId: string): Promise<void> {
       detailFetchedAt.set(groupId, Date.now());
       // A room being looked at right now has, by definition, nothing unread.
       const viewing = viewingChannel?.groupId === groupId ? viewingChannel.channelId : null;
-      const channels = detail.channels.map((c) =>
+      const channels = (detail.channels ?? []).map((c) =>
         c.id === viewing ? { ...c, unread: false, mentions: 0 } : c
       );
       const errors = { ...state.detailErrors };
       delete errors[groupId];
-      setState({ details: { ...state.details, [groupId]: { ...detail, channels } }, detailErrors: errors });
+      setState({
+        details: {
+          ...state.details,
+          [groupId]: {
+            ...detail,
+            channels,
+            voice: detail.voice ?? {},
+            group: {
+              ...detail.group,
+              admins: detail.group?.admins ?? [],
+              flags: detail.group?.flags ?? [],
+            },
+          },
+        },
+        detailErrors: errors,
+      });
       syncSummaryFromDetail(groupId);
     } else if (result.status !== 0) {
       // Gone, or suspended by the site (423): what was held is no longer

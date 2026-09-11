@@ -30,16 +30,16 @@ export function GroupMembersPanel({ detail }: { detail: GroupDetail }) {
   const isManager = detail.me.role === "owner" || detail.me.role === "admin";
   const members = useGroupMembers(
     groupId,
-    `${detail.group.memberCount}:${detail.group.admins.join(",")}`,
+    `${detail.group.memberCount}:${(detail.group.admins ?? []).join(",")}`,
     REFRESH_MS
   );
 
   // Which voice room each person is standing in, by name.
   const voiceRoomOf = useMemo(() => {
-    const names = new Map(detail.channels.map((c) => [c.id, c.name]));
+    const names = new Map((detail.channels ?? []).map((c) => [c.id, c.name]));
     const out = new Map<string, string>();
-    for (const [channelId, people] of Object.entries(detail.voice)) {
-      for (const person of people) out.set(person.userId, names.get(channelId) ?? "");
+    for (const [channelId, people] of Object.entries(detail.voice ?? {})) {
+      for (const person of people ?? []) out.set(person.userId, names.get(channelId) ?? "");
     }
     return out;
   }, [detail.channels, detail.voice]);

@@ -99,7 +99,8 @@ export function GroupRoomsPanel({
   const [createError, setCreateError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
 
-  const { group, channels, voice, me } = detail;
+  const { group, channels = [], voice: rawVoice, me } = detail;
+  const voice = rawVoice ?? {};
   const isManager = me.role === "owner" || me.role === "admin";
   const textRooms = channels.filter((c) => c.kind === "text");
   const voiceRooms = channels.filter((c) => c.kind === "voice");
@@ -203,7 +204,7 @@ export function GroupRoomsPanel({
           {voiceRooms.map((channel) => {
             const active = channel.id === activeChannelId;
             const connected = session?.groupId === group.id && session.channelId === channel.id;
-            const people = voice[channel.id] ?? [];
+            const people = voice?.[channel.id] ?? [];
             return (
               <li key={channel.id}>
                 <div
