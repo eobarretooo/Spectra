@@ -3,7 +3,7 @@
 import { useEffect, useSyncExternalStore } from "react";
 import { signalingClient, type GroupSocketEvent } from "./signalingClient";
 import { appendCachedMessage, forgetGroupMembers, removeCachedMessage } from "./groupCache";
-import { EVERYONE_MENTION } from "./groupPermissions";
+import { DEFAULT_GROUP_PERMISSIONS, EVERYONE_MENTION } from "./groupPermissions";
 import {
   fetchGroup,
   fetchMyGroups,
@@ -103,6 +103,10 @@ export function refreshGroup(groupId: string): Promise<void> {
               ...detail.group,
               admins: detail.group?.admins ?? [],
               flags: detail.group?.flags ?? [],
+              permissions: {
+                text: { ...DEFAULT_GROUP_PERMISSIONS.text, ...(detail.group?.permissions?.text ?? {}) },
+                voice: { ...DEFAULT_GROUP_PERMISSIONS.voice, ...(detail.group?.permissions?.voice ?? {}) },
+              },
             },
           },
         },

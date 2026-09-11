@@ -80,9 +80,12 @@ assert.deepEqual([...permissionKeysFor("text")], [
 assert.ok(!permissionKeysFor("voice").includes("viewChannel" as never));
 assert.ok(permissionKeysFor("voice").includes("mic"));
 
-// A group read from an older API (no permissions at all) falls back to the defaults.
+// A group read from an older API (no permissions at all or empty object) falls back to the defaults.
 assert.equal(groupAllows(undefined, "text", "sendImages"), true);
 assert.equal(groupAllows(undefined, "text", "mentionEveryone"), false);
 assert.equal(groupAllows(undefined, "voice", "screen"), true);
+assert.equal(groupAllows({} as never, "text", "mentionEveryone"), false);
+assert.equal(groupAllows({} as never, "text", "sendMessages"), true);
+assert.equal(groupAllows({} as never, "voice", "mic"), true);
 
 console.log("groupPermissions ok");

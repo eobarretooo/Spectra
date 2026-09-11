@@ -72,15 +72,15 @@ export function permissionKeysFor(kind: GroupChannelKind): readonly GroupPermiss
 export function groupAllows(permissions: GroupPermissions | undefined, kind: GroupChannelKind, key: GroupPermissionKey): boolean {
   const source = permissions ?? DEFAULT_GROUP_PERMISSIONS;
   return kind === "text"
-    ? source.text[key as TextPermissionKey] ?? DEFAULT_GROUP_PERMISSIONS.text[key as TextPermissionKey] ?? true
-    : source.voice[key as VoicePermissionKey] ?? DEFAULT_GROUP_PERMISSIONS.voice[key as VoicePermissionKey] ?? true;
+    ? source?.text?.[key as TextPermissionKey] ?? DEFAULT_GROUP_PERMISSIONS.text[key as TextPermissionKey] ?? true
+    : source?.voice?.[key as VoicePermissionKey] ?? DEFAULT_GROUP_PERMISSIONS.voice[key as VoicePermissionKey] ?? true;
 }
 
 /** Whether this room lets an ordinary member do `key`: its own setting, or the group's. */
 export function channelAllows(detail: GroupDetail, channel: GroupChannel, key: GroupPermissionKey): boolean {
-  const own = channel.permissions?.[key];
+  const own = channel?.permissions?.[key];
   if (typeof own === "boolean") return own;
-  return groupAllows(detail.group.permissions, channel.kind, key);
+  return groupAllows(detail?.group?.permissions, channel?.kind, key);
 }
 
 /** Whether the person looking may do `key` in this room. */

@@ -794,6 +794,18 @@ export function registerAuthRoutes(app: FastifyInstance) {
   // ------------------------------------------
   // Grupos e Mapa Mundial (Spectra Communities)
   // ------------------------------------------
+  const defaultGroupPermissions = {
+    text: {
+      viewChannel: true,
+      sendMessages: true,
+      sendGifs: true,
+      sendImages: true,
+      mentionMembers: true,
+      mentionEveryone: false,
+    },
+    voice: { mic: true, screen: true, camera: true, videoSource: true, chat: true, gif: true, image: true },
+  };
+
   const groupStore: any[] = [
     {
       id: "spectra-lounge",
@@ -808,7 +820,7 @@ export function registerAuthRoutes(app: FastifyInstance) {
       theme: null,
       ownerId: "system",
       admins: [],
-      permissions: {},
+      permissions: defaultGroupPermissions,
       createdAt: 1700000000000,
       voice: {},
       channels: [
@@ -831,7 +843,7 @@ export function registerAuthRoutes(app: FastifyInstance) {
       theme: null,
       ownerId: "system",
       admins: [],
-      permissions: {},
+      permissions: defaultGroupPermissions,
       createdAt: 1700000000000,
       voice: {},
       channels: [
@@ -853,7 +865,7 @@ export function registerAuthRoutes(app: FastifyInstance) {
       theme: null,
       ownerId: "system",
       admins: [],
-      permissions: {},
+      permissions: defaultGroupPermissions,
       createdAt: 1700000000000,
       voice: {},
       channels: [
@@ -932,7 +944,7 @@ export function registerAuthRoutes(app: FastifyInstance) {
         visibility,
         theme: null,
         admins: [],
-        permissions: {},
+        permissions: defaultGroupPermissions,
         createdAt: Date.now(),
         voice: {},
         channels: [
@@ -986,7 +998,7 @@ export function registerAuthRoutes(app: FastifyInstance) {
           location: grp.location || null,
           ownerId: grp.ownerId || "system",
           admins: grp.admins || [],
-          permissions: grp.permissions || {},
+          permissions: grp.permissions || defaultGroupPermissions,
           memberCount: grp.memberCount || 1,
           createdAt: grp.createdAt || Date.now(),
         },
