@@ -78,7 +78,42 @@ const SECONDARY: SecondaryItem[] = [
 
 export function SiteHeader() {
   const pathname = usePathname();
-  const secondary: SecondaryItem[] = SECONDARY;
+  const { account } = useAuth();
+  const { openPopup } = useNtPopups();
+
+  const flags = account?.flags ?? [];
+  const proItem: SecondaryItem = flags.includes("PRO_MAX")
+    ? {
+        key: "pro",
+        onClick: () => void openPopup("gift_plan", { data: {} }),
+        label: "Presentear Pro",
+        short: "Presentear",
+        Icon: MdCardGiftcard,
+        iconClassName: "text-emerald-500",
+        alwaysVisible: true,
+      }
+    : flags.includes("PRO")
+      ? {
+          key: "pro",
+          href: "/pro?plano=premium_max",
+          target: "",
+          label: "Pro Max",
+          short: "Pro Max",
+          Icon: GoldVerifiedBadgeIcon,
+          alwaysVisible: true,
+        }
+      : {
+          key: "pro",
+          href: "/pro",
+          target: "",
+          label: "Spectra Pro",
+          short: "Pro",
+          Icon: VerifiedBadgeIcon,
+          iconClassName: "text-cyan-400",
+          alwaysVisible: true,
+        };
+
+  const secondary: SecondaryItem[] = [SECONDARY[0], proItem, ...SECONDARY.slice(1)];
 
   return (
     // Sticky and translucent: on the long marketing pages the way back to the

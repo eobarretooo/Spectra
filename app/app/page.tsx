@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ogImage } from "@/lib/seo";
 import Link from "next/link";
 import { AdsterraBanner } from "@/components/AdsterraBanner";
-import { FaApple, FaGithub, FaLinux, FaWindows } from "react-icons/fa";
+import { FaAndroid, FaApple, FaGithub, FaLinux, FaWindows } from "react-icons/fa";
 import {
   MdCheck,
   MdCheckBox,
@@ -203,6 +203,12 @@ const PLATFORM_ROWS = [
     Icon: FaLinux,
     note: "Arquivo único, sem instalação: dê permissão de execução e abra.",
   },
+  {
+    name: "Android",
+    file: ".apk",
+    Icon: FaAndroid,
+    note: "Compilação automatizada no GitHub Actions. Baixe o APK diretamente para seu smartphone ou tablet Android.",
+  },
 ];
 
 const FAQ = [
@@ -296,7 +302,7 @@ export default async function AppPage() {
         >
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-xs font-semibold text-cyan-700 dark:text-cyan-300">
-              Windows · macOS · Linux
+              Windows · macOS · Linux · Android
               {version && (
                 <span className="font-mono font-normal text-cyan-600/70 dark:text-cyan-400/70">
                   {version}

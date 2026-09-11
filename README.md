@@ -2,7 +2,8 @@
 
 > Transmita sua tela, converse com áudio ultrabaixo de latência e compartilhe momentos sem depender de limitações de plataformas fechadas. 100% ponto a ponto (WebRTC), sem paywalls artificiais e com controle total dos sons transmitidos.
 
-Repositório Oficial: [https://github.com/eobarretooo/Spectra](https://github.com/eobarretooo/Spectra)
+Repositório Oficial: [https://github.com/eobarretooo/Spectra](https://github.com/eobarretooo/Spectra)  
+📋 **Relatório Técnico do Fork e Changelog**: Veja o documento completo em [`docs/2026-09-11_fork-golive-spectra-relatorio.md`](docs/2026-09-11_fork-golive-spectra-relatorio.md).
 
 ---
 

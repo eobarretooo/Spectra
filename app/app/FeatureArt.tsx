@@ -282,35 +282,78 @@ export function FeatureArt({ id }: { id: FeatureArtId }) {
 /** What the big tile in the hero mock is showing: a desktop being shared. */
 export function SharedScreenArt() {
   return (
-    <div className="relative aspect-video overflow-hidden rounded-xl bg-gradient-to-br from-indigo-950 via-zinc-900 to-zinc-950">
-      {/* A window on that desktop, with a media block and a couple of lines
-          of something — enough shape to read as "a screen", abstract enough
-          not to claim to be any particular program. */}
-      <div className="absolute inset-x-[12%] top-[14%] bottom-[18%] rounded-lg border border-white/10 bg-white/5 backdrop-blur-[1px]">
-        <div className="flex items-center gap-1 border-b border-white/10 px-2 py-1.5">
-          <span className="h-1.5 w-1.5 rounded-full bg-white/30" />
-          <span className="h-1.5 w-1.5 rounded-full bg-white/30" />
-          <span className="h-1.5 w-1.5 rounded-full bg-white/30" />
+    <div className="relative aspect-video overflow-hidden rounded-xl border border-cyan-500/20 bg-gradient-to-br from-zinc-950 via-slate-900 to-indigo-950 shadow-inner">
+      {/* Background cyber grid & glow */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b22_1px,transparent_1px),linear-gradient(to_bottom,#1e293b22_1px,transparent_1px)] bg-[size:16px_16px]" />
+      <div className="absolute -top-10 -right-10 h-36 w-36 rounded-full bg-cyan-500/15 blur-2xl" />
+      <div className="absolute -bottom-10 -left-10 h-36 w-36 rounded-full bg-violet-500/15 blur-2xl" />
+
+      {/* Modern app window inside stream */}
+      <div className="absolute inset-x-[6%] top-[10%] bottom-[12%] flex flex-col overflow-hidden rounded-lg border border-white/15 bg-zinc-900/80 shadow-2xl backdrop-blur-md">
+        {/* Title bar */}
+        <div className="flex items-center justify-between border-b border-white/10 bg-black/40 px-3 py-1.5 text-[10px]">
+          <div className="flex items-center gap-1.5">
+            <span className="h-2 w-2 rounded-full bg-red-400" />
+            <span className="h-2 w-2 rounded-full bg-amber-400" />
+            <span className="h-2 w-2 rounded-full bg-emerald-400" />
+            <span className="ml-1.5 font-mono text-[9px] font-medium text-zinc-400">
+              Spectra Live Stage — 4K 120FPS
+            </span>
+          </div>
+          <span className="rounded bg-cyan-500/20 px-1.5 py-0.5 font-mono text-[8px] font-bold text-cyan-300">
+            P2P MESH
+          </span>
         </div>
-        <div className="flex gap-2 p-2">
-          <div className="h-12 flex-[2] rounded bg-gradient-to-br from-sky-500/40 to-indigo-500/30" />
-          <div className="flex flex-1 flex-col gap-1.5 pt-1">
-            <span className="h-1.5 w-full rounded-full bg-white/20" />
-            <span className="h-1.5 w-4/5 rounded-full bg-white/15" />
-            <span className="h-1.5 w-3/5 rounded-full bg-white/10" />
+
+        {/* Content canvas */}
+        <div className="relative flex flex-1 items-center justify-center p-3">
+          {/* Simulated 3D / Game visual with code & audio waveform */}
+          <div className="flex w-full items-center justify-between gap-4">
+            <div className="flex flex-1 flex-col gap-1.5">
+              <div className="flex items-center gap-2">
+                <span className="h-2 w-12 rounded-full bg-cyan-400/80" />
+                <span className="h-2 w-20 rounded-full bg-violet-400/60" />
+                <span className="h-2 w-16 rounded-full bg-emerald-400/50" />
+              </div>
+              <div className="h-1.5 w-4/5 rounded-full bg-zinc-700/60" />
+              <div className="h-1.5 w-3/5 rounded-full bg-zinc-800/80" />
+              <div className="mt-2 flex items-center gap-1">
+                {[40, 75, 100, 60, 85, 30, 95, 50, 70, 90, 45, 80].map((val, idx) => (
+                  <span
+                    key={idx}
+                    className="spectra-eq-bar w-[3px] rounded-full bg-gradient-to-t from-cyan-500 to-violet-400"
+                    style={{ height: `${val * 0.28}px`, animationDelay: `${idx * 80}ms` }}
+                  />
+                ))}
+                <span className="ml-2 font-mono text-[9px] text-cyan-300 font-semibold">48 kHz Áudio HD</span>
+              </div>
+            </div>
+
+            {/* Minimap / HUD mockup */}
+            <div className="relative h-16 w-24 shrink-0 overflow-hidden rounded-md border border-cyan-500/30 bg-black/60 p-1">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.2),transparent_70%)]" />
+              <div className="flex h-full flex-col justify-between text-[8px] font-mono text-zinc-400">
+                <div className="flex justify-between">
+                  <span className="text-emerald-400">120 FPS</span>
+                  <span className="text-cyan-400">12ms</span>
+                </div>
+                <div className="text-center font-bold text-white/80">LATÊNCIA ZERO</div>
+                <div className="text-right text-[7px] text-zinc-500">AV1 · 60 Mbps</div>
+              </div>
+            </div>
           </div>
         </div>
-        {/* A second row of smaller blocks, so the window has a bottom half
-            instead of trailing off into empty glass. */}
-        <div className="flex gap-1.5 px-2">
-          {[0, 1, 2].map((i) => (
-            <span key={i} className="h-4 flex-1 rounded-sm bg-white/10" />
-          ))}
-        </div>
       </div>
-      <span className="absolute bottom-2 left-2 inline-flex items-center gap-1.5 rounded-full bg-black/50 px-2 py-0.5 text-[10px] font-semibold text-white">
-        <span className="spectra-live-dot h-1.5 w-1.5 rounded-full bg-red-500" />
-        ao vivo
+
+      {/* Live Badge */}
+      <span className="absolute bottom-2 left-3 inline-flex items-center gap-1.5 rounded-full border border-red-500/30 bg-black/70 px-2.5 py-0.5 text-[10px] font-semibold text-white shadow-lg backdrop-blur-md">
+        <span className="spectra-live-dot h-2 w-2 rounded-full bg-red-500" />
+        AO VIVO · 120 FPS
+      </span>
+
+      {/* Audio isolation tag */}
+      <span className="absolute bottom-2 right-3 inline-flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-cyan-950/70 px-2.5 py-0.5 text-[9px] font-medium text-cyan-300 backdrop-blur-md">
+        🔊 Som do Jogo Ativo (Discord Isolado)
       </span>
     </div>
   );
@@ -318,9 +361,7 @@ export function SharedScreenArt() {
 
 /**
  * A participant tile: a camera-ish gradient with the person's initial, and a
- * level meter on whoever is talking. Initials rather than faces on purpose —
- * a stock portrait in a product mock is a stranger's face pretending to be a
- * user.
+ * level meter on whoever is talking.
  */
 export function ParticipantArt({
   name,
@@ -333,25 +374,45 @@ export function ParticipantArt({
 }) {
   return (
     <div
-      className={`relative flex aspect-video items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br ${gradient} ${
-        speaking ? "ring-2 ring-emerald-400" : ""
+      className={`relative flex aspect-video items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br ${gradient} shadow-md transition-all duration-300 ${
+        speaking
+          ? "ring-2 ring-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.35)]"
+          : "hover:border-white/25"
       }`}
     >
-      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/20 text-[11px] font-semibold text-white">
-        {name.slice(0, 1)}
-      </span>
-      <span className="absolute bottom-1 left-1.5 text-[10px] font-medium text-white/90">
+      {/* Ambient background light */}
+      <div className="absolute inset-0 bg-black/20" />
+
+      {/* Initial Avatar with glow */}
+      <div className="relative flex flex-col items-center gap-1">
+        <span
+          className={`flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/10 text-xs font-bold text-white shadow-lg backdrop-blur-md transition ${
+            speaking ? "scale-105 border-cyan-400/60 bg-cyan-500/20 text-cyan-100" : ""
+          }`}
+        >
+          {name.slice(0, 1)}
+        </span>
+      </div>
+
+      {/* Participant name tag */}
+      <span className="absolute bottom-1.5 left-2 rounded bg-black/50 px-1.5 py-0.5 text-[10px] font-medium text-white/90 backdrop-blur-sm">
         {name}
       </span>
-      {speaking && (
-        <span className="absolute right-1.5 bottom-1.5 flex h-3 items-end gap-[2px]">
-          {[0.5, 1, 0.7].map((h, i) => (
+
+      {/* Audio Level Equalizer Meter */}
+      {speaking ? (
+        <span className="absolute right-2 bottom-1.5 flex h-3.5 items-end gap-[2px] rounded bg-black/60 px-1.5 py-0.5 backdrop-blur-sm">
+          {[0.4, 0.9, 0.6, 1, 0.7].map((h, i) => (
             <span
               key={i}
-              className="spectra-eq-bar w-[3px] rounded-full bg-cyan-300"
-              style={{ height: `${h * 100}%`, animationDelay: `${i * 140}ms` }}
+              className="spectra-eq-bar w-[2.5px] rounded-full bg-cyan-300"
+              style={{ height: `${h * 100}%`, animationDelay: `${i * 120}ms` }}
             />
           ))}
+        </span>
+      ) : (
+        <span className="absolute right-2 bottom-1.5 flex h-2 items-center gap-1 text-[9px] text-zinc-400">
+          <span className="h-1.5 w-1.5 rounded-full bg-zinc-500" />
         </span>
       )}
     </div>

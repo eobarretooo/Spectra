@@ -32,7 +32,20 @@ import { RecentRooms } from "@/components/RecentRooms";
 import { HomeGroupsPanel } from "@/components/groups/HomeGroupsPanel";
 import { ButtonSpinner } from "@/components/ButtonSpinner";
 import { prewarmCaptcha } from "@/lib/turnstile";
-import { MdLock, MdOutlineMap } from "react-icons/md";
+import { SpectraLiveStage } from "@/components/SpectraLiveStage";
+import {
+  MdLock,
+  MdOutlineMap,
+  MdTune,
+  MdSpeed,
+  MdHighQuality,
+  MdDevices,
+  MdSecurity,
+  MdGraphicEq,
+  MdCheck,
+  MdArrowForward,
+} from "react-icons/md";
+import { FaWindows, FaAndroid, FaApple, FaLinux, FaGithub } from "react-icons/fa";
 import { SocialLinks } from "@/components/SocialLinks";
 import { SiteHeader } from "@/components/SiteHeader";
 import { AdsterraBanner } from "@/components/AdsterraBanner";
@@ -389,64 +402,70 @@ export default function Home() {
   return (
     <>
       <SiteHeader />
-      <div className="flex flex-1 flex-col items-center justify-center gap-3 bg-zinc-50 px-4 py-16 dark:bg-black">
-        {peopleOnline !== null && (<div className="inline-flex gap-2">
-          <span className="flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-3.5 py-1.5 text-xs font-medium text-zinc-600 shadow-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400">
-            <span className="h-2 w-2 rounded-full bg-emerald-500" />
-            {peopleOnline} {peopleOnline === 1 ? "pessoa" : "pessoas"} em salas agora
-          </span>
-          <DownloadAppButton source="home" />
-        </div>
-        )}
-        {false && <>
+      <div className="relative min-h-screen flex-1 overflow-hidden bg-zinc-50 dark:bg-[#07080d]">
+        {/* Futuristic Ambient Glows */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 -top-40 h-[36rem] bg-[radial-gradient(60%_60%_at_50%_20%,rgba(6,182,212,0.18),transparent_75%)]"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute right-0 top-1/4 h-[30rem] w-[30rem] rounded-full bg-[radial-gradient(circle,rgba(139,92,246,0.12),transparent_70%)]"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -left-20 bottom-1/4 h-[30rem] w-[30rem] rounded-full bg-[radial-gradient(circle,rgba(6,182,212,0.1),transparent_70%)]"
+        />
 
-          <h2 style={{ color: "#ff2828", maxWidth: "500px", fontSize: "1.3rem" }}>Site fora do ar momentâneamente!!</h2>
-          <h2 style={{ color: "#ff6767", maxWidth: "500px" }}>A API foi reiniciar pra atualizar e não consegue mais ligar por ter mais de 2000 pessoas tentando reconectar.</h2>
-          <h2 style={{ color: "#ff6767", maxWidth: "500px" }}>Eu tô programando um sistema de balanceamento de carga. Aguentaí que já volta</h2>
-          <h2 style={{ color: "#ff6767", maxWidth: "500px" }}>Deve voltar em uns 10 minutos</h2>
-          <h2 style={{ color: "#67c7ff", maxWidth: "500px" }}>Para atualizações/sugestões/etc entre no meu Discord: <Link style={{ color: "#00ff00" }} href={"https://go.nemtudo.me/golive-nemtudodiscord"} target="_blank">discord.gg/nemtudo</Link></h2>
-          <h2 style={{ color: "#67c7ff", maxWidth: "500px" }}>Me segue no Twitter tbm, sempre posto update e projeto por lá <Link style={{ color: "#00ff00" }} href={"https://go.nemtudo.me/golive-nemtudo-twitter"} target="_blank">x.com/NemTudo_</Link></h2>
-        </>
-        }
-        {/* The form and the friends list. Three layouts, and the middle one is
-          the compromise rather than the goal:
+        <div className="relative mx-auto w-full max-w-7xl px-4 pt-6 pb-16 sm:px-6 lg:px-8">
+          {/* Status Bar with live metrics */}
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-black/5 pb-5 dark:border-white/5">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3.5 py-1 text-xs font-semibold text-cyan-700 dark:text-cyan-300">
+                <span className="spectra-live-dot h-2 w-2 rounded-full bg-cyan-400" />
+                P2P WebRTC Mesh
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 text-xs font-semibold text-violet-700 dark:text-violet-300">
+                ⚡ 120 FPS · 4K
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-700 dark:text-emerald-300">
+                🔊 Áudio por App
+              </span>
+            </div>
 
-            - stacked, below `lg`. The panel goes under the form.
-            - side by side from `lg`, centred *as a pair* — so the form sits a
-              little left of the page's centre. This is what the whole thing
-              used to do at every width.
-            - from `xl`, a three-column grid whose outer columns are equal, so
-              the form is dead centre of the page and the panel sits to its
-              right without moving it.
-
-          The last one cannot start any earlier, and that is arithmetic rather
-          than taste: keeping the form centred means reserving the panel's
-          width on *both* sides of it, which needs 22 + 28 + 22 rem plus the
-          gaps — about 1180px before anything overflows. Below that, a centred
-          form would push the panel off the right edge, and a page that scrolls
-          sideways is worse than one whose form sits slightly off-centre.
-
-          A guest sees none of this: HomeFriendsPanel renders nothing without an
-          account, and the grid's middle column is the form either way. */}
-        <div className="flex w-full flex-col items-center justify-center gap-4 lg:flex-row lg:flex-wrap lg:items-start xl:grid xl:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
-          {/* The groups, in what used to be an empty counterweight column: from
-              xl the grid's left column, hugging the form from that side as the
-              friends hug it from the other, and the form stays dead centre
-              either way. Below xl there is no room for three abreast, so it
-              goes after the form and the friends (order-3) — wrapped onto a
-              row of its own at lg, stacked below that.
-
-              Wrapped, and the wrapper always exists: the panel renders nothing
-              while the account is still resolving (and for somebody with no
-              identity), and a grid missing its first child puts the form in
-              the *first* column — the page opening with the form shoved to the
-              left. So from xl the wrapper holds the column even when empty
-              (xl:empty:block), and below xl an empty one simply disappears
-              (empty:hidden) instead of leaving a gap in the stack. */}
-          <div className="order-3 flex w-full max-w-md justify-center empty:hidden lg:w-auto xl:order-none xl:block xl:w-auto xl:max-w-none xl:justify-self-end xl:empty:block">
-            <HomeGroupsPanel />
+            <div className="flex items-center gap-3">
+              {peopleOnline !== null && (
+                <span className="flex items-center gap-2 rounded-full border border-zinc-200 bg-white/80 px-3.5 py-1.5 text-xs font-medium text-zinc-600 shadow-sm backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/80 dark:text-zinc-400">
+                  <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                  {peopleOnline} {peopleOnline === 1 ? "pessoa" : "pessoas"} em salas agora
+                </span>
+              )}
+              <DownloadAppButton source="home" />
+            </div>
           </div>
-          <main className="w-full max-w-md rounded-2xl border border-black/10 bg-white p-8 shadow-sm dark:border-white/10 dark:bg-zinc-950">
+
+          {/* Hero Headline & Subtitle */}
+          <div className="mt-8 max-w-3xl">
+            <h1 className="text-4xl font-extrabold tracking-tight text-zinc-950 sm:text-5xl lg:text-6xl dark:text-zinc-50">
+              Compartilhe tela, voz e áudio{" "}
+              <span className="bg-gradient-to-r from-cyan-400 via-sky-300 to-violet-400 bg-clip-text text-transparent">
+                com latência zero
+              </span>
+            </h1>
+            <p className="mt-4 text-base text-zinc-600 sm:text-lg dark:text-zinc-400">
+              Transmita seus jogos, programas e conversas em altíssima definição até 4K e 120 FPS com isolamento de áudio por aplicativo. Sem cadastro obrigatório, direto no navegador, PC ou celular.
+            </p>
+          </div>
+
+          {/* Hero 2-Column Section */}
+          <div className="mt-10 grid gap-8 lg:grid-cols-12 lg:items-start">
+            {/* Left Column: Form & Panels */}
+            <div className="lg:col-span-6 xl:col-span-7 flex flex-col gap-4">
+              <div className="flex w-full flex-col items-center justify-center gap-4 lg:flex-row lg:flex-wrap lg:items-start xl:grid xl:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
+                <div className="order-3 flex w-full max-w-md justify-center empty:hidden lg:w-auto xl:order-none xl:block xl:w-auto xl:max-w-none xl:justify-self-end xl:empty:block">
+                  <HomeGroupsPanel />
+                </div>
+                <main className="w-full max-w-md rounded-2xl border border-cyan-500/20 bg-white/95 p-8 shadow-xl backdrop-blur-xl transition duration-300 dark:border-cyan-500/20 dark:bg-zinc-950/90 dark:shadow-[0_0_50px_-15px_rgba(6,182,212,0.15)]">
             <div className="flex items-center gap-3">
               <img src="/spectra-logo.svg" alt="Spectra" className="h-9 w-9 drop-shadow-[0_0_12px_rgba(34,211,238,0.4)]" />
               <h1 className="text-2xl font-bold tracking-tight text-zinc-950 dark:text-zinc-50 bg-gradient-to-r from-cyan-400 via-sky-300 to-violet-400 bg-clip-text text-transparent">
@@ -830,23 +849,144 @@ export default function Home() {
               instead of drifting to the right edge on a wide screen. */}
           <HomeFriendsPanel className="xl:justify-self-start" />
         </div>
-        {/* Below the form rather than above it: somebody landing here came to
-          type a room name, and a slot between the headline and that field
-          would be standing in the way of the one thing this page does. */}
-        <AdsterraBanner className="mt-6" />
-        {/* No heading on this one: the home page is a form someone came here to
-          fill in, and three handles under it explain themselves. */}
-        <p className="mt-4 flex gap-5 text-center text-xs text-zinc-400 dark:text-zinc-600" style={{ alignItems: "center" }}>
-          <Link
-            href="/termos"
-            className="underline underline-offset-2 hover:text-zinc-600 dark:hover:text-zinc-300"
-          >
+      </div>
+
+      {/* Right Column: Interactive Spectra Live Stage Mockup */}
+      <div className="lg:col-span-6 xl:col-span-5 flex justify-center lg:justify-end">
+        <SpectraLiveStage />
+      </div>
+    </div>
+
+      {/* Bento Grid Features */}
+      <div className="mt-20 border-t border-black/5 pt-16 dark:border-white/5">
+        <div className="text-center">
+          <span className="text-xs font-bold tracking-widest text-cyan-500 uppercase">
+            Vantagens do Spectra
+          </span>
+          <h2 className="mt-2 text-3xl font-bold tracking-tight text-zinc-950 sm:text-4xl dark:text-zinc-50">
+            Feito para quem exige máxima qualidade e controle
+          </h2>
+          <p className="mx-auto mt-3 max-w-2xl text-sm text-zinc-600 sm:text-base dark:text-zinc-400">
+            Uma alternativa livre, autônoma e descentralizada para você transmitir sem limitações.
+          </p>
+        </div>
+
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="group rounded-2xl border border-white/10 bg-white/60 p-6 shadow-sm backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:border-cyan-500/40 hover:shadow-lg dark:bg-zinc-950/70">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-500/10 text-cyan-400 transition group-hover:scale-110">
+              <MdTune className="h-6 w-6" />
+            </div>
+            <h3 className="mt-4 text-base font-bold text-zinc-950 dark:text-zinc-50">
+              Áudio Individual por App
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+              No app desktop para Windows, escolha quais programas entram no som da tela. Jogue com Spotify tocando sem vazar na chamada.
+            </p>
+          </div>
+
+          <div className="group rounded-2xl border border-white/10 bg-white/60 p-6 shadow-sm backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:border-violet-500/40 hover:shadow-lg dark:bg-zinc-950/70">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-violet-500/10 text-violet-400 transition group-hover:scale-110">
+              <MdSpeed className="h-6 w-6" />
+            </div>
+            <h3 className="mt-4 text-base font-bold text-zinc-950 dark:text-zinc-50">
+              P2P Direto & Latência Zero
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+              Sua transmissão viaja diretamente aos seus amigos via WebRTC Mesh. Sem passar por servidores intermediários que comprimem seu vídeo.
+            </p>
+          </div>
+
+          <div className="group rounded-2xl border border-white/10 bg-white/60 p-6 shadow-sm backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:border-emerald-500/40 hover:shadow-lg dark:bg-zinc-950/70">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-400 transition group-hover:scale-110">
+              <MdHighQuality className="h-6 w-6" />
+            </div>
+            <h3 className="mt-4 text-base font-bold text-zinc-950 dark:text-zinc-50">
+              Ultra HD 4K até 120 FPS
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+              Transmita em 1080p60, 1440p ou 4K com taxas de quadros fluidas de até 120 FPS com aceleração por hardware para jogos competitivos.
+            </p>
+          </div>
+
+          <div className="group rounded-2xl border border-white/10 bg-white/60 p-6 shadow-sm backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:border-sky-500/40 hover:shadow-lg dark:bg-zinc-950/70">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-sky-500/10 text-sky-400 transition group-hover:scale-110">
+              <MdDevices className="h-6 w-6" />
+            </div>
+            <h3 className="mt-4 text-base font-bold text-zinc-950 dark:text-zinc-50">
+              Ecossistema Multiplataforma
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+              Acesse direto pelo navegador sem instalar nada, use o app para PC (Windows/Mac/Linux) ou baixe o APK para Android.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Download Platforms Banner */}
+      <div className="mt-16 overflow-hidden rounded-2xl border border-cyan-500/30 bg-gradient-to-br from-zinc-950 via-slate-950 to-indigo-950 p-8 shadow-2xl">
+        <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
+          <div>
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-cyan-400/40 bg-cyan-500/20 px-3 py-0.5 text-xs font-semibold text-cyan-300">
+              <FaAndroid className="h-3.5 w-3.5" />
+              Disponível para PC e Android
+            </span>
+            <h3 className="mt-3 text-2xl font-bold text-white">
+              Instale o Spectra na sua máquina ou celular
+            </h3>
+            <p className="mt-1.5 max-w-xl text-sm text-zinc-300">
+              Desbloqueie o seletor de tela nativo, captura de som WASAPI sem eco e o novo aplicativo para Android compilado pelo GitHub Actions.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-3">
+            <Link
+              href="/download"
+              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-400 to-sky-400 px-5 py-3 text-sm font-bold text-zinc-950 shadow-lg shadow-cyan-500/20 transition hover:from-cyan-300 hover:to-sky-300"
+            >
+              <FaWindows className="h-4 w-4" />
+              Baixar para Windows
+            </Link>
+            <Link
+              href="/app"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm font-semibold text-white backdrop-blur-md transition hover:bg-white/20"
+            >
+              Ver todas as versões
+              <MdArrowForward className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer links */}
+      <footer className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-black/5 pt-8 text-xs text-zinc-500 sm:flex-row dark:border-white/5 dark:text-zinc-400">
+        <div className="flex items-center gap-3">
+          <img src="/spectra-logo.svg" alt="Spectra" className="h-5 w-5" />
+          <span className="font-semibold text-zinc-700 dark:text-zinc-300">Spectra</span>
+          <span>— Transmissão P2P Aberta</span>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-4">
+          <Link href="/termos" className="hover:underline">
             Termos de uso
           </Link>
-          <span>•</span>
-          <span>Spectra Live</span>
-        </p>
-      </div>
-    </>
+          <Link href="/app" className="hover:underline">
+            Downloads
+          </Link>
+          <Link href="/pro" className="hover:underline">
+            Spectra Pro
+          </Link>
+          <a
+            href="https://github.com/eobarretooo/Spectra"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:underline"
+          >
+            GitHub
+          </a>
+        </div>
+      </footer>
+    </div>
+  </div>
+</>
   );
 }

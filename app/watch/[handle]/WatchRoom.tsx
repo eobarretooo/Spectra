@@ -2149,7 +2149,7 @@ export function WatchRoom({
   const proButton = planFlags.includes("PRO_MAX")
     ? {
         label: "Presentear",
-        tooltip: "Presentear alguém com o GoLive Pro",
+        tooltip: "Presentear alguém com o Spectra Pro",
         ariaLabel: "Presentear Pro",
         Icon: MdCardGiftcard,
         // Carries its own colour, like the badges below: green is what the
@@ -2162,8 +2162,8 @@ export function WatchRoom({
     : planFlags.includes("PRO")
       ? {
           label: "Pro Max",
-          tooltip: "GoLive Pro Max — temas, presentes e todo o resto do Pro",
-          ariaLabel: "GoLive Pro Max",
+          tooltip: "Spectra Pro Max — temas, presentes e todo o resto do Pro",
+          ariaLabel: "Spectra Pro Max",
           // The plan's own mark, which carries its colour in its gradients and
           // therefore takes no colour class of its own.
           Icon: GoldVerifiedBadgeIcon,
@@ -2176,8 +2176,8 @@ export function WatchRoom({
         }
       : {
           label: "Pro",
-          tooltip: "GoLive Pro — Seja Verificado, transmita em 4K/120fps e muito mais!",
-          ariaLabel: "GoLive Pro",
+          tooltip: "Spectra Pro — Seja Verificado, transmita em 4K/120fps e muito mais!",
+          ariaLabel: "Spectra Pro",
           // Blue rather than inheriting the label's colour: this is the same
           // badge that appears next to a verified name (see DisplayUserName),
           // and it only reads as that badge if it keeps its own.
@@ -5506,6 +5506,25 @@ export function WatchRoom({
                 points at the thing that sells it instead of at a donation
                 page — see app/pro. What it offers climbs with the reader's own
                 plan; the three states are decided in `proButton` above. */}
+            <Tooltip content={proButton.tooltip} placement="bottom">
+              <button
+                type="button"
+                onClick={() => {
+                  trackEvent("pro_button_clicked", { offer: proButton.label });
+                  proButton.onPress();
+                }}
+                aria-label={proButton.ariaLabel}
+                className={`flex shrink-0 cursor-pointer items-center gap-1.5 rounded-lg border px-2 py-2 text-sm font-medium transition 2xl:px-3 ${proButton.className}`}
+              >
+                <proButton.Icon
+                  className={`h-5 w-5 shrink-0 ${proButton.iconClassName}`}
+                />
+                <span className="hidden sm:inline lg:hidden 2xl:inline">
+                  {proButton.label}
+                </span>
+              </button>
+            </Tooltip>
+
             <Tooltip content="Spectra no GitHub" placement="bottom">
               <a
                 href="https://github.com/eobarretooo/Spectra"

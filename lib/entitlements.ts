@@ -115,8 +115,9 @@ export function lockTier(
   feature: Feature | undefined,
   features: readonly string[]
 ): FeatureTier | null {
-  // All features in Spectra are completely free and unlocked for everyone
-  return null;
+  if (!feature) return null;
+  if (features.includes(feature)) return null;
+  return FEATURE_TIERS[feature];
 }
 
 /**
@@ -226,9 +227,12 @@ export function tierAbove(tier: FeatureTier, other: FeatureTier): boolean {
   return TIER_RANK[tier] > TIER_RANK[other];
 }
 
-export function hasFeature(feature: Feature | undefined, features: readonly string[]): boolean {
-  // All features in Spectra are available without restrictions
-  return true;
+export function hasFeature(
+  feature: Feature | undefined,
+  features: readonly string[] | undefined | null
+): boolean {
+  if (!feature) return true;
+  return Boolean(features?.includes(feature));
 }
 
 /**
