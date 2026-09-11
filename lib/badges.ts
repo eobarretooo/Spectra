@@ -13,6 +13,9 @@ export type BadgeId =
   | "beta_tester"
   | (string & {});
 
+export type BadgeRarity = "mythic" | "legendary" | "epic" | "rare" | "exclusive";
+export type BadgeCategory = "all" | "special" | "subscription" | "community" | "achievement";
+
 export interface BadgeDefinition {
   id: string;           // Identificador único (ex: "staff", "bug_hunter")
   name: string;         // Nome visível (ex: "Staff")
@@ -26,6 +29,10 @@ export interface BadgeDefinition {
   requiredFlag?: string;// Flag requerida na conta (ex: "STAFF", "BUG_HUNTER")
   requiredPlan?: string;// Plano requerido (ex: "pro")
   createdAt: number;
+  rarity?: BadgeRarity;
+  category?: BadgeCategory;
+  howToGet?: string;
+  glowColor?: string;
 }
 
 // Cutoff for Beta Tester badge: all accounts created before 10/09/2026 (BRT / UTC-3).
@@ -46,9 +53,9 @@ export const EARLY_SUPPORTER_CUTOFF_MS = new Date("2026-10-19T00:00:00-03:00").g
 export const DEFAULT_BADGES: BadgeDefinition[] = [
   {
     id: "staff",
-    name: "Staff",
+    name: "Spectra Staff",
     flagTag: "STAFF",
-    description: "Equipe do Go Live",
+    description: "Equipe oficial do Spectra",
     iconUrl:
       "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f43f5e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/%3E%3Cpath d='m9 12 2 2 4-4'/%3E%3C/svg%3E",
     chipClass:
@@ -58,26 +65,34 @@ export const DEFAULT_BADGES: BadgeDefinition[] = [
     borderClass: "border-rose-500/30",
     requiredFlag: "STAFF",
     createdAt: 1725753600000,
+    rarity: "mythic",
+    category: "special",
+    howToGet: "Membro verificado da equipe de engenharia e operações do Spectra.",
+    glowColor: "rgba(244, 63, 94, 0.4)",
   },
   {
     id: "pro",
-    name: "Pro",
-    description: "Assinante GoLive Pro",
+    name: "Spectra Pro",
+    description: "Membro Spectra Pro",
     iconUrl:
-      "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f59e0b'%3E%3Cpath d='M13 2 3 14h9l-1 8 10-12h-9l1-8z'/%3E%3C/svg%3E",
+      "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2306b6d4'%3E%3Cpath d='M13 2 3 14h9l-1 8 10-12h-9l1-8z'/%3E%3C/svg%3E",
     chipClass:
-      "border-amber-500/30 bg-amber-500/10 text-amber-600 hover:bg-amber-500/20 dark:border-amber-500/40 dark:bg-amber-500/15 dark:text-amber-400",
-    bgClass: "bg-amber-500/15",
-    textClass: "text-amber-500",
-    borderClass: "border-amber-500/30",
+      "border-cyan-500/30 bg-cyan-500/10 text-cyan-600 hover:bg-cyan-500/20 dark:border-cyan-500/40 dark:bg-cyan-500/15 dark:text-cyan-400",
+    bgClass: "bg-cyan-500/15",
+    textClass: "text-cyan-400",
+    borderClass: "border-cyan-500/30",
     requiredPlan: "pro",
     createdAt: 1725753600000,
+    rarity: "legendary",
+    category: "subscription",
+    howToGet: "Assinar o plano Spectra Pro com streaming 4K/120 FPS e áudio avançado.",
+    glowColor: "rgba(6, 182, 212, 0.45)",
   },
   {
     id: "bug_hunter",
     name: "Bug Hunter",
     flagTag: "BUG_HUNTER",
-    description: "Quem reporta bugs",
+    description: "Caçador de bugs do Spectra",
     iconUrl:
       "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2310b981' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='8' height='14' x='8' y='6' rx='4'/%3E%3Cpath d='m19 7-3 2'/%3E%3Cpath d='m5 7 3 2'/%3E%3Cpath d='m19 19-3-2'/%3E%3Cpath d='m5 19 3-2'/%3E%3Cpath d='M20 13h-4'/%3E%3Cpath d='M4 13h4'/%3E%3Cpath d='m10 4 1 2'/%3E%3Cpath d='m14 4-1 2'/%3E%3C/svg%3E",
     chipClass:
@@ -87,51 +102,67 @@ export const DEFAULT_BADGES: BadgeDefinition[] = [
     borderClass: "border-emerald-500/30",
     requiredFlag: "BUG_HUNTER",
     createdAt: 1725753600000,
+    rarity: "epic",
+    category: "community",
+    howToGet: "Descobrir e reportar falhas ou vulnerabilidades no repositório do Spectra.",
+    glowColor: "rgba(16, 185, 129, 0.4)",
   },
   {
     id: "contributor",
     name: "Contribuidor",
     flagTag: "CONTRIBUITOR",
-    description: "Quem faz PR no app",
+    description: "Contribui com código no GitHub do Spectra",
     iconUrl:
-      "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='18' cy='18' r='3'/%3E%3Ccircle cx='6' cy='6' r='3'/%3E%3Cpath d='M13 6h3a2 2 0 0 1 2 2v7'/%3E%3Cline x1='6' y1='9' x2='6' y2='21'/%3E%3C/svg%3E",
+      "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b5cf6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='18' cy='18' r='3'/%3E%3Ccircle cx='6' cy='6' r='3'/%3E%3Cpath d='M13 6h3a2 2 0 0 1 2 2v7'/%3E%3Cline x1='6' y1='9' x2='6' y2='21'/%3E%3C/svg%3E",
     chipClass:
-      "border-indigo-500/30 bg-indigo-500/10 text-indigo-600 hover:bg-indigo-500/20 dark:border-indigo-500/40 dark:bg-indigo-500/15 dark:text-indigo-400",
-    bgClass: "bg-indigo-500/15",
-    textClass: "text-indigo-500",
-    borderClass: "border-indigo-500/30",
+      "border-violet-500/30 bg-violet-500/10 text-violet-600 hover:bg-violet-500/20 dark:border-violet-500/40 dark:bg-violet-500/15 dark:text-violet-400",
+    bgClass: "bg-violet-500/15",
+    textClass: "text-violet-400",
+    borderClass: "border-violet-500/30",
     requiredFlag: "CONTRIBUITOR",
     createdAt: 1725753600000,
+    rarity: "epic",
+    category: "community",
+    howToGet: "Contribuir com Pull Requests de código aprovados no repositório Spectra.",
+    glowColor: "rgba(139, 92, 246, 0.4)",
   },
   {
     id: "beta_mobile",
-    name: "Mobile Beta",
+    name: "Android Pioneer",
     flagTag: "BETA_MOBILE",
-    description: "Quem tem o app mobile em Beta",
+    description: "Testador do aplicativo Android oficial do Spectra",
     iconUrl:
-      "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230ea5e9' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='14' height='20' x='5' y='2' rx='2' ry='2'/%3E%3Cpath d='M12 18h.01'/%3E%3C/svg%3E",
+      "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2322d3ee' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='14' height='20' x='5' y='2' rx='2' ry='2'/%3E%3Cpath d='M12 18h.01'/%3E%3C/svg%3E",
     chipClass:
-      "border-sky-500/30 bg-sky-500/10 text-sky-600 hover:bg-sky-500/20 dark:border-sky-500/40 dark:bg-sky-500/15 dark:text-sky-400",
-    bgClass: "bg-sky-500/15",
-    textClass: "text-sky-500",
-    borderClass: "border-sky-500/30",
+      "border-cyan-500/30 bg-cyan-500/10 text-cyan-600 hover:bg-cyan-500/20 dark:border-cyan-500/40 dark:bg-cyan-500/15 dark:text-cyan-400",
+    bgClass: "bg-cyan-500/15",
+    textClass: "text-cyan-400",
+    borderClass: "border-cyan-500/30",
     requiredFlag: "BETA_MOBILE",
     createdAt: 1725753600000,
+    rarity: "rare",
+    category: "achievement",
+    howToGet: "Instalar e participar da fase de testes do aplicativo Android oficial.",
+    glowColor: "rgba(34, 211, 238, 0.4)",
   },
   {
     id: "beta_tester",
-    name: "Beta Tester",
+    name: "Early Adopter",
     flagTag: "BETA_TESTER",
-    description: "Todas as contas criadas antes do dia 10/09/2026",
+    description: "Pioneiro da primeira fase de lançamento do Spectra",
     iconUrl:
-      "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a855f7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z'/%3E%3Cpath d='m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z'/%3E%3Cpath d='M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0'/%3E%3Cpath d='M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5'/%3E%3C/svg%3E",
+      "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ec4899' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z'/%3E%3Cpath d='m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z'/%3E%3Cpath d='M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0'/%3E%3Cpath d='M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5'/%3E%3C/svg%3E",
     chipClass:
-      "border-purple-500/30 bg-purple-500/10 text-purple-600 hover:bg-purple-500/20 dark:border-purple-500/40 dark:bg-purple-500/15 dark:text-purple-400",
-    bgClass: "bg-purple-500/15",
-    textClass: "text-purple-500",
-    borderClass: "border-purple-500/30",
+      "border-pink-500/30 bg-pink-500/10 text-pink-600 hover:bg-pink-500/20 dark:border-pink-500/40 dark:bg-pink-500/15 dark:text-pink-400",
+    bgClass: "bg-pink-500/15",
+    textClass: "text-pink-400",
+    borderClass: "border-pink-500/30",
     requiredFlag: "BETA_TESTER",
     createdAt: 1725753600000,
+    rarity: "exclusive",
+    category: "achievement",
+    howToGet: "Conta criada durante a primeira fase beta de lançamento do Spectra.",
+    glowColor: "rgba(236, 72, 153, 0.4)",
   },
 ];
 

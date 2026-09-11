@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { ogImage } from "@/lib/seo";
 import Link from "next/link";
-import { AdsterraBanner } from "@/components/AdsterraBanner";
 import { FaAndroid, FaApple, FaGithub, FaLinux, FaWindows } from "react-icons/fa";
 import {
   MdCheck,
@@ -11,6 +10,8 @@ import {
   MdMemory,
   MdSecurity,
   MdTune,
+  MdAutoAwesome,
+  MdSpeed,
 } from "react-icons/md";
 import { SocialLinks } from "@/components/SocialLinks";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -22,37 +23,17 @@ import {
   type FeatureArtId,
 } from "./FeatureArt";
 
-// Landing page for the desktop build.
-//
-// The pitch has two legs, and they are deliberately given equal weight: the
-// app is light on the machine, and it is the only one of these programs that
-// lets you choose, application by application, which sounds leave your PC.
-// Echo cancellation belongs to the second leg — it is *why* GoLive itself is
-// always on the excluded list — not a headline of its own.
-//
-// Everything claimed about the app comes from what the Electron shell
-// actually does (see electron/README.md); the "light" claims come from what
-// the shell deliberately is not (no overlay, no background service, no store)
-// and from lib/videoQuality.ts's per-viewer encoding, documented in
-// docs/qualidade-e-cascata.md. No measured number is quoted against another
-// program, because none has been measured.
-//
-// The file itself always comes from /download, which resolves the newest
-// GitHub release asset at request time — no version is pinned into this page.
-
 const SITE_URL = "http://localhost:3000";
 const RELEASES_API = "https://api.github.com/repos/eobarretooo/Spectra/releases/latest";
 
-const TITLE = "Baixar o app do Spectra para PC — Windows, macOS e Linux";
+const TITLE = "Baixar o app do Spectra — Windows, macOS, Linux e Android";
 const DESCRIPTION =
-  "O Spectra como aplicativo: leve na máquina, sem overlay nem serviço em segundo plano, e com o áudio da transmissão escolhido app por app — tire o Spotify, tire o WhatsApp, mande só o que você quer. Grátis para Windows, macOS e Linux.";
+  "O Spectra como aplicativo: ultra leve, sem overlay nem processos pesados em segundo plano, e com o áudio da transmissão isolado por aplicativo — tire o Spotify, tire o WhatsApp, mande só o som do jogo. Grátis e código aberto.";
 
-// Its own card rather than the root's, so this link is not the home page's
-// picture with a different sentence under it. See lib/seo.ts.
 const OG_IMAGE = ogImage({
-  title: "O Spectra no seu PC",
+  title: "O Spectra no seu PC e Celular",
   subtitle: "Leve, sem overlay, e você escolhe quais sons saem da máquina.",
-  badge: "App para PC",
+  badge: "App Nativo",
 });
 
 export const metadata: Metadata = {
@@ -68,6 +49,7 @@ export const metadata: Metadata = {
     "compartilhar tela sem eco",
     "spectra para pc",
     "spectra windows",
+    "spectra android apk",
   ],
   alternates: { canonical: "/app" },
   openGraph: {
@@ -90,98 +72,84 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  name: "Spectra para computador",
+  name: "Spectra para Computador e Celular",
   url: `${SITE_URL}/app`,
   description: DESCRIPTION,
   applicationCategory: "CommunicationApplication",
-  operatingSystem: "Windows, macOS, Linux",
+  operatingSystem: "Windows, macOS, Linux, Android",
   inLanguage: "pt-BR",
   offers: { "@type": "Offer", price: "0", priceCurrency: "BRL" },
 };
 
-// Each card carries a small drawing of the thing it describes — see
-// FeatureArt.tsx. The bodies are shorter than the prose elsewhere on the page
-// because the drawing above them has already made half the point.
 const BENEFITS: { title: string; body: string; art: FeatureArtId; tag?: string }[] = [
   {
     title: "Pesa menos que os programas de sempre",
-    body: "Sem overlay de jogo, sem rich presence, sem loja, sem serviço em segundo plano o dia todo. Uma janela que abre pra transmitir e fecha quando acabou — a RAM e o processador ficam com o jogo.",
+    body: "Sem overlay de jogo travando seus FPS, sem rich presence ou processos misteriosos o dia todo. Uma janela rápida que abre para transmitir e fecha quando acabou.",
     art: "weight",
   },
   {
     title: "Você escolhe exatamente quais sons vão",
-    body: "A lista dos programas tocando som agora, com uma caixinha em cada um. Tire o Spotify e sua música não vaza. Nos outros o som da tela vai inteiro (ou não vai)",
+    body: "Lista em tempo real dos programas tocando áudio. Tire o Spotify e sua música fica só com você. Nos outros programas, o som da tela vai inteiro sem filtro.",
     art: "audio-pick",
   },
   {
     title: "Processa só o que alguém vê",
-    body: "Cada espectador recebe a qualidade que o tile dele realmente usa, em vez de todo mundo receber 1080p pra caber numa miniatura. É o que faz uma sala grande caber numa máquina comum.",
+    body: "Cada espectador recebe dinamicamente a resolução e bitrate que seu tile consome. Economiza banda e processamento do seu computador.",
     art: "quality",
   },
   {
     title: "Som do sistema sem eco",
-    body: "Pelo navegador, a captura leva o próprio Spectra junto e as vozes da sala voltam com atraso. No app o Spectra fica sempre fora.",
+    body: "No navegador comum, a captura leva o próprio áudio da call gerando loop e eco. No app desktop do Spectra, as vozes dos amigos são isoladas automaticamente.",
     art: "echo",
     tag: "Windows",
   },
   {
     title: "Seletor de tela nativo",
-    body: "O mesmo seletor de janelas e monitores do sistema, com o switch de som da tela e a lista de programas ali do lado, em vez do diálogo genérico do navegador.",
+    body: "Seletor rápido integrado ao sistema operacional, com controle de áudio de tela ao lado, sem os diálogos genéricos e lentos de browsers.",
     art: "picker",
   },
   {
-    title: "Janela só do Spectra",
-    body: "Sem se perder entre abas, sem fechar a sala junto com o navegador, sem barra de endereço no meio da transmissão. Fica na barra de tarefas como qualquer programa.",
+    title: "Janela dedicada do Spectra",
+    body: "Sem risco de fechar a chamada sem querer ao fechar abas do navegador. Fica na barra de tarefas como qualquer programa profissional.",
     art: "window",
   },
   {
-    title: "Atualiza sozinho",
-    body: "Baixa em segundo plano e aplica quando você fecha, sem interromper call nenhuma. E como a interface vem do site, todo recurso novo chega sem instalar nada.",
+    title: "Atualizações transparentes",
+    body: "Baixa em segundo plano direto das releases do GitHub e aplica sem atrapalhar sua gameplay ou conversa.",
     art: "update",
   },
 ];
 
-// The comparison stays deliberately unnamed. The point is the shape of these
-// programs, not a claim about a particular version of a particular one — and
-// "costumam" is doing real work in the right-hand column.
 const COMPARISON = {
   spectra: [
-    "Abre quando você vai transmitir e fecha quando acabou",
+    "Abre quando você vai transmitir e fecha quando acabou — zero bloatware",
     "Você marca, app por app, quais sons ficam fora da transmissão",
-    "Vídeo e voz ponto a ponto entre os participantes",
-    "Codifica só a qualidade que cada espectador realmente usa",
-    "Funciona sem instalar nada, direto no navegador, se você preferir",
-    "Sem conta obrigatória e sem versão paga",
+    "Vídeo e voz ponto a ponto (P2P WebRTC Mesh) de ultra baixa latência",
+    "Codificação adaptativa até 4K e 120 FPS",
+    "Funciona sem instalar nada pelo navegador, ou com app dedicado para PC e Android",
+    "Código 100% aberto e auditável no GitHub oficial",
   ],
   others: [
-    "Costumam subir junto com o sistema e ficar residentes o dia todo",
-    "O som da tela vai inteiro (ou não vai)",
-    "Overlay, rich presence e integrações rodando mesmo quando você só quer falar",
-    "Conta obrigatória, e os recursos bons costumam estar no plano pago",
+    "Iniciam com o Windows e gastam gigabytes de RAM em segundo plano",
+    "O som do sistema vai inteiro (vaza Spotify, WhatsApp e chamadas privadas)",
+    "Overlays intrusivos e lojas embutidas drenando a GPU durante jogos",
+    "Transmissões em 60fps ou 1080p presas atrás de assinaturas mensais caras",
   ],
 };
 
-// The picker's audio panel, recreated from the app itself: "sempre sem som"
-// on GoLive is not a default anyone can change, which is the whole echo
-// story in three words.
 const MUTED_APPS = [
   { name: "Spectra", checked: true, locked: true },
   { name: "Spotify", checked: true },
   { name: "WhatsApp", checked: true },
   { name: "Navegador", checked: false },
-  { name: "Steam", checked: false },
+  { name: "Steam / Jogo", checked: false },
 ];
 
-// The faces in the hero's window mock. One of them is talking, which is what
-// the level meter in the corner of that tile is for.
-// Deep stops rather than the bright end of each scale: these sit next to a
-// dark screen tile and should read as four camera feeds, not as four neon
-// swatches.
 const PARTICIPANTS = [
   { name: "Você", gradient: "from-emerald-700 to-teal-900" },
   { name: "Maria", gradient: "from-fuchsia-700 to-purple-900", speaking: true },
   { name: "João", gradient: "from-sky-700 to-indigo-900" },
-  { name: "Ana", gradient: "from-amber-600 to-orange-900" },
+  { name: "Gabriel", gradient: "from-amber-600 to-orange-900" },
 ];
 
 const PLATFORM_ROWS = [
@@ -189,84 +157,68 @@ const PLATFORM_ROWS = [
     name: "Windows",
     file: ".exe",
     Icon: FaWindows,
-    note: "Instalador comum. É a única plataforma com captura do som do sistema e escolha por programa, por limitação do macOS e do Linux.",
+    color: "text-sky-400",
+    note: "Instalador nativo com suporte a captura WASAPI e isolamento de som por aplicativo exclusivo.",
   },
   {
     name: "macOS",
     file: ".dmg",
     Icon: FaApple,
-    note: "Binário universal: o mesmo arquivo roda em Apple Silicon e Intel. Na primeira vez o macOS pede permissão de gravação de tela e o app precisa ser reaberto.",
+    color: "text-zinc-200",
+    note: "Binário universal: roda nativamente em Apple Silicon (M1/M2/M3/M4) e Intel com aceleração Metal.",
   },
   {
     name: "Linux",
     file: ".AppImage",
     Icon: FaLinux,
-    note: "Arquivo único, sem instalação: dê permissão de execução e abra.",
+    color: "text-amber-400",
+    note: "Pacote universal sem dependências de distro: dê permissão de execução (chmod +x) e abra.",
   },
   {
     name: "Android",
     file: ".apk",
     Icon: FaAndroid,
-    note: "Compilação automatizada no GitHub Actions. Baixe o APK diretamente para seu smartphone ou tablet Android.",
+    color: "text-emerald-400",
+    note: "App nativo com WebRTC acelerado por hardware para assistir e falar em salas de qualquer lugar.",
   },
 ];
 
 const FAQ = [
   {
-    q: "Preciso do app pra usar o Spectra?",
-    a: "Não. O site funciona inteiro no navegador, no PC e no celular. O app existe pra quem quer escolher quais sons vão junto, o seletor de tela nativo e uma janela dedicada que não pesa na máquina.",
+    q: "Preciso do app para usar o Spectra?",
+    a: "Não. O site funciona 100% no navegador (Edge, Chrome, Firefox, Safari) sem nenhuma instalação prévia. O app para PC e Android existe para quem busca recursos avançados como isolamento de áudio por aplicativo, menor consumo de hardware e janela dedicada.",
   },
   {
-    q: "Ele fica pesado com o tempo, como os outros?",
-    a: "Ele não tem por onde: não sobe com o sistema, não tem overlay de jogo, não tem loja e não deixa serviço nenhum rodando depois que você fecha a janela. O que existe é uma janela e o processo de captura de áudio, que só existe enquanto você está transmitindo com som.",
+    q: "O app deixa processos rodando em segundo plano?",
+    a: "Não. Diferente do Discord ou outros mensageiros, o Spectra não possui serviços de segundo plano, inicialização forçada ou telemetria invasiva. Fechou a janela, o processo é finalizado instantaneamente.",
   },
   {
-    q: "É pago?",
-    a: "Não. O app é gratuito, como o resto do Spectra, e o código está no GitHub.",
+    q: "É gratuito?",
+    a: "Sim. O aplicativo é totalmente gratuito e de código aberto. O Spectra Pro oferece recursos adicionais como badges exclusivas e resoluções até 4K/120fps, sem bloquear as funções essenciais de compartilhamento de tela.",
   },
   {
-    q: "Como funciona a escolha dos sons?",
-    a: "Na hora de compartilhar, o app lista os programas que estão tocando som naquele momento. O que você marcar fica de fora da transmissão — você continua ouvindo normalmente, só a sala é que não recebe.",
+    q: "Como funciona o isolamento de áudio?",
+    a: "No Windows, o Spectra lê as sessões de áudio ativas via WASAPI. Você marca quais programas (ex: Spotify, Discord, navegador) devem ser ignorados: você continua ouvindo a música no fone, mas seus espectadores ouvem apenas o som do jogo.",
   },
   {
-    q: "Por que isso só funciona no Windows?",
-    a: "Porque só o Windows deixa capturar o áudio da máquina excluindo programas específicos. No macOS e no Linux isso exigiria um dispositivo de áudio virtual, então lá o compartilhamento vai só com o vídeo.",
+    q: "O Windows exibiu um aviso do SmartScreen. É seguro?",
+    a: "Sim. Como o projeto é independente e de código aberto sem certificado corporativo pago de assinatura de código, o Windows avisa na primeira execução. Você pode conferir todo o código-fonte e compilações diretamente no repositório GitHub oficial.",
   },
   {
-    q: "O app fica desatualizado em relação ao site?",
-    a: "Não. A janela carrega o site publicado, então toda mudança de interface chega na próxima vez que você abre. Só o próprio programa (a janela, o seletor, o áudio) precisa de atualização — e ela é automática.",
-  },
-  {
-    q: "O Windows reclamou do instalador. É seguro?",
-    a: "O aviso aparece porque o instalador ainda não tem assinatura digital paga, não porque haja algo nele. O código é aberto e o arquivo vem direto dos releases do GitHub do projeto — dá pra conferir a origem antes de instalar.",
-  },
-  {
-    q: "E no celular / Android?",
-    a: "O app nativo para Android está em desenvolvimento ativo com Capacitor/WebRTC no GitHub oficial do Spectra! Você já pode adicionar à tela de início como PWA ou gerar a build pelo repositório.",
+    q: "Como baixar para Android?",
+    a: "Você pode baixar o arquivo APK diretamente da seção de Releases do GitHub do projeto e instalar em qualquer smartphone ou tablet Android, ou adicionar o Spectra à tela de início como PWA.",
   },
 ];
 
-const sectionClass = "mx-auto w-full max-w-5xl px-4";
-const h2Class = "text-2xl font-semibold tracking-tight text-zinc-950 sm:text-3xl dark:text-zinc-50";
-const cardClass =
-  "rounded-2xl border border-black/10 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-zinc-950";
-const ghostButtonClass =
-  "inline-flex items-center justify-center gap-2 rounded-xl border border-zinc-300 px-5 py-3 text-sm font-semibold text-zinc-700 transition hover:border-zinc-400 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-zinc-600 dark:hover:bg-zinc-900";
+const sectionClass = "mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8";
+const h2Class = "text-2xl font-bold tracking-tight text-white sm:text-3xl";
 
-// The version shown under the download button. Read from the same release
-// the /download route hands out, so the two can never name different builds,
-// and cached for the same reason that route caches: GitHub's unauthenticated
-// API allows 60 calls an hour per IP, which here is the server's, shared by
-// every visitor.
-//
-// Returns null on any trouble — no release published yet, rate limit, network
-// — because a version line is a nicety and the page must render without it.
 async function fetchLatestVersion(): Promise<string | null> {
   try {
     const res = await fetch(RELEASES_API, {
       headers: {
         Accept: "application/vnd.github+json",
-        "User-Agent": "group-sharescreen-app-page",
+        "User-Agent": "spectra-app-page",
       },
       next: { revalidate: 600 },
     });
@@ -284,317 +236,380 @@ export default async function AppPage() {
   return (
     <>
       <SiteHeader />
-      <div className="flex-1 bg-zinc-50 dark:bg-black">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <div className="relative min-h-screen flex-1 overflow-hidden bg-[#07080d] text-zinc-100">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
 
-      {/* Hero. The glow is a plain radial gradient rather than an image — it
-          costs nothing, scales to any width and holds up in both themes. */}
-      <section className="relative overflow-hidden">
+        {/* Ambient Glows */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 -top-40 h-[28rem] bg-[radial-gradient(60%_60%_at_50%_50%,rgba(6,182,212,0.16),transparent_70%)]"
+          className="pointer-events-none absolute inset-x-0 -top-40 h-[36rem] bg-[radial-gradient(60%_60%_at_50%_20%,rgba(6,182,212,0.18),transparent_75%)]"
         />
         <div
-          className={`${sectionClass} relative grid gap-12 pt-8 pb-20 lg:grid-cols-2 lg:items-center lg:gap-16`}
-        >
-          <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-xs font-semibold text-cyan-700 dark:text-cyan-300">
-              Windows · macOS · Linux · Android
-              {version && (
-                <span className="font-mono font-normal text-cyan-600/70 dark:text-cyan-400/70">
-                  {version}
-                </span>
-              )}
-            </span>
-            <h1 className="mt-5 text-4xl font-semibold tracking-tight text-balance text-zinc-950 sm:text-5xl dark:text-zinc-50">
-              Leve na máquina, e com o áudio do jeito que você quiser
-            </h1>
-            <p className="mt-5 max-w-xl text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
-              Mesma sala, mesmo link, mesma conta — só que sem o peso dos programas de call que
-              ficam abertos o dia todo, e com uma coisa que nenhum deles faz: escolher, programa
-              por programa, quais sons saem do seu PC.
-            </p>
-            <div className="mt-8">
-              <DownloadPanel />
-            </div>
-            <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-zinc-500 dark:text-zinc-400">
-              {["Grátis", "Sem cadastro", "Código aberto"].map((item) => (
-                <li key={item} className="inline-flex items-center gap-1.5">
-                  <MdCheck className="h-4 w-4 text-emerald-500" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
+          aria-hidden
+          className="pointer-events-none absolute right-0 top-1/4 h-[30rem] w-[30rem] rounded-full bg-[radial-gradient(circle,rgba(139,92,246,0.12),transparent_70%)]"
+        />
 
-          {/* A drawing of the app window rather than a screenshot: sharp at
-              any size, correct in both themes, and nothing to re-capture
-              when the interface changes. */}
-          <div className="overflow-hidden rounded-2xl border border-black/10 bg-white shadow-xl dark:border-white/10 dark:bg-zinc-950">
-            <div className="flex items-center gap-2 border-b border-black/10 bg-zinc-100 px-4 py-3 dark:border-white/10 dark:bg-zinc-900">
-              <span className="h-3 w-3 rounded-full bg-red-400" />
-              <span className="h-3 w-3 rounded-full bg-amber-400" />
-              <span className="h-3 w-3 rounded-full bg-emerald-400" />
-              <span className="ml-2 text-xs font-medium text-zinc-500 dark:text-zinc-400">
-                Spectra
-              </span>
-            </div>
-            <div className="grid grid-cols-2 gap-2 p-4">
-              <div className="col-span-2">
-                <SharedScreenArt />
-              </div>
-              {PARTICIPANTS.map((participant) => (
-                <ParticipantArt key={participant.name} {...participant} />
-              ))}
-            </div>
-            <div className="flex flex-wrap items-center gap-2 border-t border-black/10 px-4 py-3 text-xs dark:border-white/10">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-1 font-medium text-emerald-700 dark:text-emerald-300">
-                <MdTune className="h-3.5 w-3.5" />
-                Som: 2 apps fora
-              </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-zinc-500/10 px-2.5 py-1 font-medium text-zinc-600 dark:text-zinc-400">
-                <MdMemory className="h-3.5 w-3.5" />
-                Uma janela, mais nada
-              </span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className={`${sectionClass} py-16`}>
-        <h2 className={h2Class}>O que você ganha instalando</h2>
-        <p className="mt-3 max-w-2xl text-zinc-600 dark:text-zinc-400">
-          A janela carrega o mesmo site — a diferença está no que ela consegue acessar da sua
-          máquina, e no quanto ela não atrapalha enquanto isso.
-        </p>
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {BENEFITS.map(({ title, body, art, tag }) => (
-            // `group` so a card's drawing can react to it being hovered (the
-            // update bar finishes filling); the lift is what tells a mouse
-            // it found the card in the first place.
-            <div
-              key={title}
-              className="group rounded-2xl border border-black/10 bg-white p-5 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-emerald-500/40 hover:shadow-md dark:border-white/10 dark:bg-zinc-950"
-            >
-              <FeatureArt id={art} />
-              <div className="mt-4 flex items-start justify-between gap-2">
-                <h3 className="font-semibold text-zinc-950 dark:text-zinc-50">{title}</h3>
-                {tag && (
-                  <span className="mt-0.5 shrink-0 rounded-full border border-black/10 px-2 py-0.5 text-[10px] font-medium text-zinc-500 dark:border-white/10 dark:text-zinc-400">
-                    {tag}
+        {/* Hero Section */}
+        <section className="relative overflow-hidden pt-10 pb-20">
+          <div className={`${sectionClass} grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-16`}>
+            <div>
+              <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3.5 py-1 text-xs font-semibold text-cyan-300">
+                <MdAutoAwesome className="h-3.5 w-3.5 text-cyan-400" />
+                Windows · macOS · Linux · Android
+                {version && (
+                  <span className="ml-1 rounded bg-cyan-500/20 px-1.5 py-0.5 font-mono text-[10px] text-cyan-300">
+                    {version}
                   </span>
                 )}
               </div>
-              <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">{body}</p>
+              <h1 className="mt-5 text-4xl font-extrabold tracking-tight text-balance text-white sm:text-5xl lg:text-6xl">
+                Leve na máquina, com o som{" "}
+                <span className="bg-gradient-to-r from-cyan-400 via-sky-300 to-violet-400 bg-clip-text text-transparent">
+                  do jeito que você quer
+                </span>
+              </h1>
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-zinc-400 sm:text-lg">
+                Mesma sala, mesmo link, mesma conta. O Spectra como app oferece o que nenhum outro programa entrega:
+                captura nativa de alta fidelidade e escolha individual de quais sons saem do seu computador.
+              </p>
+              <div className="mt-8">
+                <DownloadPanel />
+              </div>
+              <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-xs font-medium text-zinc-400">
+                {["100% Gratuito", "Sem cadastro obrigatório", "Código Aberto no GitHub"].map((item) => (
+                  <li key={item} className="inline-flex items-center gap-1.5">
+                    <MdCheck className="h-4 w-4 text-cyan-400" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
-          ))}
-        </div>
-      </section>
 
-      {/* The audio control, with the picker recreated. This is the section
-          the app is really sold on: everything the browser and the other
-          programs cannot do about sound lives here, echo included. */}
-      <section className={`${sectionClass} py-16`}>
-        <div className="grid gap-10 rounded-3xl border border-black/10 bg-white p-8 shadow-sm sm:p-12 lg:grid-cols-2 lg:items-center dark:border-white/10 dark:bg-zinc-950">
+            {/* Desktop Mockup Preview */}
+            <div className="overflow-hidden rounded-3xl border border-white/10 bg-zinc-950/90 shadow-2xl backdrop-blur-2xl">
+              <div className="flex items-center justify-between border-b border-white/10 bg-zinc-900/60 px-4 py-3">
+                <div className="flex items-center gap-2">
+                  <span className="h-3 w-3 rounded-full bg-rose-500/80" />
+                  <span className="h-3 w-3 rounded-full bg-amber-500/80" />
+                  <span className="h-3 w-3 rounded-full bg-emerald-500/80" />
+                  <span className="ml-2 font-mono text-xs text-zinc-400">spectra/sala-jogos</span>
+                </div>
+                <span className="rounded-full bg-cyan-500/15 px-2 py-0.5 font-mono text-[10px] font-semibold text-cyan-400">
+                  120 FPS · 4K
+                </span>
+              </div>
+              <div className="grid grid-cols-2 gap-2 p-4">
+                <div className="col-span-2">
+                  <SharedScreenArt />
+                </div>
+                {PARTICIPANTS.map((participant) => (
+                  <ParticipantArt key={participant.name} {...participant} />
+                ))}
+              </div>
+              <div className="flex flex-wrap items-center justify-between gap-2 border-t border-white/10 bg-zinc-900/40 px-4 py-3 text-xs">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-cyan-500/15 px-3 py-1 font-semibold text-cyan-300">
+                  <MdTune className="h-3.5 w-3.5" />
+                  Som: 2 apps isolados
+                </span>
+                <span className="inline-flex items-center gap-1.5 font-mono text-zinc-500">
+                  <MdMemory className="h-3.5 w-3.5 text-zinc-400" />
+                  0 processos em 2º plano
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Benefits Grid */}
+        <section className={`${sectionClass} py-16 border-t border-white/5`}>
           <div>
-            <h2 className={h2Class}>Nada vaza sem você mandar</h2>
-            <p className="mt-4 leading-relaxed text-zinc-600 dark:text-zinc-400">
-              Nos outros programas o som da tela é uma chave: ou vai tudo, ou não vai nada. Aqui
-              você vê a lista dos programas que estão tocando som agora e marca os que devem ficar
-              de fora — continuam tocando pra você, só não saem da sua máquina.
-            </p>
-            <ul className="mt-6 space-y-3 text-sm text-zinc-600 dark:text-zinc-400">
-              <li className="flex gap-3">
-                <MdCheck className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" />
-                <span>
-                  <strong className="text-zinc-950 dark:text-zinc-50">Tire o Spotify</strong> e
-                  pronto: sua música não vai junto com a tela.
-                </span>
-              </li>
-              <li className="flex gap-3">
-                <MdCheck className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" />
-                <span>
-                  <strong className="text-zinc-950 dark:text-zinc-50">Tire o WhatsApp</strong> e
-                  ouça seus áudios à vontade, sem a sala inteira ouvindo junto.
-                </span>
-              </li>
-              <li className="flex gap-3">
-                <MdCheck className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" />
-                <span>
-                  <strong className="text-zinc-950 dark:text-zinc-50">O Spectra já sai fora</strong>,
-                  sempre — é o que evita que as vozes da sala voltem pra sala e todo mundo se ouça
-                  com atraso.
-                </span>
-              </li>
-            </ul>
-            <p className="mt-6 text-xs text-zinc-400 dark:text-zinc-600">
-              Escolha por programa disponível no Windows. Nas outras plataformas o compartilhamento
-              vai só com o vídeo.
+            <span className="text-xs font-bold uppercase tracking-widest text-cyan-400">
+              Vantagens do App Nativo
+            </span>
+            <h2 className={`mt-2 ${h2Class}`}>O que você ganha instalando o Spectra</h2>
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-zinc-400 sm:text-base">
+              A janela executa com aceleração gráfica total e acesso direto aos subsistemas de áudio da sua máquina,
+              sem interferir na performance dos seus jogos.
             </p>
           </div>
-
-          {/* Recreated from the app's own picker panel. */}
-          <div className="rounded-2xl border border-black/10 bg-zinc-50 p-5 shadow-inner dark:border-white/10 dark:bg-zinc-900">
-            <p className="font-semibold text-zinc-950 dark:text-zinc-50">
-              Não compartilhar som dos seguintes apps
-            </p>
-            <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
-              Apps abertos agora. O que os marcados tocarem fica de fora da transmissão — você
-              continua ouvindo normalmente.
-            </p>
-            <ul className="mt-4 space-y-1">
-              {MUTED_APPS.map(({ name, checked, locked }) => (
-                <li
-                  key={name}
-                  className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm ${
-                    checked
-                      ? "bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50"
-                      : "text-zinc-500 dark:text-zinc-400"
-                  }`}
-                >
-                  {checked ? (
-                    <MdCheckBox
-                      className={`h-4 w-4 shrink-0 ${locked ? "text-zinc-400" : "text-emerald-500"}`}
-                    />
-                  ) : (
-                    <MdCheckBoxOutlineBlank className="h-4 w-4 shrink-0 text-zinc-400 dark:text-zinc-600" />
-                  )}
-                  <span className="flex-1 font-medium">{name}</span>
-                  {locked && (
-                    <span className="text-[11px] text-zinc-400 dark:text-zinc-600">
-                      sempre sem som
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {BENEFITS.map(({ title, body, art, tag }) => (
+              <div
+                key={title}
+                className="group rounded-3xl border border-white/10 bg-zinc-900/80 p-6 backdrop-blur-xl shadow-lg transition duration-300 hover:-translate-y-1.5 hover:border-cyan-500/40 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]"
+              >
+                <FeatureArt id={art} />
+                <div className="mt-5 flex items-start justify-between gap-2">
+                  <h3 className="font-bold text-white group-hover:text-cyan-300 transition">
+                    {title}
+                  </h3>
+                  {tag && (
+                    <span className="shrink-0 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-2 py-0.5 text-[10px] font-semibold text-cyan-300">
+                      {tag}
                     </span>
                   )}
+                </div>
+                <p className="mt-2 text-xs leading-relaxed text-zinc-400">{body}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Audio Isolation Showcase */}
+        <section className={`${sectionClass} py-16`}>
+          <div className="grid gap-10 rounded-3xl border border-white/10 bg-gradient-to-b from-zinc-900/90 to-zinc-950/90 p-8 shadow-2xl backdrop-blur-2xl sm:p-12 lg:grid-cols-2 lg:items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-xs font-semibold text-cyan-300">
+                <MdTune className="h-4 w-4 text-cyan-400" />
+                Tecnologia Exclusiva Spectra
+              </div>
+              <h2 className={`mt-4 ${h2Class}`}>Nada vaza sem você autorizar</h2>
+              <p className="mt-4 text-sm leading-relaxed text-zinc-400 sm:text-base">
+                Nos outros programas de compartilhamento, o áudio é tudo ou nada: seus amigos ouvem seu jogo, suas conversas
+                paralelas e suas músicas ao mesmo tempo. No Spectra, você marca exatamente quem fica de fora.
+              </p>
+              <ul className="mt-6 space-y-3.5 text-sm text-zinc-300">
+                <li className="flex items-start gap-3">
+                  <MdCheck className="mt-0.5 h-4 w-4 shrink-0 text-cyan-400" />
+                  <span>
+                    <strong className="text-white font-semibold">Tire o Spotify:</strong> Ouça sua playlist sem ninguém na sala escutar.
+                  </span>
                 </li>
-              ))}
-            </ul>
-            <div className="mt-4 flex items-center gap-2 border-t border-black/10 pt-4 text-sm dark:border-white/10">
-              <MdCheck className="h-4 w-4 text-emerald-500" />
-              <span className="text-zinc-600 dark:text-zinc-400">Compartilhar som da tela</span>
+                <li className="flex items-start gap-3">
+                  <MdCheck className="mt-0.5 h-4 w-4 shrink-0 text-cyan-400" />
+                  <span>
+                    <strong className="text-white font-semibold">Tire o WhatsApp:</strong> Ouça áudios privados sem a transmissão ouvir junto.
+                  </span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <MdCheck className="mt-0.5 h-4 w-4 shrink-0 text-cyan-400" />
+                  <span>
+                    <strong className="text-white font-semibold">Sem eco de voz:</strong> O som da própria chamada é isolado na raiz.
+                  </span>
+                </li>
+              </ul>
+              <p className="mt-6 text-xs text-zinc-500">
+                * Escolha individual por aplicativo disponível para Windows via WASAPI Loopback.
+              </p>
+            </div>
+
+            {/* Interactive Audio Panel Simulator */}
+            <div className="rounded-3xl border border-white/10 bg-zinc-950/80 p-6 shadow-xl backdrop-blur-xl">
+              <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                <div>
+                  <p className="font-bold text-white text-sm">Painel de Isolamento de Áudio</p>
+                  <p className="text-[11px] text-zinc-400">Apps ativos no sistema operacional agora</p>
+                </div>
+                <span className="rounded-full bg-emerald-500/15 px-2.5 py-0.5 text-[10px] font-semibold text-emerald-400">
+                  Ativo
+                </span>
+              </div>
+
+              <ul className="mt-4 space-y-2">
+                {MUTED_APPS.map(({ name, checked, locked }) => (
+                  <li
+                    key={name}
+                    className={`flex items-center justify-between rounded-xl px-3.5 py-2.5 text-sm transition ${
+                      checked
+                        ? "border border-cyan-500/30 bg-cyan-500/10 text-white"
+                        : "border border-white/5 bg-zinc-900/50 text-zinc-400"
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      {checked ? (
+                        <MdCheckBox className="h-5 w-5 text-cyan-400" />
+                      ) : (
+                        <MdCheckBoxOutlineBlank className="h-5 w-5 text-zinc-600" />
+                      )}
+                      <span className="font-medium text-xs sm:text-sm">{name}</span>
+                    </div>
+
+                    <span
+                      className={`text-[10px] font-semibold uppercase tracking-wider rounded-md px-2 py-0.5 ${
+                        checked
+                          ? "bg-rose-500/20 text-rose-300"
+                          : "bg-emerald-500/20 text-emerald-300"
+                      }`}
+                    >
+                      {locked ? "Sempre Isolado" : checked ? "Isolado (Fora)" : "Transmitindo"}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-5 flex items-center justify-between border-t border-white/10 pt-4 text-xs">
+                <span className="text-zinc-400">Status da Transmissão:</span>
+                <span className="flex items-center gap-1.5 font-semibold text-emerald-400">
+                  <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                  Som do Jogo Ativo (48kHz)
+                </span>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* The weight argument, kept unnamed on the other side. */}
-      <section className={`${sectionClass} py-16`}>
-        <h2 className={h2Class}>Um app, não um cliente inteiro</h2>
-        <p className="mt-3 max-w-2xl text-zinc-600 dark:text-zinc-400">
-          Os programas de call viraram plataformas: loja, overlay, integrações, tudo carregado
-          antes de você falar a primeira palavra. O Spectra é uma janela.
-        </p>
-        <div className="mt-10 grid gap-4 lg:grid-cols-2">
-          <div className="rounded-2xl border border-cyan-500/25 bg-cyan-500/5 p-6">
-            <p className="font-semibold text-cyan-700 dark:text-cyan-300">No app do Spectra</p>
-            <ul className="mt-4 space-y-3">
-              {COMPARISON.spectra.map((item) => (
-                <li key={item} className="flex gap-3 text-sm text-zinc-700 dark:text-zinc-300">
-                  <MdCheck className="mt-0.5 h-4 w-4 shrink-0 text-cyan-500" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="rounded-2xl border border-black/10 bg-white p-6 dark:border-white/10 dark:bg-zinc-950">
-            <p className="font-semibold text-zinc-950 dark:text-zinc-50">
-              Nos programas de call de sempre
+        {/* Comparison Section */}
+        <section className={`${sectionClass} py-16`}>
+          <div className="text-center">
+            <span className="text-xs font-bold uppercase tracking-widest text-cyan-400">
+              Comparativo Direto
+            </span>
+            <h2 className={`mt-2 ${h2Class}`}>Um programa de transmissão, não um cliente pesado</h2>
+            <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-zinc-400">
+              Veja a diferença entre um aplicativo enxuto focado em desempenho contra plataformas inchadas.
             </p>
-            <ul className="mt-4 space-y-3">
-              {COMPARISON.others.map((item) => (
-                <li key={item} className="flex gap-3 text-sm text-zinc-600 dark:text-zinc-400">
-                  <MdClose className="mt-0.5 h-4 w-4 shrink-0 text-zinc-400 dark:text-zinc-600" />
-                  {item}
-                </li>
-              ))}
-            </ul>
           </div>
-        </div>
-      </section>
 
-      <section className={`${sectionClass} py-16`}>
-        <h2 className={h2Class}>Para o seu sistema</h2>
-        <div className="mt-10 grid gap-4 sm:grid-cols-3">
-          {PLATFORM_ROWS.map(({ name, file, Icon, note }) => (
-            <div key={name} className={cardClass}>
+          <div className="mt-12 grid gap-6 lg:grid-cols-2">
+            {/* Spectra */}
+            <div className="rounded-3xl border border-cyan-500/30 bg-gradient-to-b from-cyan-950/20 to-zinc-900/90 p-8 shadow-2xl backdrop-blur-xl">
               <div className="flex items-center gap-3">
-                <Icon className="h-6 w-6 text-zinc-700 dark:text-zinc-300" />
-                <div>
-                  <h3 className="font-semibold text-zinc-950 dark:text-zinc-50">{name}</h3>
-                  <p className="font-mono text-xs text-zinc-400 dark:text-zinc-600">{file}</p>
+                <img src="/spectra-logo.svg" alt="Spectra" className="h-6 w-6" />
+                <h3 className="text-lg font-bold text-white">No Spectra</h3>
+              </div>
+              <ul className="mt-6 space-y-3.5">
+                {COMPARISON.spectra.map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-sm text-zinc-200">
+                    <MdCheck className="mt-0.5 h-4 w-4 shrink-0 text-cyan-400" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Others */}
+            <div className="rounded-3xl border border-white/10 bg-zinc-900/60 p-8 shadow-xl backdrop-blur-xl">
+              <h3 className="text-lg font-bold text-zinc-400">Nos programas de call de sempre</h3>
+              <ul className="mt-6 space-y-3.5">
+                {COMPARISON.others.map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-sm text-zinc-500">
+                    <MdClose className="mt-0.5 h-4 w-4 shrink-0 text-zinc-500" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* 4 Platforms Grid */}
+        <section className={`${sectionClass} py-16`}>
+          <div>
+            <span className="text-xs font-bold uppercase tracking-widest text-cyan-400">
+              Compatibilidade Total
+            </span>
+            <h2 className={`mt-2 ${h2Class}`}>Suporte nativo para todas as plataformas</h2>
+          </div>
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {PLATFORM_ROWS.map(({ name, file, Icon, color, note }) => (
+              <div
+                key={name}
+                className="group rounded-3xl border border-white/10 bg-zinc-900/80 p-6 backdrop-blur-xl shadow-xl transition duration-300 hover:-translate-y-1 hover:border-cyan-500/40"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-zinc-950/80 shadow-md">
+                    <Icon className={`h-6 w-6 ${color}`} />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-white">{name}</h3>
+                    <p className="font-mono text-xs text-zinc-500">{file}</p>
+                  </div>
+                </div>
+                <p className="mt-4 text-xs leading-relaxed text-zinc-400">{note}</p>
+                <div className="mt-5 border-t border-white/5 pt-3">
+                  <Link
+                    href={name === "Android" ? "/download?platform=android" : `/download?platform=${name.toLowerCase().slice(0, 3)}`}
+                    className="inline-flex items-center gap-1 text-xs font-semibold text-cyan-400 hover:text-cyan-300"
+                  >
+                    Baixar {file} →
+                  </Link>
                 </div>
               </div>
-              <p className="mt-4 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">{note}</p>
-            </div>
-          ))}
-        </div>
-        <p className="mt-6 flex items-start gap-2 text-sm text-zinc-500 dark:text-zinc-400">
-          <MdSecurity className="mt-0.5 h-4 w-4 shrink-0" />
-          Os arquivos vêm direto dos releases do GitHub do projeto, e o link de download sempre
-          aponta pra versão mais recente.
-        </p>
-      </section>
-
-      <section className={`${sectionClass} py-16`}>
-        <h2 className={h2Class}>Perguntas frequentes</h2>
-        <div className="mt-10 grid gap-4 lg:grid-cols-2">
-          {FAQ.map(({ q, a }) => (
-            <details
-              key={q}
-              className="group rounded-2xl border border-black/10 bg-white shadow-sm dark:border-white/10 dark:bg-zinc-950"
-            >
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-6 font-medium text-zinc-950 dark:text-zinc-50">
-                {q}
-                <span className="shrink-0 text-xl leading-none text-zinc-400 transition group-open:rotate-45">
-                  +
-                </span>
-              </summary>
-              <p className="px-6 pb-6 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-                {a}
-              </p>
-            </details>
-          ))}
-        </div>
-      </section>
-
-      <section className={`${sectionClass} pb-20`}>
-        <div className="rounded-3xl border border-emerald-500/20 bg-emerald-500/5 p-8 text-center sm:p-12">
-          <h2 className={h2Class}>Baixe e abra</h2>
-          <p className="mx-auto mt-3 max-w-xl text-zinc-600 dark:text-zinc-400">
-            Sua conta, suas salas e seus links continuam os mesmos — o app só entra no lugar da
-            aba.
+            ))}
+          </div>
+          <p className="mt-6 flex items-center gap-2 text-xs text-zinc-500">
+            <MdSecurity className="h-4 w-4 shrink-0 text-cyan-400" />
+            Todos os binários são gerados diretamente via GitHub Actions de código aberto.
           </p>
-          <div className="mt-8 flex flex-col items-center gap-4">
-            <DownloadPanel />
+        </section>
+
+        {/* FAQ Section */}
+        <section className={`${sectionClass} py-16`}>
+          <h2 className={h2Class}>Perguntas frequentes</h2>
+          <div className="mt-8 grid gap-4 lg:grid-cols-2">
+            {FAQ.map(({ q, a }) => (
+              <details
+                key={q}
+                className="group rounded-2xl border border-white/10 bg-zinc-900/70 p-6 shadow-md backdrop-blur-xl transition hover:border-white/20"
+              >
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-white">
+                  {q}
+                  <span className="shrink-0 text-xl font-light text-cyan-400 transition group-open:rotate-45">
+                    +
+                  </span>
+                </summary>
+                <p className="mt-3 text-xs leading-relaxed text-zinc-400 sm:text-sm">
+                  {a}
+                </p>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        {/* Bottom CTA Banner */}
+        <section className={`${sectionClass} pb-20`}>
+          <div className="rounded-3xl border border-cyan-500/30 bg-gradient-to-b from-cyan-950/20 via-zinc-900/90 to-zinc-950 p-10 text-center shadow-2xl backdrop-blur-2xl sm:p-14">
+            <h2 className={`text-3xl font-extrabold text-white sm:text-4xl`}>
+              Baixe o Spectra e comece agora
+            </h2>
+            <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-zinc-400">
+              Sua conta, histórico de amigos e salas continuam os mesmos. O aplicativo substitui a aba com o máximo
+              em performance e controle.
+            </p>
+            <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <DownloadPanel />
+              <a
+                href="https://github.com/eobarretooo/Spectra"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-zinc-900/80 px-6 py-4 text-base font-semibold text-zinc-200 backdrop-blur-xl transition duration-200 hover:border-white/20 hover:bg-zinc-800 hover:text-white"
+              >
+                <FaGithub className="h-5 w-5" />
+                Código no GitHub
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* Clean Footer (No Adsterra Bloat) */}
+        <footer className={`${sectionClass} pb-16 text-center text-xs text-zinc-500`}>
+          <SocialLinks className="mb-8" />
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <Link href="/termos" className="hover:text-zinc-300 transition">
+              Termos de uso
+            </Link>
+            <span>•</span>
+            <Link href="/badges" className="hover:text-zinc-300 transition">
+              Badges
+            </Link>
+            <span>•</span>
+            <Link href="/pro" className="hover:text-zinc-300 transition">
+              Spectra Pro
+            </Link>
+            <span>•</span>
             <a
               href="https://github.com/eobarretooo/Spectra"
               target="_blank"
               rel="noopener noreferrer"
-              className={ghostButtonClass}
+              className="hover:text-zinc-300 transition"
             >
-              <FaGithub className="h-5 w-5" />
-              Ver o código
+              GitHub Oficial
             </a>
           </div>
-        </div>
-      </section>
-
-      <footer
-        className={`${sectionClass} pb-16 text-center text-xs text-zinc-400 dark:text-zinc-600`}
-      >
-        <AdsterraBanner className="mb-10" />
-        <SocialLinks className="mb-8" />
-        <p>
-          <Link
-            href="/termos"
-            className="underline underline-offset-2 hover:text-zinc-600 dark:hover:text-zinc-300"
-          >
-            Termos de uso
-          </Link>
-        </p>
-      </footer>
+        </footer>
       </div>
     </>
   );

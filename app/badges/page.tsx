@@ -3,22 +3,28 @@ import { ogImage } from "@/lib/seo";
 import { SiteHeader } from "@/components/SiteHeader";
 import { BadgesPanel } from "./BadgesPanel";
 
-const TITLE = "Badges do GoLive — o que cada uma significa";
+const TITLE = "Badges e Conquistas do Spectra — O que cada selo significa";
 const DESCRIPTION =
-  "Todas as badges do GoLive e como cada uma é conquistada: staff, bug hunter, contribuidor, beta tester, apoiador inicial e as que vêm com o plano Pro.";
+  "Descubra todas as badges do Spectra e como desbloquear cada uma: Staff, Spectra Pro, Bug Hunter, Contribuidor de Código, Android Pioneer e Early Adopter.";
 
-// Its own card rather than the root's, so this link is not the home page's
-// picture with a different sentence under it. See lib/seo.ts.
 const OG_IMAGE = ogImage({
-  title: "Badges do GoLive",
-  subtitle: "O que cada uma significa e como conseguir.",
+  title: "Badges do Spectra",
+  subtitle: "Conquistas exclusivas e marcas de perfil no Spectra.",
   badge: "Badges",
 });
 
 export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
-  keywords: ["badges golive", "selos golive", "bug hunter", "beta tester", "apoiador inicial"],
+  keywords: [
+    "badges spectra",
+    "selos spectra",
+    "conquistas spectra",
+    "bug hunter",
+    "early adopter",
+    "android pioneer",
+    "spectra pro",
+  ],
   alternates: { canonical: "/badges" },
   openGraph: {
     type: "website",
@@ -37,7 +43,7 @@ export const metadata: Metadata = {
 // reads the live one.
 export default function BadgesPage() {
   return (
-    <div className="flex min-h-dvh flex-col bg-zinc-50 dark:bg-black">
+    <div className="flex min-h-dvh flex-col bg-[#07080d]">
       <SiteHeader />
       <BadgesPanel />
     </div>

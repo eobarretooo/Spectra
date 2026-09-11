@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { AdsterraBanner } from "@/components/AdsterraBanner";
+import { SiteHeader } from "@/components/SiteHeader";
 
 export const metadata: Metadata = {
-  title: "Termos de Uso e Privacidade",
+  title: "Termos de Uso e Privacidade — Spectra",
   description:
-    "Termos de uso e política de privacidade do Spectra: como o serviço de transmissão de tela, câmera e voz em grupo funciona e quais dados são tratados.",
+    "Termos de uso e política de privacidade do Spectra: como o serviço de transmissão P2P funciona e quais dados são tratados.",
   alternates: {
     canonical: "/termos",
   },
@@ -16,18 +16,20 @@ export const metadata: Metadata = {
 };
 
 const sectionClass = "mt-8 first:mt-0";
-const h2Class = "text-lg font-semibold text-zinc-950 dark:text-zinc-50";
-const pClass = "mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400";
-const ulClass = "mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400";
-const linkClass = "underline underline-offset-2 hover:text-zinc-900 dark:hover:text-zinc-100";
+const h2Class = "text-lg font-bold text-white";
+const pClass = "mt-2 text-sm leading-relaxed text-zinc-300";
+const ulClass = "mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-zinc-300";
+const linkClass = "underline underline-offset-2 text-cyan-400 hover:text-cyan-300";
 
 export default function TermosPage() {
   return (
-    <div className="flex flex-1 justify-center bg-zinc-50 px-4 py-16 dark:bg-black">
-      <main className="w-full max-w-2xl">
-        <Link href="/" className={`text-sm font-medium text-zinc-500 ${linkClass}`}>
-          ← Voltar para o Spectra
-        </Link>
+    <div className="flex min-h-screen flex-col bg-[#07080d] text-zinc-100">
+      <SiteHeader />
+      <div className="flex flex-1 justify-center px-4 py-16">
+        <main className="w-full max-w-3xl rounded-3xl border border-white/10 bg-zinc-900/80 p-8 shadow-2xl backdrop-blur-xl sm:p-12">
+          <Link href="/" className={`text-sm font-medium ${linkClass}`}>
+            ← Voltar para o início
+          </Link>
 
         <h1 className="mt-4 text-2xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-50">
           Termos de Uso e Privacidade
@@ -264,12 +266,11 @@ export default function TermosPage() {
           </p>
         </section>
 
-        <p className="mt-10 text-xs text-zinc-400 dark:text-zinc-600">
-          Última atualização: 23 de agosto de 2026.
+        <p className="mt-10 text-xs text-zinc-500">
+          Última atualização: 11 de setembro de 2026.
         </p>
-
-        <AdsterraBanner className="mt-10" />
       </main>
+      </div>
     </div>
   );
 }

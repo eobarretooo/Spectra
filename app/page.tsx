@@ -69,21 +69,21 @@ const ROOM_CHECK_DEBOUNCE_MS = 450;
 const STUCK_RECONNECT_MS = 15_000;
 
 const inputClass =
-  "rounded-lg border border-zinc-300 bg-white px-4 py-2.5 text-zinc-950 outline-none focus:border-zinc-500 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50";
+  "rounded-xl border border-white/10 bg-zinc-950/80 px-4 py-2.5 text-white placeholder-zinc-500 outline-none transition focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400";
 const primaryButtonClass =
-  "rounded-lg bg-zinc-950 px-4 py-2.5 font-medium text-white transition hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-zinc-50 dark:text-zinc-950 dark:hover:bg-zinc-200";
+  "cursor-pointer rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-2.5 font-semibold text-white shadow-lg shadow-cyan-500/20 transition hover:from-cyan-400 hover:to-blue-500 disabled:cursor-not-allowed disabled:opacity-50";
 const secondaryButtonClass =
-  "rounded-lg border border-zinc-300 px-4 py-2.5 font-medium text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-900";
+  "cursor-pointer rounded-xl border border-white/10 bg-zinc-800/80 px-4 py-2.5 font-medium text-zinc-200 transition hover:border-white/20 hover:bg-zinc-700/80 hover:text-white";
 const linkButtonClass =
-  "self-start text-sm font-medium underline underline-offset-2 text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100";
-const labelClass = "text-sm font-medium text-zinc-700 dark:text-zinc-300";
+  "self-start text-sm font-medium underline underline-offset-2 text-cyan-400 hover:text-cyan-300";
+const labelClass = "text-xs font-bold uppercase tracking-wider text-zinc-400";
 // The room-type / create-vs-join choices below. Selected state is a filled
 // button rather than a subtle border, because which one is active decides
 // what the rest of the form asks for.
 function roomTabClass(selected: boolean): string {
-  return `flex items-center justify-center gap-1.5 rounded-lg border px-3 py-2 text-sm font-medium transition ${selected
-    ? "border-zinc-950 bg-zinc-950 text-white dark:border-zinc-50 dark:bg-zinc-50 dark:text-zinc-950"
-    : "border-zinc-300 text-zinc-700 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-900"
+  return `flex items-center justify-center gap-1.5 rounded-xl border px-3 py-2 text-xs font-semibold transition duration-200 ${selected
+    ? "border-cyan-500/40 bg-cyan-500/20 text-cyan-300 shadow-[0_0_12px_rgba(6,182,212,0.25)]"
+    : "border-white/10 bg-zinc-900/60 text-zinc-400 hover:border-white/20 hover:bg-zinc-800 hover:text-zinc-200"
     }`;
 }
 
@@ -459,40 +459,46 @@ export default function Home() {
 
           {/* Hero 2-Column Section */}
           <div className="mt-10 grid gap-8 lg:grid-cols-12 lg:items-start">
-            {/* Left Column: Form & Panels */}
-            <div className="lg:col-span-6 xl:col-span-7 flex flex-col gap-4">
-              <div className="flex w-full flex-col items-center justify-center gap-4 lg:flex-row lg:flex-wrap lg:items-start xl:grid xl:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
-                <div className="order-3 flex w-full max-w-md justify-center empty:hidden lg:w-auto xl:order-none xl:block xl:w-auto xl:max-w-none xl:justify-self-end xl:empty:block">
-                  <HomeGroupsPanel />
+            {/* Left Column: Connection Console & Info */}
+            <div className="lg:col-span-5 flex flex-col gap-5 w-full">
+              <main className="w-full rounded-3xl border border-white/10 bg-zinc-900/80 p-7 shadow-2xl backdrop-blur-2xl transition duration-300 hover:border-cyan-500/30">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="h-2 w-2 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_rgba(34,211,238,0.8)]" />
+                    <span className="text-xs font-bold uppercase tracking-wider text-cyan-400">
+                      {registered ? "Painel de Transmissão" : "Conexão Imediata"}
+                    </span>
+                  </div>
+                  <span className="rounded-full border border-white/10 bg-zinc-950/60 px-2.5 py-0.5 text-[10px] font-mono text-zinc-400">
+                    P2P Mesh
+                  </span>
                 </div>
-                <main className="w-full max-w-md rounded-2xl border border-cyan-500/20 bg-white/95 p-8 shadow-xl backdrop-blur-xl transition duration-300 dark:border-cyan-500/20 dark:bg-zinc-950/90 dark:shadow-[0_0_50px_-15px_rgba(6,182,212,0.15)]">
-            <div className="flex items-center gap-3">
-              <img src="/spectra-logo.svg" alt="Spectra" className="h-9 w-9 drop-shadow-[0_0_12px_rgba(34,211,238,0.4)]" />
-              <h1 className="text-2xl font-bold tracking-tight text-zinc-950 dark:text-zinc-50 bg-gradient-to-r from-cyan-400 via-sky-300 to-violet-400 bg-clip-text text-transparent">
-                Spectra
-              </h1>
-            </div>
-            <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
-              Compartilhe sua tela, câmera e voz em alta definição com quem estiver na mesma sala, sem cadastro.
-            </p>
-            <div className="mt-4 flex flex-wrap items-center gap-2">
-              <Link
-                href="/rooms"
-                className="inline-flex items-center gap-1.5 rounded-lg border border-cyan-500/30 px-3.5 py-2 text-sm font-medium text-cyan-700 transition hover:border-cyan-500 hover:bg-cyan-50 dark:border-cyan-500/30 dark:text-cyan-300 dark:hover:border-cyan-400 dark:hover:bg-cyan-950/40"
-              >
-                <GlobeIcon className="h-4 w-4" />
-                Ver salas públicas
-              </Link>
-              <Tooltip content="Encontre salas no seu país, cidade ou bairro!">
-                <Link
-                  href="/worldmap"
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-violet-500/30 px-3.5 py-2 text-sm font-medium text-violet-700 transition hover:border-violet-500 hover:bg-violet-50 dark:border-violet-500/30 dark:text-violet-300 dark:hover:border-violet-400 dark:hover:bg-violet-950/40"
-                >
-                  <MdOutlineMap className="h-4 w-4" />
-                  Ver mapa de salas
-                </Link>
-              </Tooltip>
-            </div>
+                <h2 className="mt-2.5 text-xl font-bold text-white">
+                  {registered ? "Entrar ou Criar Sala" : "Comece a Transmitir"}
+                </h2>
+                <p className="mt-1 text-xs text-zinc-400 leading-relaxed">
+                  {registered
+                    ? "Digite o nome da sala para entrar ou crie uma nova sala instantaneamente."
+                    : "Escolha um apelido para começar como convidado ou entre na sua conta."}
+                </p>
+                <div className="mt-4 flex flex-wrap items-center gap-2">
+                  <Link
+                    href="/rooms"
+                    className="inline-flex items-center gap-1.5 rounded-xl border border-cyan-500/30 bg-cyan-500/10 px-3 py-1.5 text-xs font-semibold text-cyan-300 transition hover:border-cyan-400 hover:bg-cyan-500/20"
+                  >
+                    <GlobeIcon className="h-3.5 w-3.5" />
+                    Salas públicas
+                  </Link>
+                  <Tooltip content="Encontre salas no seu país, cidade ou bairro!">
+                    <Link
+                      href="/worldmap"
+                      className="inline-flex items-center gap-1.5 rounded-xl border border-violet-500/30 bg-violet-500/10 px-3 py-1.5 text-xs font-semibold text-violet-300 transition hover:border-violet-400 hover:bg-violet-500/20"
+                    >
+                      <MdOutlineMap className="h-3.5 w-3.5" />
+                      Mapa de salas
+                    </Link>
+                  </Tooltip>
+                </div>
             {banned ? (
               <div className="mt-8 flex flex-col items-start gap-2">
                 <p className="text-sm font-medium text-red-600 dark:text-red-400">
@@ -845,17 +851,61 @@ export default function Home() {
               </form>
             )}
           </main>
-          {/* Hard against the start of its column, so it stays beside the form
-              instead of drifting to the right edge on a wide screen. */}
-          <HomeFriendsPanel className="xl:justify-self-start" />
-        </div>
-      </div>
 
-      {/* Right Column: Interactive Spectra Live Stage Mockup */}
-      <div className="lg:col-span-6 xl:col-span-5 flex justify-center lg:justify-end">
-        <SpectraLiveStage />
-      </div>
-    </div>
+              <HomeGroupsPanel />
+              <HomeFriendsPanel />
+
+              {/* Tech Highlights Pill Box to balance height */}
+              <div className="rounded-3xl border border-white/10 bg-zinc-900/60 p-5 backdrop-blur-xl shadow-xl">
+                <p className="text-xs font-bold uppercase tracking-wider text-zinc-400">
+                  Destaques da Arquitetura Spectra
+                </p>
+                <div className="mt-3 grid grid-cols-2 gap-3 text-xs">
+                  <div className="flex items-start gap-2.5 rounded-2xl border border-white/5 bg-zinc-950/60 p-3">
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-cyan-500/15 text-cyan-400 text-sm">
+                      ⚡
+                    </span>
+                    <div>
+                      <p className="font-bold text-white">4K & 120 FPS</p>
+                      <p className="text-[10px] text-zinc-400">AV1 / VP9 adaptativo</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2.5 rounded-2xl border border-white/5 bg-zinc-950/60 p-3">
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-violet-500/15 text-violet-400 text-sm">
+                      🔊
+                    </span>
+                    <div>
+                      <p className="font-bold text-white">Áudio por App</p>
+                      <p className="text-[10px] text-zinc-400">Sem vazar Spotify</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2.5 rounded-2xl border border-white/5 bg-zinc-950/60 p-3">
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-emerald-500/15 text-emerald-400 text-sm">
+                      🔒
+                    </span>
+                    <div>
+                      <p className="font-bold text-white">P2P Mesh</p>
+                      <p className="text-[10px] text-zinc-400">Sem servidores no meio</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2.5 rounded-2xl border border-white/5 bg-zinc-950/60 p-3">
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-pink-500/15 text-pink-400 text-sm">
+                      📱
+                    </span>
+                    <div>
+                      <p className="font-bold text-white">Multiplataforma</p>
+                      <p className="text-[10px] text-zinc-400">PC, Web & Android</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Interactive Spectra Live Stage Mockup */}
+            <div className="lg:col-span-7 flex justify-center lg:justify-end w-full">
+              <SpectraLiveStage />
+            </div>
+          </div>
 
       {/* Bento Grid Features */}
       <div className="mt-20 border-t border-black/5 pt-16 dark:border-white/5">

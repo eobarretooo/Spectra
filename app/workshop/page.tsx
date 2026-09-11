@@ -22,7 +22,7 @@ export const metadata: Metadata = pageMetadata({
 
 export default function WorkshopPage() {
   return (
-    <div className="flex min-h-dvh flex-col bg-zinc-50 dark:bg-black">
+    <div className="flex min-h-dvh flex-col bg-[#07080d] text-zinc-100">
       <SiteHeader />
       <WorkshopPanel />
     </div>

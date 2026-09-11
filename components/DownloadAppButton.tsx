@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { FaApple, FaLinux, FaWindows } from "react-icons/fa";
+import { FaAndroid, FaApple, FaLinux, FaWindows } from "react-icons/fa";
 import { isDesktopApp } from "@/lib/desktop";
 import { detectDownloadPlatform, type DownloadPlatform } from "@/lib/downloadTargets";
 import { trackDownloadClick, type DownloadSource } from "@/lib/analytics";
@@ -23,6 +23,7 @@ const LABEL: Record<DownloadPlatform, { text: string; Icon: typeof FaWindows }> 
   win: { text: "Baixar para Windows", Icon: FaWindows },
   mac: { text: "Baixar para macOS", Icon: FaApple },
   linux: { text: "Baixar para Linux", Icon: FaLinux },
+  android: { text: "Baixar APK Android", Icon: FaAndroid },
 };
 
 export function DownloadAppButton({

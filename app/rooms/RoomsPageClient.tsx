@@ -4,24 +4,17 @@ import { useEffect, useMemo, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { fetchPublicRooms, roomActivity, type PublicRoom } from "@/lib/roomsApi";
 import { Tooltip } from "@/components/Tooltip";
-import { ThemeMenuButton } from "@/components/ThemeToggle";
-import { UpdateAppButton } from "@/components/UpdateAppButton";
 import { CameraIcon, MicIcon, ScreenIcon, VideoSourceIcon } from "@/components/icons";
 import { roomCategory } from "@/lib/roomCategories";
-import { AdsterraNative } from "@/components/AdsterraNative";
+import { SiteHeader } from "@/components/SiteHeader";
+import { MdOutlineSearch, MdTune, MdOutlineVideocam } from "react-icons/md";
 
 const POLL_INTERVAL_MS = 8000;
 
-// How the list is ordered. The default is microphones rather than head count
-// on purpose: a room where people are actually talking is the one worth
-// walking into, and a big idle room full of parked tabs is not — head count
-// alone can't tell those apart, so it's the tiebreaker instead of the key.
 const SORT_OPTIONS = [
-  { value: "mic", label: "Maior número de microfones ativos" },
-  { value: "people", label: "Mais gente conectada" },
-  // Screens only — a room full of cameras is a different room, and the
-  // server counts the two channels apart for exactly that reason.
-  { value: "screen", label: "Mais transmissão de tela" },
+  { value: "mic", label: "Mais microfones ativos" },
+  { value: "people", label: "Mais pessoas conectadas" },
+  { value: "screen", label: "Mais transmissões de tela" },
 ] as const;
 
 type SortValue = (typeof SORT_OPTIONS)[number]["value"];
@@ -29,9 +22,6 @@ type SortValue = (typeof SORT_OPTIONS)[number]["value"];
 const DEFAULT_SORT: SortValue = "mic";
 
 function sortRooms(rooms: PublicRoom[], sort: SortValue): PublicRoom[] {
-  // Every ordering falls back to people, then to the older room first — the
-  // same last resort the server's own /rooms ordering uses, so a list of
-  // rooms sitting at zero doesn't reshuffle itself on every poll.
   const primary = (room: PublicRoom): number => {
     if (sort === "mic") return roomActivity(room, "micCount");
     if (sort === "screen") return roomActivity(room, "screenCount");
@@ -56,9 +46,6 @@ function formatActiveFor(createdAt: number): string {
   return `há ${days} ${days === 1 ? "dia" : "dias"}`;
 }
 
-// One counter on a room's card. Dimmed at zero rather than hidden: the three
-// always sit in the same order in the same place, so cards stay comparable at
-// a glance instead of each having a layout of its own.
 function RoomStat({
   icon,
   value,
@@ -68,18 +55,18 @@ function RoomStat({
   value: number;
   label: string;
 }) {
+  const active = value > 0;
   return (
-    <Tooltip content={label}>
+    <Tooltip content={`${value} ${label.toLowerCase()}`}>
       <span
-        className={`flex items-center gap-1 tabular-nums ${
-          value > 0
-            ? "text-zinc-700 dark:text-zinc-200"
-            : "text-zinc-400 dark:text-zinc-600"
+        className={`flex items-center gap-1.5 rounded-lg border px-2 py-1 text-[11px] font-medium transition ${
+          active
+            ? "border-cyan-500/30 bg-cyan-500/10 text-cyan-300"
+            : "border-white/5 bg-zinc-950/40 text-zinc-500"
         }`}
       >
         {icon}
-        {value}
-        <span className="sr-only">{label}</span>
+        <span>{value}</span>
       </span>
     </Tooltip>
   );
@@ -115,8 +102,6 @@ export function RoomsPageClient() {
     };
   }, []);
 
-  // Sorted before filtering so the order is a property of the list itself and
-  // not of whatever happens to be typed in the search box.
   const filtered = useMemo(
     () =>
       sortRooms(rooms ?? [], sort).filter((r) =>
@@ -126,160 +111,185 @@ export function RoomsPageClient() {
   );
 
   return (
-    <div className="flex flex-1 flex-col bg-zinc-50 px-4 py-10 dark:bg-black">
-      <div className="mx-auto w-full max-w-3xl">
-        <div className="flex items-center justify-between gap-3">
+    <div className="relative min-h-screen flex-1 overflow-hidden bg-[#07080d] text-zinc-100">
+      <SiteHeader />
+
+      {/* Ambient Glows */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 -top-40 h-[36rem] bg-[radial-gradient(60%_60%_at_50%_20%,rgba(6,182,212,0.15),transparent_75%)]"
+      />
+
+      <main className="relative mx-auto w-full max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between border-b border-white/5 pb-8">
           <div>
-            <h1 className="text-2xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-50">
-              Salas públicas
+            <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3.5 py-1 text-xs font-semibold text-cyan-300">
+              <span className="h-2 w-2 rounded-full bg-cyan-400 animate-pulse" />
+              Explorar Comunidade
+            </div>
+            <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+              Salas Públicas do{" "}
+              <span className="bg-gradient-to-r from-cyan-400 via-sky-300 to-violet-400 bg-clip-text text-transparent">
+                Spectra
+              </span>
             </h1>
-            <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
-              Salas com pelo menos uma pessoa conectada agora.
+            <p className="mt-2 text-sm leading-relaxed text-zinc-400">
+              Salas ativas agora transmitindo jogos, código e conversas abertas. Entre para assistir ou interagir.
             </p>
           </div>
-          {/* This page has no SiteHeader to hang the theme switch off, and
-              it's a page people leave open — so it gets its own copy next to
-              the way out. The setting itself is one global preference (see
-              lib/theme.ts); this is just another place to reach it. */}
-          <div className="flex shrink-0 items-center gap-1.5">
-            <ThemeMenuButton />
-            {/* Same reasoning as the theme switch beside it: no SiteHeader
-                here to carry it, and this is a page people leave open. */}
-            <UpdateAppButton />
-            <Link
-              href="/"
-              className="shrink-0 rounded-lg border border-zinc-300 px-3 py-2 text-sm font-medium text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-900"
-            >
-              Início
-            </Link>
-          </div>
+
+          <Link
+            href="/"
+            className="inline-flex shrink-0 items-center justify-center gap-2 rounded-2xl border border-white/10 bg-zinc-900/80 px-5 py-2.5 text-xs font-semibold text-zinc-200 backdrop-blur-xl transition hover:border-white/20 hover:bg-zinc-800"
+          >
+            ← Voltar ao Início
+          </Link>
         </div>
 
-        <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-          <input
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Pesquisar sala por nome..."
-            className="w-full min-w-0 flex-1 rounded-lg border border-zinc-300 bg-white px-4 py-2.5 text-zinc-950 outline-none focus:border-zinc-500 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
-          />
-          <label className="flex shrink-0 items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400">
-            <span className="shrink-0">Ordenar por</span>
+        {/* Filter Bar */}
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <div className="relative flex-1">
+            <MdOutlineSearch className="pointer-events-none absolute left-3.5 top-3.5 h-5 w-5 text-zinc-500" />
+            <input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Pesquisar por nome da sala..."
+              className="w-full rounded-2xl border border-white/10 bg-zinc-900/80 py-2.5 pl-10 pr-4 text-sm text-white placeholder-zinc-500 outline-none transition focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400"
+            />
+          </div>
+
+          <div className="flex shrink-0 items-center gap-2">
+            <span className="flex items-center gap-1.5 text-xs text-zinc-400 font-medium">
+              <MdTune className="h-4 w-4 text-cyan-400" />
+              Ordenar por:
+            </span>
             <select
               value={sort}
               onChange={(e) => setSort(e.target.value as SortValue)}
-              className="w-full min-w-0 rounded-lg border border-zinc-300 bg-white px-3 py-2.5 text-sm text-zinc-950 outline-none focus:border-zinc-500 sm:w-auto dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
+              className="rounded-2xl border border-white/10 bg-zinc-900/80 px-3 py-2.5 text-xs font-semibold text-white outline-none focus:border-cyan-400"
             >
               {SORT_OPTIONS.map((option) => (
-                <option key={option.value} value={option.value}>
+                <option key={option.value} value={option.value} className="bg-zinc-950 text-white">
                   {option.label}
                 </option>
               ))}
             </select>
-          </label>
+          </div>
         </div>
 
-        <div className="mt-6">
+        {/* Room List Content */}
+        <div className="mt-8">
           {error && (
-            <p className="rounded-lg bg-red-50 px-4 py-3 text-sm text-red-600 dark:bg-red-950/40 dark:text-red-400">
+            <div className="rounded-2xl border border-rose-500/30 bg-rose-500/10 p-4 text-sm text-rose-300">
               {error}
-            </p>
+            </div>
           )}
 
           {!error && rooms === null && (
-            <p className="text-sm text-zinc-500 dark:text-zinc-400">Carregando...</p>
+            <div className="flex items-center justify-center py-20 text-sm text-zinc-500">
+              <span className="inline-block h-5 w-5 animate-spin rounded-full border-2 border-cyan-400 border-t-transparent mr-3" />
+              Carregando salas ativas…
+            </div>
           )}
 
           {!error && rooms !== null && filtered.length === 0 && (
-            <p className="text-sm text-zinc-500 dark:text-zinc-400">
-              {rooms.length === 0
-                ? "Nenhuma sala pública ativa no momento."
-                : "Nenhuma sala encontrada para essa pesquisa."}
-            </p>
+            <div className="flex flex-col items-center justify-center rounded-3xl border border-white/5 bg-zinc-900/40 py-20 text-center">
+              <MdOutlineVideocam className="h-10 w-10 text-zinc-600" />
+              <p className="mt-3 text-sm font-semibold text-zinc-300">
+                {rooms.length === 0
+                  ? "Nenhuma sala pública ativa no momento."
+                  : "Nenhuma sala encontrada para essa pesquisa."}
+              </p>
+              <p className="mt-1 text-xs text-zinc-500">
+                Você pode ser o primeiro a abrir uma sala pública agora!
+              </p>
+              <Link
+                href="/"
+                className="mt-5 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-2 text-xs font-semibold text-white shadow-lg shadow-cyan-500/20 transition hover:from-cyan-400 hover:to-blue-500"
+              >
+                Criar uma sala
+              </Link>
+            </div>
           )}
 
-          {/* Above the list rather than after it, and outside the <ul> rather
-              than as a row in it: a native unit is built to look like the
-              content around it, so one dropped between two rooms would read
-              as a room. It takes no space at all until it has an ad — see
-              AdsterraNative's placeholder — so an empty one leaves the list
-              exactly where it was. */}
-          <AdsterraNative className="mb-4" />
-
-          <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {filtered.map((room) => {
               const category = roomCategory(room.category);
               return (
-              <li
-                key={room.handle}
-                className="flex items-center justify-between gap-3 rounded-xl border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950"
-              >
-                <div className="min-w-0">
-                  <div className="flex min-w-0 items-center gap-2">
-                    {/* The name is truncated to keep the card one line wide —
-                        the tooltip is what makes a long one readable at all. */}
-                    <Tooltip content={room.handle}>
-                      <p className="truncate font-semibold text-zinc-900 dark:text-zinc-100">
-                        {room.handle}
-                      </p>
-                    </Tooltip>
-                    {category && (
-                      <span
-                        className={`shrink-0 rounded-full px-2 py-0.5 text-[11px] font-medium ${category.className}`}
-                      >
-                        {category.label}
-                      </span>
-                    )}
-                  </div>
-                  {/* Only when there is one — an empty line here would push
-                      every other card's layout around for nothing. */}
-                  {room.description && (
-                    <p className="mt-1 line-clamp-2 text-xs text-zinc-600 dark:text-zinc-300">
-                      {room.description}
-                    </p>
-                  )}
-                  <p className="mt-0.5 text-xs text-zinc-500 dark:text-zinc-400">
-                    {room.peopleCount} {room.peopleCount === 1 ? "pessoa" : "pessoas"} · ativa{" "}
-                    {formatActiveFor(room.createdAt)}
-                  </p>
-                  {/* Microfones, telas, câmeras e vídeos. Screens and cameras
-                      sit side by side rather than rolled into one "sharing"
-                      number: they say different things about what is going on
-                      in there, and the sort menu orders on the screen half. */}
-                  <div className="mt-1.5 flex items-center gap-2.5 text-xs">
-                    <RoomStat
-                      icon={<MicIcon className="h-3.5 w-3.5" />}
-                      value={roomActivity(room, "micCount")}
-                      label="Microfones ativos"
-                    />
-                    <RoomStat
-                      icon={<ScreenIcon className="h-3.5 w-3.5" />}
-                      value={roomActivity(room, "screenCount")}
-                      label="Telas transmitidas"
-                    />
-                    <RoomStat
-                      icon={<CameraIcon className="h-3.5 w-3.5" />}
-                      value={roomActivity(room, "cameraCount")}
-                      label="Câmeras ligadas"
-                    />
-                    <RoomStat
-                      icon={<VideoSourceIcon className="h-3.5 w-3.5" />}
-                      value={roomActivity(room, "videoSourceCount")}
-                      label="Fontes de vídeo"
-                    />
-                  </div>
-                </div>
-                <Link
-                  href={`/watch/${room.handle}`}
-                  className="shrink-0 rounded-lg bg-zinc-950 px-3 py-2 text-sm font-medium text-white transition hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-950 dark:hover:bg-zinc-200"
+                <li
+                  key={room.handle}
+                  className="group flex flex-col justify-between gap-4 rounded-3xl border border-white/10 bg-zinc-900/80 p-5 backdrop-blur-xl shadow-lg transition duration-300 hover:-translate-y-1 hover:border-cyan-500/40 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]"
                 >
-                  Entrar
-                </Link>
-              </li>
+                  <div>
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex min-w-0 items-center gap-2">
+                        <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                        <Tooltip content={room.handle}>
+                          <p className="truncate text-base font-bold text-white group-hover:text-cyan-300 transition">
+                            {room.handle}
+                          </p>
+                        </Tooltip>
+                      </div>
+
+                      {category && (
+                        <span
+                          className={`shrink-0 rounded-full px-2.5 py-0.5 text-[10px] font-semibold ${category.className}`}
+                        >
+                          {category.label}
+                        </span>
+                      )}
+                    </div>
+
+                    {room.description && (
+                      <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-zinc-400">
+                        {room.description}
+                      </p>
+                    )}
+
+                    <p className="mt-2 text-[11px] font-mono text-zinc-500">
+                      {room.peopleCount} {room.peopleCount === 1 ? "pessoa" : "pessoas"} · ativa{" "}
+                      {formatActiveFor(room.createdAt)}
+                    </p>
+                  </div>
+
+                  <div className="flex items-center justify-between border-t border-white/5 pt-3">
+                    <div className="flex items-center gap-1.5">
+                      <RoomStat
+                        icon={<MicIcon className="h-3 w-3" />}
+                        value={roomActivity(room, "micCount")}
+                        label="Microfones"
+                      />
+                      <RoomStat
+                        icon={<ScreenIcon className="h-3 w-3" />}
+                        value={roomActivity(room, "screenCount")}
+                        label="Telas"
+                      />
+                      <RoomStat
+                        icon={<CameraIcon className="h-3 w-3" />}
+                        value={roomActivity(room, "cameraCount")}
+                        label="Câmeras"
+                      />
+                      <RoomStat
+                        icon={<VideoSourceIcon className="h-3 w-3" />}
+                        value={roomActivity(room, "videoSourceCount")}
+                        label="Vídeos"
+                      />
+                    </div>
+
+                    <Link
+                      href={`/watch/${room.handle}`}
+                      className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-1.5 text-xs font-semibold text-white shadow-md shadow-cyan-500/20 transition hover:from-cyan-400 hover:to-blue-500"
+                    >
+                      Entrar →
+                    </Link>
+                  </div>
+                </li>
               );
             })}
           </ul>
         </div>
-      </div>
+      </main>
     </div>
   );
 }

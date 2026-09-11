@@ -25,6 +25,7 @@ const LABEL: Record<DownloadPlatform, string> = {
   win: "Baixar para Windows",
   mac: "Baixar para macOS",
   linux: "Baixar para Linux",
+  android: "Baixar APK para Android",
 };
 
 // Small floating, dismissible control for "get GoLive as an app" — a
