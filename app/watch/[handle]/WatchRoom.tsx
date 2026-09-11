@@ -5191,7 +5191,7 @@ export function WatchRoom({
           // group's bar (see inHeaderSlot), and the rest is said there already.
           group
             ? "hidden"
-            : "shrink-0 border-b border-white/10 bg-[#07080d]/90 px-3 py-2.5 backdrop-blur-2xl sm:px-4"
+            : "relative z-30 shrink-0 border-b border-white/10 bg-[#07080d]/90 px-3 py-2.5 backdrop-blur-2xl sm:px-4"
         }
       >
         <div className="flex flex-wrap items-center gap-x-2 gap-y-2.5 lg:grid lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:flex-nowrap lg:gap-3">

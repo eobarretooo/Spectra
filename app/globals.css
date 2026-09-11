@@ -200,6 +200,7 @@ body {
   color: inherit;
   border-radius: 0;
   box-shadow: none;
+  z-index: 99999;
 }
 
 .tippy-box[data-theme~="golive-panel"] > .tippy-content {

@@ -68,6 +68,8 @@ export function Tooltip({
       // tap still just does what the control does.
       touch={["hold", 400]}
       maxWidth={280}
+      appendTo={() => document.body}
+      zIndex={99999}
     >
       {wrapperClassName === undefined ? (
         children
@@ -160,6 +162,8 @@ export function Popover({
             theme="golive-panel"
             animation="shift-away"
             duration={[150, 100]}
+            appendTo={() => document.body}
+            zIndex={99999}
             // The panels size themselves (w-64, w-80, ...); Tippy's 350px
             // default would quietly cap the wider ones.
             maxWidth="none"
