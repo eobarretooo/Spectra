@@ -32,23 +32,8 @@ import { RecentRooms } from "@/components/RecentRooms";
 import { HomeGroupsPanel } from "@/components/groups/HomeGroupsPanel";
 import { ButtonSpinner } from "@/components/ButtonSpinner";
 import { prewarmCaptcha } from "@/lib/turnstile";
-import { SpectraLiveStage } from "@/components/SpectraLiveStage";
-import {
-  MdLock,
-  MdOutlineMap,
-  MdTune,
-  MdSpeed,
-  MdHighQuality,
-  MdDevices,
-  MdSecurity,
-  MdGraphicEq,
-  MdCheck,
-  MdArrowForward,
-} from "react-icons/md";
-import { FaWindows, FaAndroid, FaApple, FaLinux, FaGithub } from "react-icons/fa";
-import { SocialLinks } from "@/components/SocialLinks";
+import { MdLock, MdOutlineMap } from "react-icons/md";
 import { SiteHeader } from "@/components/SiteHeader";
-import { AdsterraBanner } from "@/components/AdsterraBanner";
 import { HomeFriendsPanel } from "@/components/HomeFriendsPanel";
 import { Tooltip } from "@/components/Tooltip";
 
@@ -402,102 +387,60 @@ export default function Home() {
   return (
     <>
       <SiteHeader />
-      <div className="relative min-h-screen flex-1 overflow-x-clip bg-zinc-50 dark:bg-[#07080d]">
-        {/* Futuristic Ambient Glows */}
+      <div className="relative flex min-h-screen flex-1 flex-col items-center justify-center gap-3 bg-zinc-50 px-4 py-16 dark:bg-[#07080d]">
+        {/* Ambient Glows */}
         <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
           <div
-            className="pointer-events-none absolute inset-x-0 -top-40 h-[36rem] bg-[radial-gradient(60%_60%_at_50%_20%,rgba(6,182,212,0.18),transparent_75%)]"
+            className="pointer-events-none absolute inset-x-0 -top-40 h-[36rem] bg-[radial-gradient(60%_60%_at_50%_20%,rgba(6,182,212,0.12),transparent_75%)]"
           />
           <div
-            className="pointer-events-none absolute right-0 top-1/4 h-[30rem] w-[30rem] rounded-full bg-[radial-gradient(circle,rgba(139,92,246,0.12),transparent_70%)]"
-          />
-          <div
-            className="pointer-events-none absolute -left-20 bottom-1/4 h-[30rem] w-[30rem] rounded-full bg-[radial-gradient(circle,rgba(6,182,212,0.1),transparent_70%)]"
+            className="pointer-events-none absolute right-0 top-1/4 h-[30rem] w-[30rem] rounded-full bg-[radial-gradient(circle,rgba(139,92,246,0.08),transparent_70%)]"
           />
         </div>
 
-        <div className="relative mx-auto w-full max-w-7xl px-4 pt-6 pb-16 sm:px-6 lg:px-8">
-          {/* Status Bar with live metrics */}
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-black/5 pb-5 dark:border-white/5">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3.5 py-1 text-xs font-semibold text-cyan-700 dark:text-cyan-300">
-                <span className="spectra-live-dot h-2 w-2 rounded-full bg-cyan-400" />
-                P2P WebRTC Mesh
-              </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 text-xs font-semibold text-violet-700 dark:text-violet-300">
-                ⚡ 120 FPS · 4K
-              </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-700 dark:text-emerald-300">
-                🔊 Áudio por App
-              </span>
-            </div>
+        {peopleOnline !== null && (
+          <div className="relative z-10 inline-flex gap-2">
+            <span className="flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-3.5 py-1.5 text-xs font-medium text-zinc-600 shadow-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400">
+              <span className="h-2 w-2 rounded-full bg-emerald-500" />
+              {peopleOnline} {peopleOnline === 1 ? "pessoa" : "pessoas"} em salas agora
+            </span>
+            <DownloadAppButton source="home" />
+          </div>
+        )}
 
+        <div className="relative z-10 flex w-full flex-col items-center justify-center gap-4 lg:flex-row lg:flex-wrap lg:items-start xl:grid xl:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
+          <div className="order-3 flex w-full max-w-md justify-center empty:hidden lg:w-auto xl:order-none xl:block xl:w-auto xl:max-w-none xl:justify-self-end xl:empty:block">
+            <HomeGroupsPanel />
+          </div>
+
+          <main className="w-full max-w-md rounded-3xl border border-black/10 bg-white p-8 shadow-2xl backdrop-blur-xl dark:border-white/10 dark:bg-zinc-950/90">
             <div className="flex items-center gap-3">
-              {peopleOnline !== null && (
-                <span className="flex items-center gap-2 rounded-full border border-zinc-200 bg-white/80 px-3.5 py-1.5 text-xs font-medium text-zinc-600 shadow-sm backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/80 dark:text-zinc-400">
-                  <span className="h-2 w-2 rounded-full bg-emerald-500" />
-                  {peopleOnline} {peopleOnline === 1 ? "pessoa" : "pessoas"} em salas agora
-                </span>
-              )}
-              <DownloadAppButton source="home" />
+              <img src="/spectra-logo.svg" alt="Spectra" className="h-9 w-9 drop-shadow-[0_0_12px_rgba(34,211,238,0.4)]" />
+              <h1 className="text-2xl font-bold tracking-tight text-zinc-950 dark:text-zinc-50 bg-gradient-to-r from-cyan-400 via-sky-300 to-violet-400 bg-clip-text text-transparent">
+                Spectra
+              </h1>
             </div>
-          </div>
-
-          {/* Hero Headline & Subtitle */}
-          <div className="mt-8 max-w-3xl">
-            <h1 className="text-4xl font-extrabold tracking-tight text-zinc-950 sm:text-5xl lg:text-6xl dark:text-zinc-50">
-              Compartilhe tela, voz e áudio{" "}
-              <span className="bg-gradient-to-r from-cyan-400 via-sky-300 to-violet-400 bg-clip-text text-transparent">
-                com latência zero
-              </span>
-            </h1>
-            <p className="mt-4 text-base text-zinc-600 sm:text-lg dark:text-zinc-400">
-              Transmita seus jogos, programas e conversas em altíssima definição até 4K e 120 FPS com isolamento de áudio por aplicativo. Sem cadastro obrigatório, direto no navegador, PC ou celular.
+            <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
+              Compartilhe sua tela, câmera e voz em alta definição com quem estiver na mesma sala, sem cadastro.
             </p>
-          </div>
-
-          {/* Hero 2-Column Section */}
-          <div className="mt-10 grid gap-8 lg:grid-cols-12 lg:items-start">
-            {/* Left Column: Connection Console & Info */}
-            <div className="lg:col-span-5 flex flex-col gap-5 w-full">
-              <main className="w-full rounded-3xl border border-white/10 bg-zinc-900/80 p-7 shadow-2xl backdrop-blur-2xl transition duration-300 hover:border-cyan-500/30">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="h-2 w-2 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_rgba(34,211,238,0.8)]" />
-                    <span className="text-xs font-bold uppercase tracking-wider text-cyan-400">
-                      {registered ? "Painel de Transmissão" : "Conexão Imediata"}
-                    </span>
-                  </div>
-                  <span className="rounded-full border border-white/10 bg-zinc-950/60 px-2.5 py-0.5 text-[10px] font-mono text-zinc-400">
-                    P2P Mesh
-                  </span>
-                </div>
-                <h2 className="mt-2.5 text-xl font-bold text-white">
-                  {registered ? "Entrar ou Criar Sala" : "Comece a Transmitir"}
-                </h2>
-                <p className="mt-1 text-xs text-zinc-400 leading-relaxed">
-                  {registered
-                    ? "Digite o nome da sala para entrar ou crie uma nova sala instantaneamente."
-                    : "Escolha um apelido para começar como convidado ou entre na sua conta."}
-                </p>
-                <div className="mt-4 flex flex-wrap items-center gap-2">
-                  <Link
-                    href="/rooms"
-                    className="inline-flex items-center gap-1.5 rounded-xl border border-cyan-500/30 bg-cyan-500/10 px-3 py-1.5 text-xs font-semibold text-cyan-300 transition hover:border-cyan-400 hover:bg-cyan-500/20"
-                  >
-                    <GlobeIcon className="h-3.5 w-3.5" />
-                    Salas públicas
-                  </Link>
-                  <Tooltip content="Encontre salas no seu país, cidade ou bairro!">
-                    <Link
-                      href="/worldmap"
-                      className="inline-flex items-center gap-1.5 rounded-xl border border-violet-500/30 bg-violet-500/10 px-3 py-1.5 text-xs font-semibold text-violet-300 transition hover:border-violet-400 hover:bg-violet-500/20"
-                    >
-                      <MdOutlineMap className="h-3.5 w-3.5" />
-                      Mapa de salas
-                    </Link>
-                  </Tooltip>
-                </div>
+            <div className="mt-4 flex flex-wrap items-center gap-2">
+              <Link
+                href="/rooms"
+                className="inline-flex items-center gap-1.5 rounded-lg border border-cyan-500/30 px-3.5 py-2 text-sm font-medium text-cyan-700 transition hover:border-cyan-500 hover:bg-cyan-50 dark:border-cyan-500/30 dark:text-cyan-300 dark:hover:border-cyan-400 dark:hover:bg-cyan-950/40"
+              >
+                <GlobeIcon className="h-4 w-4" />
+                Ver salas públicas
+              </Link>
+              <Tooltip content="Encontre salas no seu país, cidade ou bairro!">
+                <Link
+                  href="/worldmap"
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-violet-500/30 px-3.5 py-2 text-sm font-medium text-violet-700 transition hover:border-violet-500 hover:bg-violet-50 dark:border-violet-500/30 dark:text-violet-300 dark:hover:border-violet-400 dark:hover:bg-violet-950/40"
+                >
+                  <MdOutlineMap className="h-4 w-4" />
+                  Mapa de salas
+                </Link>
+              </Tooltip>
+            </div>
             {banned ? (
               <div className="mt-8 flex flex-col items-start gap-2">
                 <p className="text-sm font-medium text-red-600 dark:text-red-400">
@@ -851,191 +794,50 @@ export default function Home() {
             )}
           </main>
 
-              <HomeGroupsPanel />
-              <HomeFriendsPanel />
-
-              {/* Tech Highlights Pill Box to balance height */}
-              <div className="rounded-3xl border border-white/10 bg-zinc-900/60 p-5 backdrop-blur-xl shadow-xl">
-                <p className="text-xs font-bold uppercase tracking-wider text-zinc-400">
-                  Destaques da Arquitetura Spectra
-                </p>
-                <div className="mt-3 grid grid-cols-2 gap-3 text-xs">
-                  <div className="flex items-start gap-2.5 rounded-2xl border border-white/5 bg-zinc-950/60 p-3">
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-cyan-500/15 text-cyan-400 text-sm">
-                      ⚡
-                    </span>
-                    <div>
-                      <p className="font-bold text-white">4K & 120 FPS</p>
-                      <p className="text-[10px] text-zinc-400">AV1 / VP9 adaptativo</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-2.5 rounded-2xl border border-white/5 bg-zinc-950/60 p-3">
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-violet-500/15 text-violet-400 text-sm">
-                      🔊
-                    </span>
-                    <div>
-                      <p className="font-bold text-white">Áudio por App</p>
-                      <p className="text-[10px] text-zinc-400">Sem vazar Spotify</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-2.5 rounded-2xl border border-white/5 bg-zinc-950/60 p-3">
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-emerald-500/15 text-emerald-400 text-sm">
-                      🔒
-                    </span>
-                    <div>
-                      <p className="font-bold text-white">P2P Mesh</p>
-                      <p className="text-[10px] text-zinc-400">Sem servidores no meio</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-2.5 rounded-2xl border border-white/5 bg-zinc-950/60 p-3">
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-pink-500/15 text-pink-400 text-sm">
-                      📱
-                    </span>
-                    <div>
-                      <p className="font-bold text-white">Multiplataforma</p>
-                      <p className="text-[10px] text-zinc-400">PC, Web & Android</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Column: Interactive Spectra Live Stage Mockup */}
-            <div className="lg:col-span-7 flex justify-center lg:justify-end w-full">
-              <SpectraLiveStage />
-            </div>
-          </div>
-
-      {/* Bento Grid Features */}
-      <div className="mt-20 border-t border-black/5 pt-16 dark:border-white/5">
-        <div className="text-center">
-          <span className="text-xs font-bold tracking-widest text-cyan-500 uppercase">
-            Vantagens do Spectra
-          </span>
-          <h2 className="mt-2 text-3xl font-bold tracking-tight text-zinc-950 sm:text-4xl dark:text-zinc-50">
-            Feito para quem exige máxima qualidade e controle
-          </h2>
-          <p className="mx-auto mt-3 max-w-2xl text-sm text-zinc-600 sm:text-base dark:text-zinc-400">
-            Uma alternativa livre, autônoma e descentralizada para você transmitir sem limitações.
-          </p>
-        </div>
-
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="group rounded-2xl border border-white/10 bg-white/60 p-6 shadow-sm backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:border-cyan-500/40 hover:shadow-lg dark:bg-zinc-950/70">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-500/10 text-cyan-400 transition group-hover:scale-110">
-              <MdTune className="h-6 w-6" />
-            </div>
-            <h3 className="mt-4 text-base font-bold text-zinc-950 dark:text-zinc-50">
-              Áudio Individual por App
-            </h3>
-            <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-              No app desktop para Windows, escolha quais programas entram no som da tela. Jogue com Spotify tocando sem vazar na chamada.
-            </p>
-          </div>
-
-          <div className="group rounded-2xl border border-white/10 bg-white/60 p-6 shadow-sm backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:border-violet-500/40 hover:shadow-lg dark:bg-zinc-950/70">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-violet-500/10 text-violet-400 transition group-hover:scale-110">
-              <MdSpeed className="h-6 w-6" />
-            </div>
-            <h3 className="mt-4 text-base font-bold text-zinc-950 dark:text-zinc-50">
-              P2P Direto & Latência Zero
-            </h3>
-            <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-              Sua transmissão viaja diretamente aos seus amigos via WebRTC Mesh. Sem passar por servidores intermediários que comprimem seu vídeo.
-            </p>
-          </div>
-
-          <div className="group rounded-2xl border border-white/10 bg-white/60 p-6 shadow-sm backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:border-emerald-500/40 hover:shadow-lg dark:bg-zinc-950/70">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-400 transition group-hover:scale-110">
-              <MdHighQuality className="h-6 w-6" />
-            </div>
-            <h3 className="mt-4 text-base font-bold text-zinc-950 dark:text-zinc-50">
-              Ultra HD 4K até 120 FPS
-            </h3>
-            <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-              Transmita em 1080p60, 1440p ou 4K com taxas de quadros fluidas de até 120 FPS com aceleração por hardware para jogos competitivos.
-            </p>
-          </div>
-
-          <div className="group rounded-2xl border border-white/10 bg-white/60 p-6 shadow-sm backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:border-sky-500/40 hover:shadow-lg dark:bg-zinc-950/70">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-sky-500/10 text-sky-400 transition group-hover:scale-110">
-              <MdDevices className="h-6 w-6" />
-            </div>
-            <h3 className="mt-4 text-base font-bold text-zinc-950 dark:text-zinc-50">
-              Ecossistema Multiplataforma
-            </h3>
-            <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-              Acesse direto pelo navegador sem instalar nada, use o app para PC (Windows/Mac/Linux) ou baixe o APK para Android.
-            </p>
+          <div className="order-2 flex w-full max-w-md justify-center empty:hidden lg:w-auto xl:order-none xl:block xl:w-auto xl:max-w-none xl:justify-self-start xl:empty:block">
+            <HomeFriendsPanel className="xl:justify-self-start" />
           </div>
         </div>
-      </div>
 
-      {/* Download Platforms Banner */}
-      <div className="mt-16 overflow-hidden rounded-2xl border border-cyan-500/30 bg-gradient-to-br from-zinc-950 via-slate-950 to-indigo-950 p-8 shadow-2xl">
-        <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
-          <div>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-cyan-400/40 bg-cyan-500/20 px-3 py-0.5 text-xs font-semibold text-cyan-300">
-              <FaAndroid className="h-3.5 w-3.5" />
-              Disponível para PC e Android
-            </span>
-            <h3 className="mt-3 text-2xl font-bold text-white">
-              Instale o Spectra na sua máquina ou celular
-            </h3>
-            <p className="mt-1.5 max-w-xl text-sm text-zinc-300">
-              Desbloqueie o seletor de tela nativo, captura de som WASAPI sem eco e o novo aplicativo para Android compilado pelo GitHub Actions.
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-3">
-            <Link
-              href="/download"
-              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-400 to-sky-400 px-5 py-3 text-sm font-bold text-zinc-950 shadow-lg shadow-cyan-500/20 transition hover:from-cyan-300 hover:to-sky-300"
-            >
-              <FaWindows className="h-4 w-4" />
-              Baixar para Windows
-            </Link>
-            <Link
-              href="/app"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm font-semibold text-white backdrop-blur-md transition hover:bg-white/20"
-            >
-              Ver todas as versões
-              <MdArrowForward className="h-4 w-4" />
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      {/* Footer links */}
-      <footer className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-black/5 pt-8 text-xs text-zinc-500 sm:flex-row dark:border-white/5 dark:text-zinc-400">
-        <div className="flex items-center gap-3">
-          <img src="/spectra-logo.svg" alt="Spectra" className="h-5 w-5" />
-          <span className="font-semibold text-zinc-700 dark:text-zinc-300">Spectra</span>
-          <span>— Transmissão P2P Aberta</span>
-        </div>
-
-        <div className="flex flex-wrap items-center gap-4">
-          <Link href="/termos" className="hover:underline">
+        <p className="relative z-10 mt-6 flex flex-wrap justify-center gap-4 text-center text-xs text-zinc-400 dark:text-zinc-600" style={{ alignItems: "center" }}>
+          <Link
+            href="/termos"
+            className="underline underline-offset-2 hover:text-zinc-600 dark:hover:text-zinc-300"
+          >
             Termos de uso
           </Link>
-          <Link href="/app" className="hover:underline">
+          <span>•</span>
+          <Link
+            href="/app"
+            className="underline underline-offset-2 hover:text-zinc-600 dark:hover:text-zinc-300"
+          >
             Downloads
           </Link>
-          <Link href="/pro" className="hover:underline">
+          <span>•</span>
+          <Link
+            href="/badges"
+            className="underline underline-offset-2 hover:text-zinc-600 dark:hover:text-zinc-300"
+          >
+            Badges
+          </Link>
+          <span>•</span>
+          <Link
+            href="/pro"
+            className="underline underline-offset-2 hover:text-zinc-600 dark:hover:text-zinc-300"
+          >
             Spectra Pro
           </Link>
+          <span>•</span>
           <a
             href="https://github.com/eobarretooo/Spectra"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:underline"
+            className="underline underline-offset-2 hover:text-zinc-600 dark:hover:text-zinc-300"
           >
             GitHub
           </a>
-        </div>
-      </footer>
-    </div>
-  </div>
-</>
+        </p>
+      </div>
+    </>
   );
 }

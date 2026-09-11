@@ -47,7 +47,6 @@ export function BadgesPanel() {
 
   const [activeCategory, setActiveCategory] = useState<BadgeCategory | "my_badges">("all");
   const [selectedBadge, setSelectedBadge] = useState<BadgeDefinition | null>(null);
-  const [previewUsername, setPreviewUsername] = useState(account?.username || "SeuNome");
 
   const filteredBadges = badges.filter((badge) => {
     if (activeCategory === "my_badges") {
@@ -239,59 +238,6 @@ export function BadgesPanel() {
             })}
           </ul>
         )}
-
-        {/* Interactive Profile Flair Preview Sandbox */}
-        <section className="mt-16 rounded-3xl border border-white/10 bg-gradient-to-r from-zinc-900/80 via-zinc-950/90 to-zinc-900/80 p-8 backdrop-blur-xl shadow-2xl">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-            <div className="max-w-xl">
-              <span className="text-xs font-bold uppercase tracking-widest text-cyan-400">
-                Simulador de Perfil
-              </span>
-              <h2 className="mt-1 text-2xl font-bold text-white">Veja seus selos brilhando no chat</h2>
-              <p className="mt-2 text-sm text-zinc-400">
-                Badges do Spectra aparecem ao lado do seu nome nas salas de transmissão, no chat ao vivo e na página
-                de perfil pública.
-              </p>
-              <div className="mt-4 flex items-center gap-3">
-                <input
-                  type="text"
-                  value={previewUsername}
-                  onChange={(e) => setPreviewUsername(e.target.value)}
-                  maxLength={24}
-                  placeholder="Seu nome"
-                  className="rounded-xl border border-white/10 bg-zinc-950 px-4 py-2 text-sm text-white placeholder-zinc-600 outline-none focus:border-cyan-500"
-                />
-                <span className="text-xs text-zinc-500">Edite para testar</span>
-              </div>
-            </div>
-
-            {/* Live Profile Tile Preview */}
-            <div className="flex items-center gap-4 rounded-2xl border border-cyan-500/20 bg-zinc-950/80 p-5 shadow-[0_0_30px_rgba(6,182,212,0.15)]">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500 to-violet-600 font-bold text-lg text-white shadow-md">
-                {previewUsername ? previewUsername.charAt(0).toUpperCase() : "S"}
-              </div>
-              <div>
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="font-bold text-white">{previewUsername || "Convidado"}</span>
-                  {/* Render unlocked badges or simulated badges */}
-                  {(owned.length > 0 ? owned : badges.slice(0, 3)).map((b) => (
-                    <span
-                      key={b.id}
-                      title={b.name}
-                      className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-semibold ${
-                        b.chipClass || "border-cyan-500/30 bg-cyan-500/15 text-cyan-300"
-                      }`}
-                    >
-                      <img src={b.iconUrl} alt="" className="h-3 w-3" />
-                      {b.name}
-                    </span>
-                  ))}
-                </div>
-                <p className="mt-1 text-xs text-zinc-400">Transmissão ativa • 120 FPS • 4K P2P</p>
-              </div>
-            </div>
-          </div>
-        </section>
       </main>
 
       {/* Detail Modal */}
