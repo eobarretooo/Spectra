@@ -402,20 +402,19 @@ export default function Home() {
   return (
     <>
       <SiteHeader />
-      <div className="relative min-h-screen flex-1 overflow-hidden bg-zinc-50 dark:bg-[#07080d]">
+      <div className="relative min-h-screen flex-1 overflow-x-clip bg-zinc-50 dark:bg-[#07080d]">
         {/* Futuristic Ambient Glows */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 -top-40 h-[36rem] bg-[radial-gradient(60%_60%_at_50%_20%,rgba(6,182,212,0.18),transparent_75%)]"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute right-0 top-1/4 h-[30rem] w-[30rem] rounded-full bg-[radial-gradient(circle,rgba(139,92,246,0.12),transparent_70%)]"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -left-20 bottom-1/4 h-[30rem] w-[30rem] rounded-full bg-[radial-gradient(circle,rgba(6,182,212,0.1),transparent_70%)]"
-        />
+        <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div
+            className="pointer-events-none absolute inset-x-0 -top-40 h-[36rem] bg-[radial-gradient(60%_60%_at_50%_20%,rgba(6,182,212,0.18),transparent_75%)]"
+          />
+          <div
+            className="pointer-events-none absolute right-0 top-1/4 h-[30rem] w-[30rem] rounded-full bg-[radial-gradient(circle,rgba(139,92,246,0.12),transparent_70%)]"
+          />
+          <div
+            className="pointer-events-none absolute -left-20 bottom-1/4 h-[30rem] w-[30rem] rounded-full bg-[radial-gradient(circle,rgba(6,182,212,0.1),transparent_70%)]"
+          />
+        </div>
 
         <div className="relative mx-auto w-full max-w-7xl px-4 pt-6 pb-16 sm:px-6 lg:px-8">
           {/* Status Bar with live metrics */}

@@ -111,14 +111,15 @@ export function RoomsPageClient() {
   );
 
   return (
-    <div className="relative min-h-screen flex-1 overflow-hidden bg-[#07080d] text-zinc-100">
+    <div className="relative min-h-screen flex-1 overflow-x-clip bg-[#07080d] text-zinc-100">
       <SiteHeader />
 
       {/* Ambient Glows */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 -top-40 h-[36rem] bg-[radial-gradient(60%_60%_at_50%_20%,rgba(6,182,212,0.15),transparent_75%)]"
-      />
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div
+          className="pointer-events-none absolute inset-x-0 -top-40 h-[36rem] bg-[radial-gradient(60%_60%_at_50%_20%,rgba(6,182,212,0.15),transparent_75%)]"
+        />
+      </div>
 
       <main className="relative mx-auto w-full max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
         {/* Header */}
