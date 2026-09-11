@@ -3,6 +3,7 @@ import Fastify from "fastify";
 import websocketPlugin from "@fastify/websocket";
 import cors from "@fastify/cors";
 import { registerSignalingRoutes } from "./signaling.js";
+import { registerAuthRoutes } from "./auth.js";
 import { register as metricsRegister } from "./metrics.js";
 
 const PORT = Number(process.env.SIGNALING_PORT || 4000);
@@ -44,6 +45,7 @@ async function main() {
 
   await app.register(async (instance) => {
     registerSignalingRoutes(instance, randomUUID);
+    registerAuthRoutes(instance);
   });
 
   try {

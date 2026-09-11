@@ -24,7 +24,7 @@ export default async function InvitePage(props: PageProps<"/invite/[code]">) {
   const { code } = await props.params;
   const preview = await fetchInvitePreview(code);
   return (
-    <div className="flex min-h-dvh flex-col bg-zinc-50 dark:bg-black">
+    <div className="flex min-h-dvh flex-col bg-[#07080d] text-zinc-100">
       <SiteHeader />
       <InviteClient code={code} initialPreview={preview} />
     </div>

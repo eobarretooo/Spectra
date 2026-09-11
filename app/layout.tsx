@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import { StatusBanner } from "@/components/StatusBanner";
 import { AnnouncementBanner } from "@/components/AnnouncementBanner";
+import { ForkAttribution } from "@/components/ForkAttribution";
 import { CapacitorBridge } from "@/components/CapacitorBridge";
 import { InstallAppButton } from "@/components/InstallAppButton";
 import { AuthProvider } from "@/lib/AuthContext";
@@ -137,7 +138,7 @@ export const viewport: Viewport = {
   // Matches manifest.ts's background_color/theme_color — themeColor moved
   // out of `metadata` and into this separate export (metadata.themeColor is
   // deprecated).
-  themeColor: "#09090b",
+  themeColor: "#07080d",
 };
 
 const jsonLd = {
@@ -223,7 +224,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                   unless the status feed reports an outage. */}
               <StatusBanner />
               <AnnouncementBanner />
-              {children}
+              <div className="flex-1 flex flex-col">{children}</div>
+              <ForkAttribution />
               <InstallAppButton />
             </NtPopups>
           </AuthProvider>

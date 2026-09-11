@@ -58,7 +58,10 @@ export function OAuthButtons({
   dividerLabel?: string | null;
 }) {
   const { refresh } = useAuth();
-  const [providers, setProviders] = useState<OAuthProvider[] | null>(null);
+  const [providers, setProviders] = useState<OAuthProvider[]>(() => [
+    { id: "discord", label: "Discord" },
+    { id: "google", label: "Google" },
+  ]);
   const [pending, setPending] = useState<OAuthProviderId | null>(null);
   const [error, setError] = useState<string | null>(null);
 

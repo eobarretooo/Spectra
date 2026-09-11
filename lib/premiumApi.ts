@@ -85,17 +85,137 @@ function authHeaders(): Record<string, string> {
   return token ? { Authorization: `Bearer ${token}` } : {};
 }
 
+export const DEFAULT_SPECTRA_PLANS: PremiumPlan[] = [
+  {
+    id: "premium",
+    title: "Spectra Pro",
+    description: "Qualidade profissional de streaming, 4K/240fps e badge exclusiva de verificado.",
+    iconId: "verified",
+    priceCents: 1490,
+    priceLabel: "R$ 14,90",
+    pixPriceCents: 1490,
+    pixPriceLabel: "R$ 14,90",
+    currency: "BRL",
+    frequency: 1,
+    frequencyType: "months",
+    features: [
+      "verified_badge",
+      "quality_2160p",
+      "quality_1440p",
+      "fps_120",
+      "bitrate_maximo",
+      "no_ads",
+      "avatar_gallery",
+      "avatar_upload",
+      "banner_upload",
+      "room_theme",
+      "room_theme_publish",
+      "room_theme_set",
+      "room_theme_gradient",
+    ],
+    cycles: [
+      {
+        cycle: "monthly",
+        priceCents: 1490,
+        priceLabel: "R$ 14,90",
+        pixPriceCents: 1490,
+        pixPriceLabel: "R$ 14,90",
+        fullPriceCents: null,
+        fullPriceLabel: null,
+        discountPercent: 0,
+        monthlyEquivalentLabel: "R$ 14,90",
+        periodDays: 30,
+      },
+      {
+        cycle: "yearly",
+        priceCents: 11990,
+        priceLabel: "R$ 119,90",
+        pixPriceCents: 11990,
+        pixPriceLabel: "R$ 119,90",
+        fullPriceCents: 17880,
+        fullPriceLabel: "R$ 178,80",
+        discountPercent: 33,
+        monthlyEquivalentLabel: "R$ 9,99",
+        periodDays: 365,
+      },
+    ],
+    purchasePoints: 100,
+    dailyPoints: 10,
+    available: true,
+  },
+  {
+    id: "premium_max",
+    title: "Spectra Pro Max",
+    description: "O pacote definitivo: badge dourada, prioridade máxima nos servidores P2P, temas com degradê dinâmico e músicas de perfil.",
+    iconId: "gold_verified",
+    priceCents: 2490,
+    priceLabel: "R$ 24,90",
+    pixPriceCents: 2490,
+    pixPriceLabel: "R$ 24,90",
+    currency: "BRL",
+    frequency: 1,
+    frequencyType: "months",
+    features: [
+      "verified_badge",
+      "quality_2160p",
+      "quality_1440p",
+      "fps_120",
+      "bitrate_maximo",
+      "no_ads",
+      "avatar_gallery",
+      "avatar_upload",
+      "banner_upload",
+      "profile_gradient",
+      "profile_song",
+      "room_theme",
+      "room_theme_publish",
+      "room_theme_set",
+      "room_theme_gradient",
+    ],
+    cycles: [
+      {
+        cycle: "monthly",
+        priceCents: 2490,
+        priceLabel: "R$ 24,90",
+        pixPriceCents: 2490,
+        pixPriceLabel: "R$ 24,90",
+        fullPriceCents: null,
+        fullPriceLabel: null,
+        discountPercent: 0,
+        monthlyEquivalentLabel: "R$ 24,90",
+        periodDays: 30,
+      },
+      {
+        cycle: "yearly",
+        priceCents: 19990,
+        priceLabel: "R$ 199,90",
+        pixPriceCents: 19990,
+        pixPriceLabel: "R$ 199,90",
+        fullPriceCents: 29880,
+        fullPriceLabel: "R$ 298,80",
+        discountPercent: 33,
+        monthlyEquivalentLabel: "R$ 16,65",
+        periodDays: 365,
+      },
+    ],
+    purchasePoints: 250,
+    dailyPoints: 25,
+    available: true,
+  },
+];
+
 /** The plan on offer. Public — no account needed to read a price tag. */
 export async function fetchPremiumPlan(signal?: AbortSignal): Promise<PremiumPlan | null> {
   try {
     const res = await fetch(`${getSignalingHttpBase()}/premium/plan`, { signal });
-    if (!res.ok) return null;
-    return (await res.json()) as PremiumPlan;
+    if (res.ok) {
+      const plan = (await res.json()) as PremiumPlan;
+      if (plan && plan.id) return plan;
+    }
   } catch {
-    // An API that is down should leave the page readable rather than throwing
-    // into a boundary: the caller renders a "não foi possível carregar" state.
-    return null;
+    // Falls back to default plan if API is down
   }
+  return DEFAULT_SPECTRA_PLANS[0];
 }
 
 /**
@@ -113,11 +233,9 @@ export async function fetchPremiumPlans(signal?: AbortSignal): Promise<PremiumPl
       if (Array.isArray(data.plans) && data.plans.length > 0) return data.plans;
     }
   } catch {
-    // Same reasoning as fetchPremiumPlan: a page that cannot reach the API
-    // should still render.
+    // Falls back to default plans if API is down
   }
-  const single = await fetchPremiumPlan(signal);
-  return single ? [single] : [];
+  return DEFAULT_SPECTRA_PLANS;
 }
 
 export type StartCheckoutResult =

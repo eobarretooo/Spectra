@@ -46,10 +46,19 @@ export function isOAuthMessage(data: unknown): data is OAuthMessage {
 }
 
 export async function fetchOAuthProviders(signal?: AbortSignal): Promise<OAuthProvider[]> {
-  const res = await fetch(`${getSignalingHttpBase()}/auth/oauth/providers`, { signal });
-  if (!res.ok) return [];
-  const data = (await res.json()) as { providers: OAuthProvider[] };
-  return data.providers ?? [];
+  try {
+    const res = await fetch(`${getSignalingHttpBase()}/auth/oauth/providers`, { signal });
+    if (res.ok) {
+      const data = (await res.json()) as { providers?: OAuthProvider[] };
+      if (Array.isArray(data.providers) && data.providers.length > 0) return data.providers;
+    }
+  } catch {
+    // Falls back to Discord and Google
+  }
+  return [
+    { id: "discord", label: "Discord" },
+    { id: "google", label: "Google" },
+  ];
 }
 
 // `returnTo` is the page the user is on right now: the API validates its

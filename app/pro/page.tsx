@@ -31,7 +31,7 @@ export const metadata: Metadata = pageMetadata({
 // copy nobody remembers to update the day the price changes.
 export default function ProPage() {
   return (
-    <div className="flex min-h-dvh flex-col bg-zinc-50 dark:bg-black">
+    <div className="flex min-h-dvh flex-col bg-[#07080d] text-zinc-100">
       <SiteHeader />
       <ProPanel />
     </div>

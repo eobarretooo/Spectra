@@ -25,6 +25,7 @@ import {
   isPremiumActive,
   startPixPayment,
   startPremiumCheckout,
+  DEFAULT_SPECTRA_PLANS,
   type PixCharge,
   type PremiumPlan,
 } from "@/lib/premiumApi";
@@ -150,7 +151,7 @@ export function ProPanel({
   // machinery.
   const [earlySupporterOpen] = useState(() => Date.now() < EARLY_SUPPORTER_CUTOFF_MS);
   const [cycle, setCycle] = useState<BillingCycle>("monthly");
-  const [plans, setPlans] = useState<PremiumPlan[]>([]);
+  const [plans, setPlans] = useState<PremiumPlan[]>(() => DEFAULT_SPECTRA_PLANS);
   // Which plan the page opens on, when whatever linked here named one:
   // /pro?plano=premium_max is where the header sends somebody who already has
   // Pro, and landing them on the cheapest plan would be answering "what is
@@ -201,7 +202,7 @@ export function ProPanel({
           periodDays: 30,
         }
       : null);
-  const [loadingPlan, setLoadingPlan] = useState(true);
+  const [loadingPlan, setLoadingPlan] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   // Only ever shown after the API asks for it — an account created through

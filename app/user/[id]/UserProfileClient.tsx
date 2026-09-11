@@ -17,7 +17,7 @@ export function UserProfileClient({ id }: { id: string }) {
   const autoplay = useProfileSongAutoplay();
 
   return (
-    <div className="flex flex-1 justify-center bg-zinc-50 px-4 py-10 dark:bg-black sm:py-16">
+    <div className="flex flex-1 justify-center bg-[#07080d] px-4 py-10 text-zinc-100 sm:py-16">
       <main className="w-full max-w-2xl">
         <Link
           href="/"

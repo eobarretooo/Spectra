@@ -12,13 +12,19 @@ export default function manifest(): MetadataRoute.Manifest {
       "Transmita sua tela, câmera e voz com ultra baixa latência, direto do navegador. Crie uma sala em instantes sem cadastro.",
     start_url: "/",
     display: "standalone",
-    background_color: "#0a0b10",
-    theme_color: "#0a0b10",
+    background_color: "#07080d",
+    theme_color: "#07080d",
     icons: [
       {
         src: "/spectra-logo.svg",
         sizes: "500x500",
         type: "image/svg+xml",
+        purpose: "any",
+      },
+      {
+        src: "/icon.png",
+        sizes: "512x512",
+        type: "image/png",
         purpose: "any",
       },
     ],

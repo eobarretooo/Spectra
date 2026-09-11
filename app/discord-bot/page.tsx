@@ -28,16 +28,16 @@ import {
 // re-pointable from one place.
 
 const BOT_INVITE = "/bot";
-const SITE_URL = "https://golive.nemtudo.me";
+const SITE_URL = "http://localhost:3000";
 
-const TITLE = "Bot do GoLive para Discord — sala de transmissão automática em toda call";
+const TITLE = "Bot do Spectra para Discord — sala de transmissão automática em toda call";
 const DESCRIPTION =
-  "Adicione o bot do GoLive ao seu servidor e cada call ganha uma sala de transmissão de tela automática: o link aparece no status do canal e no chat da call. Grátis, funciona de cara e é ajustável por /config.";
+  "Adicione o bot do Spectra ao seu servidor e cada call ganha uma sala de transmissão de tela automática: o link aparece no status do canal e no chat da call. Grátis, funciona de cara e é ajustável por /config.";
 
 // Its own card rather than the root's, so this link is not the home page's
 // picture with a different sentence under it. See lib/seo.ts.
 const OG_IMAGE = ogImage({
-  title: "GoLive no seu Discord",
+  title: "Spectra no seu Discord",
   subtitle: "Crie salas e chame o pessoal sem sair da conversa.",
   badge: "Bot para Discord",
 });
@@ -221,7 +221,7 @@ export default function DiscordBotPage() {
   return (
     <>
       <SiteHeader />
-      <div className="flex-1 bg-zinc-50 dark:bg-black">
+      <div className="flex-1 bg-[#07080d] text-zinc-100">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -247,7 +247,7 @@ export default function DiscordBotPage() {
               Toda call do seu servidor com uma sala de transmissão automática
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
-              Assim que alguém entra em um canal de voz, o bot cria uma sala privada no GoLive,
+              Assim que alguém entra em um canal de voz, o bot cria uma sala privada no Spectra,
               coloca o link no status da call e manda no chat dela. Ninguém precisa criar, lembrar
               ou pedir nada.
             </p>
@@ -257,7 +257,7 @@ export default function DiscordBotPage() {
                 Adicionar ao meu servidor
               </a>
               <Link href="/" className={ghostButtonClass}>
-                Conhecer o GoLive
+                Conhecer o Spectra
               </Link>
             </div>
             <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-zinc-500 dark:text-zinc-400">

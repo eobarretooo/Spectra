@@ -92,14 +92,14 @@ html[data-obs="true"] div:has(> iframe[src*="challenges.cloudflare.com"]) {
 :root[data-theme="dark"] {
   color-scheme: dark;
   /* Deep Space Onyx background with subtle spectral violet/cyan undertones */
-  --background: #0a0b10;
+  --background: #07080d;
   --foreground: #f1f5f9;
 
-  --color-black: #0a0b10 !important;
-  --color-zinc-950: #12131d;
-  --color-zinc-900: #1b1c2b;
-  --color-zinc-800: #292c3f;
-  --color-zinc-700: #3b3f5c;
+  --color-black: #07080d !important;
+  --color-zinc-950: #0e0f18;
+  --color-zinc-900: #141624;
+  --color-zinc-800: #1f2136;
+  --color-zinc-700: #333652;
 
   --spectra-cyan: #06b6d4;
   --spectra-cyan-glow: #22d3ee;
