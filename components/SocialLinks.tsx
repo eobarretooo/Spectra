@@ -1,33 +1,12 @@
-import { FaDiscord, FaInstagram, FaXTwitter } from "react-icons/fa6";
+import { FaDiscord } from "react-icons/fa6";
 
-// The three places to follow the project, in one component so a new one (or a
-// changed handle) is a single edit rather than a hunt through every footer.
-//
-// The Discord invite is the odd one out and comes first for it: the other two
-// are where updates get posted, but that one is where someone lands with a
-// bug, a suggestion, or a room that will not connect — and it is already the
-// contact address in the terms.
+// Only official Spectra community link
 const LINKS = [
   {
-    label: "discord.gg/nemtudo",
-    href: "https://discord.gg/nemtudo",
+    label: "discord.gg/spectra",
+    href: "https://discord.gg/p8ZRn2SKm",
     Icon: FaDiscord,
-    // Brand colors on hover only. At rest the row stays in the page's own
-    // greys, so three logos in a footer read as a set instead of as three
-    // competing badges.
     hover: "hover:border-[#5865F2]/50 hover:text-[#5865F2] dark:hover:text-[#a5adff]",
-  },
-  {
-    label: "@NemTudo_",
-    href: "https://x.com/NemTudo_",
-    Icon: FaXTwitter,
-    hover: "hover:border-zinc-500 hover:text-zinc-950 dark:hover:text-zinc-50",
-  },
-  {
-    label: "@onemtudo",
-    href: "https://instagram.com/onemtudo",
-    Icon: FaInstagram,
-    hover: "hover:border-[#E1306C]/50 hover:text-[#E1306C] dark:hover:text-[#f472a0]",
   },
 ];
 

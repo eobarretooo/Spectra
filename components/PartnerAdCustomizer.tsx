@@ -194,13 +194,13 @@ export function PartnerAdCustomizer({
 
         <div className="border-t border-zinc-200 px-5 py-4 dark:border-zinc-800">
           <a
-            href="https://go.nemtudo.me/golive-partner-nemtudodiscord"
+            href="https://discord.gg/p8ZRn2SKm"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => trackEvent("partner_customizer_discord_clicked")}
             className="block rounded-lg bg-[#5865f2] px-4 py-2.5 text-center text-sm font-semibold text-white transition hover:opacity-90"
           >
-            Gostei! Falar no Discord pra anunciar
+            Gostei! Falar no Discord do Spectra pra anunciar
           </a>
         </div>
       </div>

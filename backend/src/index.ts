@@ -6,6 +6,16 @@ import { registerSignalingRoutes } from "./signaling.js";
 import { registerAuthRoutes } from "./auth.js";
 import { register as metricsRegister } from "./metrics.js";
 
+// Load .env automatically in Node 20+
+if (typeof process.loadEnvFile === "function") {
+  try {
+    process.loadEnvFile();
+  } catch {}
+  try {
+    process.loadEnvFile(".env.local");
+  } catch {}
+}
+
 const PORT = Number(process.env.SIGNALING_PORT || 4000);
 const HOST = process.env.SIGNALING_HOST || "0.0.0.0";
 // Optional: if set, /metrics requires `Authorization: Bearer <token>`.

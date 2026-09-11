@@ -56,9 +56,9 @@ export type PartnerCardData = {
 export const FALLBACK_PARTNER: PartnerCardData = {
   title: "Anuncie aqui pra todo mundo!",
   description:
-    "Esse site é visitado por mais de 50 mil pessoas por dia!\n\nAbra um ticket no meu Discord e vamos combinar um anúncio",
-  buttonLabel: "Abrir ticket no Discord",
-  buttonUrl: "https://go.nemtudo.me/golive-partner-nemtudodiscord",
+    "Esse site é visitado por milhares de pessoas por dia!\n\nEntre no nosso Discord oficial do Spectra e vamos combinar um anúncio",
+  buttonLabel: "Entrar no Discord",
+  buttonUrl: "https://discord.gg/p8ZRn2SKm",
   backgroundColor: "#111827",
   textColor: "#f4f4f5",
   buttonBackgroundColor: "#5865f2",

@@ -76,7 +76,7 @@ function buildStartUrl(
   const url = new URL(`${getSignalingHttpBase()}/auth/oauth/${provider}/start`);
   url.searchParams.set(
     "returnTo",
-    returnToPath ? new URL(returnToPath, window.location.origin).toString() : window.location.href
+    returnToPath ? new URL(returnToPath, window.location.origin).toString() : new URL("/oauth/callback", window.location.origin).toString()
   );
   if (options.link) {
     // Only present when connecting a provider to an account that's already

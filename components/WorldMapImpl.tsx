@@ -84,30 +84,25 @@ const COMPACT_LABEL_ZOOM = 5;
 // as the rest of the app (inline, since Leaflet inserts this outside React
 // and Tailwind's scanner never sees a class name built at runtime).
 function roomIcon(marker: WorldMapMarker, compact: boolean): L.DivIcon {
-  // Green for a live room, blue for a group — the one difference between the
-  // two kinds of pin, so the map can be read at a glance (see WorldMapMarker.kind).
-  const color = marker.kind === "group" ? "#2563eb" : "#059669";
-  const glow = marker.kind === "group" ? "rgba(37,99,235,.28)" : "rgba(5,150,105,.28)";
+  // Cyan for a live room, violet for a group
+  const isGroup = marker.kind === "group";
+  const color = isGroup ? "#a855f7" : "#06b6d4";
+  const glow = isGroup ? "rgba(168,85,247,.5)" : "rgba(6,182,212,.5)";
   const count =
     typeof marker.peopleCount === "number"
-      ? `<span style="opacity:.8;font-variant-numeric:tabular-nums">${marker.peopleCount}</span>`
+      ? `<span style="opacity:.9;font-variant-numeric:tabular-nums">${marker.peopleCount}</span>`
       : "";
   const pill = compact
-    ? // Just the number. The name is still one hover (the native tooltip) or
-      // one click (the popup) away, which is the right price for it out here.
-      `<div style="display:flex;align-items:center;justify-content:center;min-width:16px;white-space:nowrap;border-radius:9999px;background:${color};color:#fff;padding:1px 5px;font-size:10px;font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,.35)">${count || "·"}</div>`
+    ? `<div style="display:flex;align-items:center;justify-content:center;min-width:18px;white-space:nowrap;border-radius:9999px;background:${color};color:#000;padding:1px 6px;font-size:10px;font-weight:800;box-shadow:0 0 10px ${glow}">${count || "·"}</div>`
     : (() => {
         const raw = marker.label;
         const label = escapeHtml(
           raw.length > MAX_PIN_LABEL ? `${raw.slice(0, MAX_PIN_LABEL - 1)}…` : raw
         );
-        // A darker inset pill rather than another colour: the pin already
-        // carries the room's own colour, and a second bright one would
-        // compete with it.
         const tag = marker.tag
-          ? `<span style="border-radius:9999px;background:rgba(0,0,0,.25);padding:0 5px;font-size:9px">${escapeHtml(marker.tag)}</span>`
+          ? `<span style="border-radius:9999px;background:rgba(0,0,0,.35);padding:1px 5px;font-size:9px;color:#fff">${escapeHtml(marker.tag)}</span>`
           : "";
-        return `<div style="display:flex;align-items:center;gap:4px;white-space:nowrap;border-radius:9999px;background:${color};color:#fff;padding:2px 7px;font-size:11px;font-weight:600;box-shadow:0 1px 5px rgba(0,0,0,.35)">${tag}<span>${label}</span>${count}</div>`;
+        return `<div style="display:flex;align-items:center;gap:5px;white-space:nowrap;border-radius:9999px;background:${color};color:#07080d;padding:2px 8px;font-size:11px;font-weight:700;box-shadow:0 0 14px ${glow}">${tag}<span style="color:#07080d">${label}</span>${count ? `<span style="background:rgba(0,0,0,0.25);border-radius:9999px;padding:0 4px;font-size:9px;color:#fff">${count}</span>` : ""}</div>`;
       })();
   return L.divIcon({
     className: "",
@@ -115,44 +110,40 @@ function roomIcon(marker: WorldMapMarker, compact: boolean): L.DivIcon {
       <div style="transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;pointer-events:auto">
         ${pill}
         <div style="width:2px;height:${compact ? 4 : 6}px;background:${color}"></div>
-        <div style="width:6px;height:6px;border-radius:9999px;background:${color};box-shadow:0 0 0 2px ${glow}"></div>
+        <div style="width:6px;height:6px;border-radius:9999px;background:${color};box-shadow:0 0 8px ${glow}"></div>
       </div>`,
-    // The whole thing is positioned by the CSS transform above, so Leaflet's
-    // own anchor maths has nothing left to do — hence a zero-size icon.
     iconSize: [0, 0],
     iconAnchor: [0, 0],
   });
 }
 
-// What opens when a room pin is clicked. Plain HTML, because Leaflet owns
-// this node — an <a> rather than a Next <Link>, so it is an ordinary
-// navigation into the room (which is a full page's worth of new code anyway).
+// What opens when a room pin is clicked.
 function popupHtml(marker: WorldMapMarker): string {
   const label = escapeHtml(marker.label);
-  // Spelled out here, unlike on the pin: this is the one place with room for
-  // a sentence. A room counts people in it; a group counts its members.
+  const isGroup = marker.kind === "group";
   const [one, many] = marker.countNoun ?? ["pessoa", "pessoas"];
   const badge =
     typeof marker.peopleCount === "number"
-      ? `<div style="font-size:12px;opacity:.7;margin-top:2px">${marker.peopleCount} ${escapeHtml(
+      ? `<div style="font-size:12px;opacity:.8;margin-top:3px;display:flex;align-items:center;gap:5px"><span style="width:6px;height:6px;border-radius:9999px;background:${isGroup ? "#a855f7" : "#06b6d4"};display:inline-block"></span>${marker.peopleCount} ${escapeHtml(
           marker.peopleCount === 1 ? one : many
         )}</div>`
       : "";
   const tag = marker.tag
-    ? `<div style="font-size:11px;font-weight:600;opacity:.8;margin-bottom:2px">${escapeHtml(marker.tag)}</div>`
+    ? `<div style="font-size:10px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:${isGroup ? "#c084fc" : "#22d3ee"};margin-bottom:3px">${escapeHtml(marker.tag)}</div>`
     : "";
-  // The one thing here with real length — capped by the server at 120
-  // characters, so it can be shown whole rather than clamped.
   const description = marker.description
-    ? `<div style="font-size:12px;margin-top:6px;line-height:1.35">${escapeHtml(marker.description)}</div>`
+    ? `<div style="font-size:12px;margin-top:6px;line-height:1.4;color:#a1a1aa">${escapeHtml(marker.description)}</div>`
     : "";
+  const btnGradient = isGroup
+    ? "linear-gradient(135deg, #9333ea, #6366f1)"
+    : "linear-gradient(135deg, #06b6d4, #2563eb)";
   return `
-    <div style="min-width:160px;max-width:220px">
+    <div style="min-width:180px;max-width:240px;padding:4px">
       ${tag}
-      <div style="font-weight:600;font-size:14px;word-break:break-all">${label}</div>
+      <div style="font-weight:700;font-size:15px;word-break:break-word;color:#ffffff">${label}</div>
       ${badge}
       ${description}
-      <a href="${escapeHtml(marker.href ?? "#")}" style="display:block;margin-top:8px;border-radius:8px;background:#09090b;color:#fff;padding:6px 10px;text-align:center;font-size:13px;font-weight:500;text-decoration:none">${escapeHtml(marker.actionLabel ?? "Entrar na sala")}</a>
+      <a href="${escapeHtml(marker.href ?? "#")}" style="display:block;margin-top:10px;border-radius:10px;background:${btnGradient};color:#ffffff;padding:8px 12px;text-align:center;font-size:12px;font-weight:700;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,.4)">${escapeHtml(marker.actionLabel ?? "Entrar na sala")}</a>
     </div>`;
 }
 
@@ -491,48 +482,47 @@ export default function WorldMapImpl({
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Pesquisar cidade, país, endereço..."
               aria-label="Pesquisar um lugar no mapa"
-              className="w-full rounded-lg border border-zinc-300 bg-white py-2 pl-8 pr-8 text-sm text-zinc-900 shadow-md outline-none focus:border-zinc-500 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
+              className="w-full rounded-xl border border-white/10 bg-zinc-950/90 py-2.5 pl-9 pr-9 text-xs text-white shadow-xl backdrop-blur-xl outline-none transition focus:border-cyan-500/60 focus:ring-2 focus:ring-cyan-500/20 placeholder:text-zinc-500"
             />
             {query && (
               <button
                 type="button"
                 onClick={clearSearch}
                 aria-label="Limpar pesquisa"
-                className="absolute right-1.5 top-1/2 flex h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full text-zinc-400 transition hover:bg-black/10 hover:text-zinc-700 dark:hover:bg-white/10 dark:hover:text-zinc-200"
+                className="absolute right-2 top-1/2 flex h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full text-zinc-400 transition hover:bg-white/10 hover:text-zinc-200"
               >
                 <MdClose className="h-4 w-4" />
               </button>
             )}
           </form>
 
-          {/* Nothing at all until there is something to say — an empty
-              dropdown hanging under the box would just cover the map. */}
+          {/* Search Dropdown */}
           {canSearch && (currentResults !== null || currentError || searching) && (
-            <div className="mt-1 max-h-64 overflow-y-auto rounded-lg border border-zinc-300 bg-white shadow-lg dark:border-zinc-700 dark:bg-zinc-900">
+            <div className="mt-1.5 max-h-64 overflow-y-auto rounded-xl border border-white/10 bg-zinc-950/95 shadow-2xl backdrop-blur-2xl">
               {currentError ? (
-                <p className="px-3 py-2 text-xs text-red-500">
+                <p className="px-3 py-2.5 text-xs text-red-400">
                   Não foi possível pesquisar agora.
                 </p>
               ) : currentResults === null ? (
-                <p className="px-3 py-2 text-xs text-zinc-500 dark:text-zinc-400">Pesquisando...</p>
+                <p className="px-3 py-2.5 text-xs text-zinc-400">Pesquisando...</p>
               ) : currentResults.length === 0 ? (
-                <p className="px-3 py-2 text-xs text-zinc-500 dark:text-zinc-400">
+                <p className="px-3 py-2.5 text-xs text-zinc-400">
                   Nenhum lugar encontrado.
                 </p>
               ) : (
-                <ul>
+                <ul className="divide-y divide-white/5">
                   {currentResults.map((place) => (
                     <li key={place.id}>
                       <button
                         type="button"
                         onClick={() => goToPlace(place)}
-                        className="flex w-full flex-col items-start px-3 py-2 text-left transition hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                        className="flex w-full flex-col items-start px-3 py-2.5 text-left transition hover:bg-white/5"
                       >
-                        <span className="text-sm font-medium text-zinc-900 dark:text-zinc-50">
+                        <span className="text-xs font-semibold text-zinc-100">
                           {place.name}
                         </span>
                         {place.context && (
-                          <span className="text-xs text-zinc-500 dark:text-zinc-400">
+                          <span className="text-[11px] text-zinc-400">
                             {place.context}
                           </span>
                         )}

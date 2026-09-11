@@ -141,8 +141,8 @@ export function GroupAppShell({ children }: { children: ReactNode }) {
 
   return (
     <GroupNavContext.Provider value={{ openNav: () => setNavOpen(true) }}>
-      <div data-group-shell className="flex min-h-0 flex-1 flex-col bg-zinc-50 dark:bg-black">
-        <header className="shrink-0 border-b border-black/10 bg-white px-3 py-2 sm:px-4 dark:border-white/10 dark:bg-zinc-950">
+      <div data-group-shell className="flex min-h-0 flex-1 flex-col bg-zinc-50 dark:bg-[#07080d]">
+        <header className="shrink-0 border-b border-black/10 bg-white px-3 py-2 sm:px-4 dark:border-white/10 dark:bg-[#0b0d14]/80 dark:backdrop-blur-xl">
           <div className="flex items-center gap-2 lg:grid lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:gap-3">
             <div className="flex min-w-0 flex-1 items-center gap-2">
               <Tooltip content="Voltar ao início" placement="bottom">

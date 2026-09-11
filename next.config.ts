@@ -88,6 +88,16 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/spectra",
+        destination: "https://discord.gg/p8ZRn2SKm",
+        permanent: false,
+      },
+      {
+        source: "/discord",
+        destination: "https://discord.gg/p8ZRn2SKm",
+        permanent: false,
+      },
+      {
         source: "/github",
         destination: "https://github.com/eobarretooo/Spectra",
         permanent: true,
