@@ -41,8 +41,16 @@ export function invitePath(code: string): string {
   return `/invite/${code}`;
 }
 
-/** Hosts whose links can carry an invite. Same two as the room links (see roomsApi). */
-const INVITE_HOSTS = new Set(["golive.nemtudo.me", "g.nemtudo.me", "localhost", "127.0.0.1"]);
+/** Hosts whose links can carry an invite. Same as the room links (see roomsApi). */
+const INVITE_HOSTS = new Set([
+  "spectra.live",
+  "spectra.nemtudo.me",
+  "s.nemtudo.me",
+  "golive.nemtudo.me",
+  "g.nemtudo.me",
+  "localhost",
+  "127.0.0.1",
+]);
 
 /**
  * The invite code somebody meant, from whatever they pasted — a bare code or

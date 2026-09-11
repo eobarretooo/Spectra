@@ -774,6 +774,152 @@ export function registerAuthRoutes(app: FastifyInstance) {
     }
   );
 
+  function activatePlan(
+    account: StoredAccount,
+    planId = "premium",
+    method: "subscription" | "pix" = "subscription",
+    days = 30
+  ) {
+    const isMax = planId === "premium_max";
+    const proFeatures = [
+      "verified_badge",
+      "quality_1440p",
+      "quality_2160p",
+      "fps_120",
+      "bitrate_maximo",
+      "no_ads",
+      "avatar_gallery",
+      "room_theme",
+    ];
+    const maxFeatures = [
+      ...proFeatures,
+      "avatar_upload",
+      "banner_upload",
+      "profile_gradient",
+      "profile_song",
+      "room_theme_publish",
+      "room_theme_set",
+      "room_theme_gradient",
+    ];
+
+    account.features = Array.from(new Set([...account.features, ...(isMax ? maxFeatures : proFeatures)]));
+
+    const flags = new Set(account.flags || []);
+    flags.add("VERIFIED");
+    flags.add("PRO");
+    if (isMax) flags.add("PRO_MAX");
+    account.flags = Array.from(flags);
+    account.points = (account.points || 0) + (isMax ? 100 : 50);
+
+    const now = Date.now();
+    const periodMs = days * 24 * 60 * 60 * 1000;
+    const currentPeriodEnd =
+      account.premium && account.premium.currentPeriodEnd > now
+        ? account.premium.currentPeriodEnd + periodMs
+        : now + periodMs;
+
+    account.premium = {
+      plan: planId,
+      method,
+      status: "active",
+      currentPeriodEnd,
+      provider: "mercadopago",
+      providerRef: `sub_${now.toString(36)}`,
+      lastPaymentId: `pay_${now.toString(36)}`,
+      cancelledAt: null,
+      updatedAt: now,
+    };
+    account.updatedAt = now;
+    persistState();
+  }
+
+  // Ativação / Simulação de aprovação de plano Pro
+  app.post(
+    "/premium/activate",
+    async (
+      req: FastifyRequest<{
+        Body: { planId?: string; cycle?: "monthly" | "yearly"; days?: number; method?: "subscription" | "pix" };
+      }>,
+      reply
+    ) => {
+      const authHeader = req.headers.authorization || "";
+      const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : "";
+      const accountId = tokens.get(token);
+      const account = accountId ? accounts.get(accountId) : null;
+
+      if (!account) {
+        return reply.code(401).send({ error: "Não autenticado" });
+      }
+
+      const { planId = "premium", cycle = "monthly", method = "subscription" } = req.body || {};
+      const days = req.body?.days ?? (cycle === "yearly" ? 365 : 30);
+
+      activatePlan(account, planId, method, days);
+
+      return {
+        ok: true,
+        premium: account.premium,
+        features: account.features,
+        flags: account.flags,
+      };
+    }
+  );
+
+  // Cancelar assinatura recorrente
+  app.post("/premium/cancel", async (req: FastifyRequest, reply) => {
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : "";
+    const accountId = tokens.get(token);
+    const account = accountId ? accounts.get(accountId) : null;
+
+    if (!account) {
+      return reply.code(401).send({ error: "Não autenticado" });
+    }
+
+    if (account.premium) {
+      account.premium.status = "cancelled";
+      account.premium.cancelledAt = Date.now();
+      account.updatedAt = Date.now();
+      persistState();
+    }
+
+    return { ok: true };
+  });
+
+  // Webhook Mercado Pago
+  app.post("/premium/webhook", async (req: FastifyRequest, reply) => {
+    try {
+      const q = req.query as Record<string, any> | undefined;
+      const b = req.body as Record<string, any> | undefined;
+      const topic = q?.topic || b?.type || b?.topic;
+      const paymentId = q?.id || b?.data?.id || b?.id;
+
+      if (MERCADO_PAGO_ACCESS_TOKEN && paymentId && (topic === "payment" || topic === "collection")) {
+        const mpRes = await fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
+          headers: { Authorization: `Bearer ${MERCADO_PAGO_ACCESS_TOKEN}` },
+        });
+        if (mpRes.ok) {
+          const payment = (await mpRes.json()) as any;
+          if (payment.status === "approved") {
+            const accountId = payment.external_reference;
+            const account = accountId ? accounts.get(accountId) : null;
+            if (account) {
+              const planId = payment.description?.includes("Pro Max") ? "premium_max" : "premium";
+              const isYearly = payment.description?.includes("Anual");
+              const days = isYearly ? 365 : 30;
+              const method = payment.payment_method_id === "pix" ? "pix" : "subscription";
+              activatePlan(account, planId, method, days);
+            }
+          }
+        }
+      }
+      return reply.code(200).send({ received: true });
+    } catch (err) {
+      console.error("Webhook processing error:", err);
+      return reply.code(200).send({ received: true });
+    }
+  });
+
   // Status da assinatura do usuário
   app.get("/premium/status", async (req: FastifyRequest, reply) => {
     const authHeader = req.headers.authorization || "";

@@ -58,7 +58,7 @@ async function loadGift(code: string): Promise<GiftCard | null> {
       from?: { displayName?: string } | null;
     };
     return {
-      planTitle: data.planTitle ?? "GoLive Pro",
+      planTitle: data.planTitle ?? "Spectra Pro",
       days: typeof data.days === "number" ? data.days : 0,
       fromName: data.from?.displayName ?? null,
     };

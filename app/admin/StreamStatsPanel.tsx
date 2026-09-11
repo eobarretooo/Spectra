@@ -114,7 +114,7 @@ export function StreamStatsPanel() {
             Métricas do Modo Streamer e Programas de Transmissão
           </h2>
           <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
-            Monitoramento em tempo real de streamers e vídeos rodando fora do GoLive via OBS Studio, Streamlabs, vMix, etc.
+            Monitoramento em tempo real de streamers e vídeos rodando fora do Spectra via OBS Studio, Streamlabs, vMix, etc.
           </p>
         </div>
       </div>
@@ -139,7 +139,7 @@ export function StreamStatsPanel() {
           highlight={stats.externalStreamClients > 0}
         />
         <StatCard
-          label="Vídeos fora do GoLive"
+          label="Vídeos fora do Spectra"
           value={stats.activeExternalStreams}
           subtext="Fluxos de mídia em broadcast"
           highlight={stats.activeExternalStreams > 0}
@@ -203,7 +203,7 @@ export function StreamStatsPanel() {
         {stats.streams.length === 0 ? (
           <div className="py-10 text-center text-zinc-400 dark:text-zinc-500">
             <ObsSourceIcon className="mx-auto mb-2.5 h-8 w-8 opacity-40" />
-            <p className="text-sm font-medium">Nenhum vídeo sendo transmitido fora do GoLive no momento.</p>
+            <p className="text-sm font-medium">Nenhum vídeo sendo transmitido fora do Spectra no momento.</p>
             <p className="text-xs mt-0.5">Assim que uma fonte Browser Source do OBS conectar, ela aparecerá listada aqui.</p>
           </div>
         ) : (

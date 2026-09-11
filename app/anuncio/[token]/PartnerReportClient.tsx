@@ -457,7 +457,7 @@ export function PartnerReportClient({ token }: { token: string }) {
       </section>
 
       <p className="mt-6 text-center text-[11px] leading-relaxed text-[var(--ink-3)]">
-        Os números se atualizam sozinhos, quase em tempo real, direto do servidor do GoLive.
+        Os números se atualizam sozinhos, quase em tempo real, direto do servidor do Spectra.
         Qualquer pessoa com esse link vê essa página — ela não dá acesso a mais nada da conta nem a
         outros anúncios.
       </p>

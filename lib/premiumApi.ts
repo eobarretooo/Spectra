@@ -635,6 +635,28 @@ export async function cancelPremium(): Promise<{ ok: boolean; error?: string }> 
   }
 }
 
+/** Activates or extends a Pro subscription plan on the current account. */
+export async function activatePremiumPlan(
+  planId = "premium",
+  cycle: BillingCycle = "monthly"
+): Promise<{ ok: boolean; error?: string }> {
+  try {
+    const res = await fetch(`${getSignalingHttpBase()}/premium/activate`, {
+      method: "POST",
+      headers: { ...authHeaders(), "Content-Type": "application/json" },
+      body: JSON.stringify({ planId, cycle }),
+    });
+    if (!res.ok) {
+      const data = (await res.json().catch(() => ({}))) as { error?: string };
+      return { ok: false, error: data.error ?? "Não foi possível ativar o plano." };
+    }
+    return { ok: true };
+  } catch {
+    return { ok: false, error: "Sem conexão com o servidor." };
+  }
+}
+
+
 /** Whether a subscription is paying right now, for the account page's copy. */
 export function isPremiumActive(premium: PremiumState | null | undefined): boolean {
   if (!premium) return false;

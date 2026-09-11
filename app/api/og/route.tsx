@@ -31,12 +31,11 @@ const HEIGHT = 630;
  * which part of it.
  */
 const TONES: Record<string, { from: string; to: string; label: string }> = {
-  // The site's own red, the one the icon and every Discord embed already use.
-  default: { from: "#f43f5e", to: "#e11d48", label: "GoLive" },
+  default: { from: "#06b6d4", to: "#3b82f6", label: "Spectra" },
   room: { from: "#38bdf8", to: "#6366f1", label: "Sala ao vivo" },
   gift: { from: "#34d399", to: "#059669", label: "Presente" },
-  pro: { from: "#60a5fa", to: "#2563eb", label: "GoLive Pro" },
-  max: { from: "#fbbf24", to: "#f59e0b", label: "GoLive Pro Max" },
+  pro: { from: "#60a5fa", to: "#2563eb", label: "Spectra Pro" },
+  max: { from: "#fbbf24", to: "#f59e0b", label: "Spectra Pro Max" },
   theme: { from: "#a78bfa", to: "#7c3aed", label: "Temas" },
 };
 
@@ -51,7 +50,7 @@ export async function GET(request: Request) {
   const params = new URL(request.url).searchParams;
   // Clamped, because these arrive on a public URL and the only thing stopping
   // a novel from being rendered into a 1200-pixel card is this line.
-  const title = (params.get("title") || "GoLive").slice(0, 90);
+  const title = (params.get("title") || "Spectra").slice(0, 90);
   const subtitle = (params.get("subtitle") || "").slice(0, 140);
   const tone = TONES[params.get("tone") || "default"] ?? TONES.default;
   const badge = (params.get("badge") || tone.label).slice(0, 40);

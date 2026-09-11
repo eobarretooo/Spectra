@@ -50,6 +50,9 @@ export function toRoomHandle(rawHandle: string, isPrivate: boolean): string {
  * loud or typed from a phone screen.
  */
 const ROOM_LINK_HOSTS: Record<string, { prefix?: string }> = {
+  "spectra.live": { prefix: "watch" },
+  "spectra.nemtudo.me": { prefix: "watch" },
+  "s.nemtudo.me": {},
   "golive.nemtudo.me": { prefix: "watch" },
   "g.nemtudo.me": {},
 };

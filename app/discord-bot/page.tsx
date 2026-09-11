@@ -77,7 +77,7 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  name: "Bot do GoLive para Discord",
+  name: "Bot do Spectra para Discord",
   url: `${SITE_URL}/discord-bot`,
   description: DESCRIPTION,
   applicationCategory: "CommunicationApplication",
@@ -94,7 +94,7 @@ const STEPS = [
   },
   {
     title: "O bot cria uma sala privada",
-    body: "Uma sala nova no GoLive, daquela call, que não aparece em nenhuma lista pública.",
+    body: "Uma sala nova no Spectra, daquela call, que não aparece em nenhuma lista pública.",
     Icon: MdLock,
   },
   {
@@ -117,7 +117,7 @@ const BENEFITS = [
   },
   {
     title: "Várias telas ao mesmo tempo",
-    body: "No GoLive todo mundo da sala pode transmitir junto — tela, câmera ou voz — e cada pessoa escolhe quem quer assistir.",
+    body: "No Spectra todo mundo da sala pode transmitir junto — tela, câmera ou voz — e cada pessoa escolhe quem quer assistir.",
     Icon: MdGroups,
   },
   {
@@ -153,7 +153,7 @@ const COMMANDS = [
   },
   {
     name: "/config show",
-    body: "Mostra a configuração atual do servidor — e, de brinde, quantas pessoas estão transmitindo no GoLive agora.",
+    body: "Mostra a configuração atual do servidor — e, de brinde, quantas pessoas estão transmitindo no Spectra agora.",
   },
 ];
 
@@ -175,15 +175,15 @@ const FAQ = [
     a: "Só das que correspondem ao que ele faz: ver os canais de voz do servidor, alterar o status da call e enviar mensagem no chat dela. As permissões são apresentadas na própria tela de adicionar do Discord, antes de você confirmar.",
   },
   {
-    q: "Quem entra na sala precisa de conta no GoLive?",
+    q: "Quem entra na sala precisa de conta no Spectra?",
     a: "Não. Basta abrir o link e escolher um nome. Criar conta é opcional e serve pra guardar seu perfil, não pra assistir.",
   },
   {
     q: "A sala fica aberta pra qualquer um?",
-    a: "A sala é privada, então não aparece na lista pública do GoLive. Como todo link, porém, quem receber o endereço consegue entrar — trate-o como você trataria um convite do servidor.",
+    a: "A sala é privada, então não aparece na lista pública do Spectra. Como todo link, porém, quem receber o endereço consegue entrar — trate-o como você trataria um convite do servidor.",
   },
   {
-    q: "Dá pra usar o GoLive sem o bot?",
+    q: "Dá pra usar o Spectra sem o bot?",
     a: "Dá. O bot só automatiza a criação da sala: você pode criar uma na página inicial a qualquer momento e mandar o link onde quiser.",
   },
 ];
@@ -193,14 +193,14 @@ const SHOTS = [
     src: "https://cdn.nemtudo.me/f/command/MjAyNi8wOC8yMi9JTUFHRS8wMV8yNl8yM19fMTc4NzM3Mjc4Mzk4Mi0xMjUyMDI2MDU.webp",
     width: 1040,
     height: 1109,
-    alt: "Mensagem do bot GoLive no chat da call do Discord, com o link da sala e o preview do site",
+    alt: "Mensagem do bot Spectra no chat da call do Discord, com o link da sala e o preview do site",
     caption: "A mensagem que o bot manda no chat da call.",
   },
   {
     src: "https://cdn.nemtudo.me/f/command/MjAyNi8wOC8yMi9JTUFHRS8wMV8yN18xOF9fMTc4NzM3MjgzODY2Mi01NzkzMDE4MzQ.webp",
     width: 894,
     height: 219,
-    alt: "Canal de voz do Discord exibindo o link da sala do GoLive no status da call",
+    alt: "Canal de voz do Discord exibindo o link da sala do Spectra no status da call",
     caption: "E o status do canal de voz, com o link à vista.",
   },
 ];
@@ -287,7 +287,7 @@ export default function DiscordBotPage() {
                     <span className="ml-auto shrink-0 font-mono text-xs text-emerald-400">0:03</span>
                   </div>
                   <p className="mt-0.5 truncate text-sm text-zinc-400">
-                    [GoLive] g.nemtudo.me/priv-64318
+                    [Spectra] spectra.live/watch/priv-64318
                   </p>
                 </div>
               </div>
@@ -306,14 +306,14 @@ export default function DiscordBotPage() {
               </span>
               <div className="min-w-0">
                 <p className="flex flex-wrap items-center gap-1.5 text-sm font-semibold text-zinc-100">
-                  GoLive
+                  Spectra
                   <span className="rounded bg-[#5865F2] px-1.5 py-0.5 text-[10px] font-bold tracking-wide text-white">
                     APP
                   </span>
                 </p>
                 <p className="mt-0.5 text-sm break-words text-zinc-300">
-                  [Go Live] Transmita tela nessa call por aqui:{" "}
-                  <span className="text-sky-400">g.nemtudo.me/priv-64318</span>
+                  [Spectra] Transmita tela nessa call por aqui:{" "}
+                  <span className="text-sky-400">spectra.live/watch/priv-64318</span>
                 </p>
               </div>
             </div>
@@ -401,7 +401,7 @@ export default function DiscordBotPage() {
               <span className="flex h-5 w-5 items-center justify-center rounded-md bg-sky-500">
                 <MdMonitor className="h-3 w-3 text-white" />
               </span>
-              <span className="text-sm font-semibold text-zinc-100">GoLive</span>
+              <span className="text-sm font-semibold text-zinc-100">Spectra</span>
             </div>
             <ul className="space-y-0.5">
               {COMMANDS.map(({ name, option, body }) => (

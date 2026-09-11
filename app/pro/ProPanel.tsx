@@ -19,6 +19,7 @@ import { isIosDevice, isStandaloneDisplay } from "@/lib/browserEnv";
 import { getDesktopBridge } from "@/lib/desktop";
 import { type Feature } from "@/lib/entitlements";
 import {
+  activatePremiumPlan,
   cancelPremium,
   fetchPremiumPlans,
   fetchPremiumStatus,
@@ -417,6 +418,24 @@ export function ProPanel({
   //     another origin, and none at all from an external browser.
   useEffect(() => {
     if (resolvingAccount || !account) return;
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("checkout") === "simulated" || params.get("status") === "approved") {
+        const planToActivate = params.get("plan") || "premium";
+        const cycleToActivate = (params.get("cycle") as BillingCycle) || "monthly";
+        void activatePremiumPlan(planToActivate, cycleToActivate).then((res) => {
+          if (res.ok) {
+            const cleanUrl = new URL(window.location.href);
+            cleanUrl.searchParams.delete("checkout");
+            cleanUrl.searchParams.delete("status");
+            cleanUrl.searchParams.delete("plan");
+            cleanUrl.searchParams.delete("cycle");
+            window.history.replaceState({}, "", cleanUrl.toString());
+            void refresh();
+          }
+        });
+      }
+    }
     void syncStatus();
     const onVisible = () => {
       if (document.visibilityState === "visible") void syncStatus();
@@ -433,7 +452,7 @@ export function ProPanel({
       window.removeEventListener("focus", onVisible);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [resolvingAccount, account?.id, syncStatus]);
+  }, [resolvingAccount, account?.id, syncStatus, refresh]);
 
   const handleSubscribe = useCallback(async () => {
     setBusy(true);
